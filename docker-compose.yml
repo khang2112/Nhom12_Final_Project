@@ -1,0 +1,31 @@
+services:
+  chroma:
+    build:
+      context: .
+      target: db
+    volumes:
+      - chroma_data:/data
+    restart: unless-stopped
+  web:
+    build:
+      context: .
+      target: web
+    ports:
+      - "127.0.0.1:7860:7860"
+    environment:
+      CHROMA_HOST: chroma
+      CHROMA_PORT: "8000"
+      GRADIO_SERVER_NAME: "0.0.0.0"
+      GRADIO_ANALYTICS_ENABLED: "False"
+      ANONYMIZED_TELEMETRY: "False"
+    depends_on:
+      - chroma
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:7860/config', timeout=5)"]
+      interval: 15s
+      timeout: 10s
+      retries: 12
+      start_period: 60s
+    restart: unless-stopped
+volumes:
+  chroma_data:

@@ -1,0 +1,7 @@
+feature,missing_train_before,missing_train_after,changed_observed_values,train_median,iqr_lower,iqr_upper
+year,0,0,0,1979.5,,
+log_population,0,0,37,15.750021098268011,11.811199820694311,19.79559883765569
+log_gdp,0,0,0,8.179820075810404,4.169442744465041,12.158315794751044
+sim_health_index,70,0,0,72.625,,
+sim_education_index,95,0,0,73.03,,
+sim_trend_index,63,0,0,73.79,,

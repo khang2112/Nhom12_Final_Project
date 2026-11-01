@@ -1,40 +1,4 @@
 record_id,country,year
-Albania_1952,Albania,1952
-Albania_1957,Albania,1957
-Albania_1962,Albania,1962
-Albania_1967,Albania,1967
-Albania_1972,Albania,1972
-Albania_1977,Albania,1977
-Albania_1982,Albania,1982
-Albania_1987,Albania,1987
-Albania_1992,Albania,1992
-Albania_1997,Albania,1997
-Albania_2002,Albania,2002
-Albania_2007,Albania,2007
-Bolivia_1952,Bolivia,1952
-Bolivia_1957,Bolivia,1957
-Bolivia_1962,Bolivia,1962
-Bolivia_1967,Bolivia,1967
-Bolivia_1972,Bolivia,1972
-Bolivia_1977,Bolivia,1977
-Bolivia_1982,Bolivia,1982
-Bolivia_1987,Bolivia,1987
-Bolivia_1992,Bolivia,1992
-Bolivia_1997,Bolivia,1997
-Bolivia_2002,Bolivia,2002
-Bolivia_2007,Bolivia,2007
-Bulgaria_1952,Bulgaria,1952
-Bulgaria_1957,Bulgaria,1957
-Bulgaria_1962,Bulgaria,1962
-Bulgaria_1967,Bulgaria,1967
-Bulgaria_1972,Bulgaria,1972
-Bulgaria_1977,Bulgaria,1977
-Bulgaria_1982,Bulgaria,1982
-Bulgaria_1987,Bulgaria,1987
-Bulgaria_1992,Bulgaria,1992
-Bulgaria_1997,Bulgaria,1997
-Bulgaria_2002,Bulgaria,2002
-Bulgaria_2007,Bulgaria,2007
 Cambodia_1952,Cambodia,1952
 Cambodia_1957,Cambodia,1957
 Cambodia_1962,Cambodia,1962
@@ -71,30 +35,6 @@ Congo_Dem_Rep_1992,"Congo, Dem. Rep.",1992
 Congo_Dem_Rep_1997,"Congo, Dem. Rep.",1997
 Congo_Dem_Rep_2002,"Congo, Dem. Rep.",2002
 Congo_Dem_Rep_2007,"Congo, Dem. Rep.",2007
-Costa_Rica_1952,Costa Rica,1952
-Costa_Rica_1957,Costa Rica,1957
-Costa_Rica_1962,Costa Rica,1962
-Costa_Rica_1967,Costa Rica,1967
-Costa_Rica_1972,Costa Rica,1972
-Costa_Rica_1977,Costa Rica,1977
-Costa_Rica_1982,Costa Rica,1982
-Costa_Rica_1987,Costa Rica,1987
-Costa_Rica_1992,Costa Rica,1992
-Costa_Rica_1997,Costa Rica,1997
-Costa_Rica_2002,Costa Rica,2002
-Costa_Rica_2007,Costa Rica,2007
-Czech_Republic_1952,Czech Republic,1952
-Czech_Republic_1957,Czech Republic,1957
-Czech_Republic_1962,Czech Republic,1962
-Czech_Republic_1967,Czech Republic,1967
-Czech_Republic_1972,Czech Republic,1972
-Czech_Republic_1977,Czech Republic,1977
-Czech_Republic_1982,Czech Republic,1982
-Czech_Republic_1987,Czech Republic,1987
-Czech_Republic_1992,Czech Republic,1992
-Czech_Republic_1997,Czech Republic,1997
-Czech_Republic_2002,Czech Republic,2002
-Czech_Republic_2007,Czech Republic,2007
 Egypt_1952,Egypt,1952
 Egypt_1957,Egypt,1957
 Egypt_1962,Egypt,1962
@@ -107,30 +47,6 @@ Egypt_1992,Egypt,1992
 Egypt_1997,Egypt,1997
 Egypt_2002,Egypt,2002
 Egypt_2007,Egypt,2007
-Finland_1952,Finland,1952
-Finland_1957,Finland,1957
-Finland_1962,Finland,1962
-Finland_1967,Finland,1967
-Finland_1972,Finland,1972
-Finland_1977,Finland,1977
-Finland_1982,Finland,1982
-Finland_1987,Finland,1987
-Finland_1992,Finland,1992
-Finland_1997,Finland,1997
-Finland_2002,Finland,2002
-Finland_2007,Finland,2007
-France_1952,France,1952
-France_1957,France,1957
-France_1962,France,1962
-France_1967,France,1967
-France_1972,France,1972
-France_1977,France,1977
-France_1982,France,1982
-France_1987,France,1987
-France_1992,France,1992
-France_1997,France,1997
-France_2002,France,2002
-France_2007,France,2007
 Gabon_1952,Gabon,1952
 Gabon_1957,Gabon,1957
 Gabon_1962,Gabon,1962
@@ -191,18 +107,6 @@ Iraq_1992,Iraq,1992
 Iraq_1997,Iraq,1997
 Iraq_2002,Iraq,2002
 Iraq_2007,Iraq,2007
-Jamaica_1952,Jamaica,1952
-Jamaica_1957,Jamaica,1957
-Jamaica_1962,Jamaica,1962
-Jamaica_1967,Jamaica,1967
-Jamaica_1972,Jamaica,1972
-Jamaica_1977,Jamaica,1977
-Jamaica_1982,Jamaica,1982
-Jamaica_1987,Jamaica,1987
-Jamaica_1992,Jamaica,1992
-Jamaica_1997,Jamaica,1997
-Jamaica_2002,Jamaica,2002
-Jamaica_2007,Jamaica,2007
 Korea_Dem_Rep_1952,"Korea, Dem. Rep.",1952
 Korea_Dem_Rep_1957,"Korea, Dem. Rep.",1957
 Korea_Dem_Rep_1962,"Korea, Dem. Rep.",1962
@@ -251,30 +155,6 @@ Malawi_1992,Malawi,1992
 Malawi_1997,Malawi,1997
 Malawi_2002,Malawi,2002
 Malawi_2007,Malawi,2007
-Peru_1952,Peru,1952
-Peru_1957,Peru,1957
-Peru_1962,Peru,1962
-Peru_1967,Peru,1967
-Peru_1972,Peru,1972
-Peru_1977,Peru,1977
-Peru_1982,Peru,1982
-Peru_1987,Peru,1987
-Peru_1992,Peru,1992
-Peru_1997,Peru,1997
-Peru_2002,Peru,2002
-Peru_2007,Peru,2007
-Puerto_Rico_1952,Puerto Rico,1952
-Puerto_Rico_1957,Puerto Rico,1957
-Puerto_Rico_1962,Puerto Rico,1962
-Puerto_Rico_1967,Puerto Rico,1967
-Puerto_Rico_1972,Puerto Rico,1972
-Puerto_Rico_1977,Puerto Rico,1977
-Puerto_Rico_1982,Puerto Rico,1982
-Puerto_Rico_1987,Puerto Rico,1987
-Puerto_Rico_1992,Puerto Rico,1992
-Puerto_Rico_1997,Puerto Rico,1997
-Puerto_Rico_2002,Puerto Rico,2002
-Puerto_Rico_2007,Puerto Rico,2007
 Rwanda_1952,Rwanda,1952
 Rwanda_1957,Rwanda,1957
 Rwanda_1962,Rwanda,1962
@@ -299,18 +179,6 @@ Somalia_1992,Somalia,1992
 Somalia_1997,Somalia,1997
 Somalia_2002,Somalia,2002
 Somalia_2007,Somalia,2007
-Sweden_1952,Sweden,1952
-Sweden_1957,Sweden,1957
-Sweden_1962,Sweden,1962
-Sweden_1967,Sweden,1967
-Sweden_1972,Sweden,1972
-Sweden_1977,Sweden,1977
-Sweden_1982,Sweden,1982
-Sweden_1987,Sweden,1987
-Sweden_1992,Sweden,1992
-Sweden_1997,Sweden,1997
-Sweden_2002,Sweden,2002
-Sweden_2007,Sweden,2007
 Thailand_1952,Thailand,1952
 Thailand_1957,Thailand,1957
 Thailand_1962,Thailand,1962
@@ -347,3 +215,135 @@ Zimbabwe_1992,Zimbabwe,1992
 Zimbabwe_1997,Zimbabwe,1997
 Zimbabwe_2002,Zimbabwe,2002
 Zimbabwe_2007,Zimbabwe,2007
+Albania_1952,Albania,1952
+Albania_1957,Albania,1957
+Albania_1962,Albania,1962
+Albania_1967,Albania,1967
+Albania_1972,Albania,1972
+Albania_1977,Albania,1977
+Albania_1982,Albania,1982
+Albania_1987,Albania,1987
+Albania_1992,Albania,1992
+Albania_1997,Albania,1997
+Albania_2002,Albania,2002
+Albania_2007,Albania,2007
+Bolivia_1952,Bolivia,1952
+Bolivia_1957,Bolivia,1957
+Bolivia_1962,Bolivia,1962
+Bolivia_1967,Bolivia,1967
+Bolivia_1972,Bolivia,1972
+Bolivia_1977,Bolivia,1977
+Bolivia_1982,Bolivia,1982
+Bolivia_1987,Bolivia,1987
+Bolivia_1992,Bolivia,1992
+Bolivia_1997,Bolivia,1997
+Bolivia_2002,Bolivia,2002
+Bolivia_2007,Bolivia,2007
+Bulgaria_1952,Bulgaria,1952
+Bulgaria_1957,Bulgaria,1957
+Bulgaria_1962,Bulgaria,1962
+Bulgaria_1967,Bulgaria,1967
+Bulgaria_1972,Bulgaria,1972
+Bulgaria_1977,Bulgaria,1977
+Bulgaria_1982,Bulgaria,1982
+Bulgaria_1987,Bulgaria,1987
+Bulgaria_1992,Bulgaria,1992
+Bulgaria_1997,Bulgaria,1997
+Bulgaria_2002,Bulgaria,2002
+Bulgaria_2007,Bulgaria,2007
+Costa_Rica_1952,Costa Rica,1952
+Costa_Rica_1957,Costa Rica,1957
+Costa_Rica_1962,Costa Rica,1962
+Costa_Rica_1967,Costa Rica,1967
+Costa_Rica_1972,Costa Rica,1972
+Costa_Rica_1977,Costa Rica,1977
+Costa_Rica_1982,Costa Rica,1982
+Costa_Rica_1987,Costa Rica,1987
+Costa_Rica_1992,Costa Rica,1992
+Costa_Rica_1997,Costa Rica,1997
+Costa_Rica_2002,Costa Rica,2002
+Costa_Rica_2007,Costa Rica,2007
+Czech_Republic_1952,Czech Republic,1952
+Czech_Republic_1957,Czech Republic,1957
+Czech_Republic_1962,Czech Republic,1962
+Czech_Republic_1967,Czech Republic,1967
+Czech_Republic_1972,Czech Republic,1972
+Czech_Republic_1977,Czech Republic,1977
+Czech_Republic_1982,Czech Republic,1982
+Czech_Republic_1987,Czech Republic,1987
+Czech_Republic_1992,Czech Republic,1992
+Czech_Republic_1997,Czech Republic,1997
+Czech_Republic_2002,Czech Republic,2002
+Czech_Republic_2007,Czech Republic,2007
+Finland_1952,Finland,1952
+Finland_1957,Finland,1957
+Finland_1962,Finland,1962
+Finland_1967,Finland,1967
+Finland_1972,Finland,1972
+Finland_1977,Finland,1977
+Finland_1982,Finland,1982
+Finland_1987,Finland,1987
+Finland_1992,Finland,1992
+Finland_1997,Finland,1997
+Finland_2002,Finland,2002
+Finland_2007,Finland,2007
+France_1952,France,1952
+France_1957,France,1957
+France_1962,France,1962
+France_1967,France,1967
+France_1972,France,1972
+France_1977,France,1977
+France_1982,France,1982
+France_1987,France,1987
+France_1992,France,1992
+France_1997,France,1997
+France_2002,France,2002
+France_2007,France,2007
+Jamaica_1952,Jamaica,1952
+Jamaica_1957,Jamaica,1957
+Jamaica_1962,Jamaica,1962
+Jamaica_1967,Jamaica,1967
+Jamaica_1972,Jamaica,1972
+Jamaica_1977,Jamaica,1977
+Jamaica_1982,Jamaica,1982
+Jamaica_1987,Jamaica,1987
+Jamaica_1992,Jamaica,1992
+Jamaica_1997,Jamaica,1997
+Jamaica_2002,Jamaica,2002
+Jamaica_2007,Jamaica,2007
+Peru_1952,Peru,1952
+Peru_1957,Peru,1957
+Peru_1962,Peru,1962
+Peru_1967,Peru,1967
+Peru_1972,Peru,1972
+Peru_1977,Peru,1977
+Peru_1982,Peru,1982
+Peru_1987,Peru,1987
+Peru_1992,Peru,1992
+Peru_1997,Peru,1997
+Peru_2002,Peru,2002
+Peru_2007,Peru,2007
+Puerto_Rico_1952,Puerto Rico,1952
+Puerto_Rico_1957,Puerto Rico,1957
+Puerto_Rico_1962,Puerto Rico,1962
+Puerto_Rico_1967,Puerto Rico,1967
+Puerto_Rico_1972,Puerto Rico,1972
+Puerto_Rico_1977,Puerto Rico,1977
+Puerto_Rico_1982,Puerto Rico,1982
+Puerto_Rico_1987,Puerto Rico,1987
+Puerto_Rico_1992,Puerto Rico,1992
+Puerto_Rico_1997,Puerto Rico,1997
+Puerto_Rico_2002,Puerto Rico,2002
+Puerto_Rico_2007,Puerto Rico,2007
+Sweden_1952,Sweden,1952
+Sweden_1957,Sweden,1957
+Sweden_1962,Sweden,1962
+Sweden_1967,Sweden,1967
+Sweden_1972,Sweden,1972
+Sweden_1977,Sweden,1977
+Sweden_1982,Sweden,1982
+Sweden_1987,Sweden,1987
+Sweden_1992,Sweden,1992
+Sweden_1997,Sweden,1997
+Sweden_2002,Sweden,2002
+Sweden_2007,Sweden,2007

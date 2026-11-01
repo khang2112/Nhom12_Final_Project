@@ -27,8 +27,8 @@ Angola,Africa,AGO,1962,34.0,Gapminder,Angola_1962,4826015.0,4269.276742,Gapminde
 Angola,Africa,AGO,1962,37.168,World Bank,Angola_1962,4826015.0,4269.276742,Gapminder,82.69,72.75,61.74,Higher simulated investment,True
 Angola,Africa,AGO,1967,35.985,Gapminder,Angola_1967,5247469.0,5522.776375,Gapminder,71.34,57.19,85.31,Moderate simulated investment,True
 Angola,Africa,AGO,1967,38.616,World Bank,Angola_1967,5247469.0,5522.776375,Gapminder,71.34,57.19,85.31,Moderate simulated investment,True
-Angola,Africa,AGO,1972,37.928,Gapminder,Angola_1972,5894858.0,5473.288004999999,Gapminder,,71.67,72.75,Higher simulated investment,True
-Angola,Africa,AGO,1972,40.469,World Bank,Angola_1972,5894858.0,5473.288004999999,Gapminder,,71.67,72.75,Higher simulated investment,True
+Angola,Africa,AGO,1972,37.928,Gapminder,Angola_1972,5894858.0,5473.2880049999985,Gapminder,,71.67,72.75,Higher simulated investment,True
+Angola,Africa,AGO,1972,40.469,World Bank,Angola_1972,5894858.0,5473.2880049999985,Gapminder,,71.67,72.75,Higher simulated investment,True
 Angola,Africa,AGO,1977,39.483,Gapminder,Angola_1977,6162675.0,3008.647355,Gapminder,68.66,76.74,71.04,Moderate simulated investment,True
 Angola,Africa,AGO,1977,41.215,World Bank,Angola_1977,6162675.0,3008.647355,Gapminder,68.66,76.74,71.04,Moderate simulated investment,True
 Angola,Africa,AGO,1982,39.942,Gapminder,Angola_1982,7016384.0,2756.953672,Gapminder,71.99,55.97,96.47,Moderate simulated investment,True
@@ -132,7 +132,7 @@ Austria,Europe,AUT,2002,78.6780487804878,World Bank,Austria_2002,8148312.0,32417
 Austria,Europe,AUT,2007,79.829,Gapminder,Austria_2007,8199783.0,36126.4927,Gapminder,92.18,89.06,88.37,Higher simulated investment,True
 Austria,Europe,AUT,2007,80.1804878048781,World Bank,Austria_2007,8199783.0,36126.4927,Gapminder,92.18,89.06,88.37,Higher simulated investment,True
 Burundi,Africa,BDI,1952,39.031,Gapminder,Burundi_1952,2445618.0,339.2964587,Gapminder,65.41,35.23,61.09,Moderate simulated investment,True
-Burundi,Africa,BDI,1957,40.533,Gapminder,Burundi_1957,2667518.0,379.5646281000001,Gapminder,,58.2,63.41,Moderate simulated investment,True
+Burundi,Africa,BDI,1957,40.533,Gapminder,Burundi_1957,2667518.0,379.56462810000005,Gapminder,,58.2,63.41,Moderate simulated investment,True
 Burundi,Africa,BDI,1962,42.045,Gapminder,Burundi_1962,2961915.0,355.2032273,Gapminder,46.39,43.61,55.27,Lower simulated investment,True
 Burundi,Africa,BDI,1962,43.492,World Bank,Burundi_1962,2961915.0,355.2032273,Gapminder,46.39,43.61,55.27,Lower simulated investment,True
 Burundi,Africa,BDI,1967,43.548,Gapminder,Burundi_1967,3330989.0,412.97751360000007,Gapminder,54.94,62.22,50.16,Moderate simulated investment,True
@@ -1101,8 +1101,8 @@ Equatorial Guinea,Africa,GNQ,2007,51.57899999999999,Gapminder,Equatorial_Guinea_
 Equatorial Guinea,Africa,GNQ,2007,56.857,World Bank,Equatorial_Guinea_2007,551201.0,12154.08975,Gapminder,87.98,95.6,92.29,Higher simulated investment,True
 Greece,Europe,GRC,1952,65.86,Gapminder,Greece_1952,7733250.0,3530.690067,Gapminder,68.98,70.23,76.74,Moderate simulated investment,True
 Greece,Europe,GRC,1957,67.86,Gapminder,Greece_1957,8096218.0,4916.299889,Gapminder,,60.94,75.86,Higher simulated investment,True
-Greece,Europe,GRC,1962,69.51,Gapminder,Greece_1962,8448233.0,6017.190732999999,Gapminder,55.08,92.01,75.01,Moderate simulated investment,True
-Greece,Europe,GRC,1962,70.2246097560976,World Bank,Greece_1962,8448233.0,6017.190732999999,Gapminder,55.08,92.01,75.01,Moderate simulated investment,True
+Greece,Europe,GRC,1962,69.51,Gapminder,Greece_1962,8448233.0,6017.1907329999985,Gapminder,55.08,92.01,75.01,Moderate simulated investment,True
+Greece,Europe,GRC,1962,70.2246097560976,World Bank,Greece_1962,8448233.0,6017.1907329999985,Gapminder,55.08,92.01,75.01,Moderate simulated investment,True
 Greece,Europe,GRC,1967,71.0,Gapminder,Greece_1967,8716441.0,8513.097016,Gapminder,65.8,70.36,85.03,Moderate simulated investment,True
 Greece,Europe,GRC,1967,71.307,World Bank,Greece_1967,8716441.0,8513.097016,Gapminder,65.8,70.36,85.03,Moderate simulated investment,True
 Greece,Europe,GRC,1972,72.34,Gapminder,Greece_1972,8888628.0,12724.82957,Gapminder,85.21,87.93,91.66,Higher simulated investment,True
@@ -1145,8 +1145,8 @@ Guatemala,Americas,GTM,2007,70.259,Gapminder,Guatemala_2007,12572928.0,5186.0500
 Guatemala,Americas,GTM,2007,69.299,World Bank,Guatemala_2007,12572928.0,5186.050003,Gapminder,,91.74,59.64,Higher simulated investment,True
 "Hong Kong, China",Asia,HKG,1952,60.96,Gapminder,Hong_Kong_China_1952,2125900.0,3054.421209,Gapminder,81.99,63.89,64.14,Higher simulated investment,True
 "Hong Kong, China",Asia,HKG,1957,64.75,Gapminder,Hong_Kong_China_1957,2736300.0,3629.076457,Gapminder,56.2,81.15,62.57,Moderate simulated investment,True
-"Hong Kong, China",Asia,HKG,1962,67.65,Gapminder,Hong_Kong_China_1962,3305200.0,4692.648271999999,Gapminder,86.15,64.82,69.2,Higher simulated investment,True
-"Hong Kong, China",Asia,HKG,1962,66.9104634146342,World Bank,Hong_Kong_China_1962,3305200.0,4692.648271999999,Gapminder,86.15,64.82,69.2,Higher simulated investment,True
+"Hong Kong, China",Asia,HKG,1962,67.65,Gapminder,Hong_Kong_China_1962,3305200.0,4692.6482719999985,Gapminder,86.15,64.82,69.2,Higher simulated investment,True
+"Hong Kong, China",Asia,HKG,1962,66.9104634146342,World Bank,Hong_Kong_China_1962,3305200.0,4692.6482719999985,Gapminder,86.15,64.82,69.2,Higher simulated investment,True
 "Hong Kong, China",Asia,HKG,1967,70.0,Gapminder,Hong_Kong_China_1967,3722800.0,6197.962814,Gapminder,75.07,,77.59,,True
 "Hong Kong, China",Asia,HKG,1967,69.8278536585366,World Bank,Hong_Kong_China_1967,3722800.0,6197.962814,Gapminder,75.07,,77.59,,True
 "Hong Kong, China",Asia,HKG,1972,72.0,Gapminder,Hong_Kong_China_1972,4115700.0,8315.928145,Gapminder,98.46,,74.46,Higher simulated investment,True
@@ -1323,8 +1323,8 @@ Iran,Asia,IRN,1952,44.869,Gapminder,Iran_1952,17272000.0,3035.326002,Gapminder,6
 Iran,Asia,IRN,1957,47.181,Gapminder,Iran_1957,19792000.0,3290.257643,Gapminder,63.08,71.56,66.61,Moderate simulated investment,True
 Iran,Asia,IRN,1962,49.325,Gapminder,Iran_1962,22874000.0,4187.329802,Gapminder,77.95,66.49,72.55,Higher simulated investment,True
 Iran,Asia,IRN,1962,43.769,World Bank,Iran_1962,22874000.0,4187.329802,Gapminder,77.95,66.49,72.55,Higher simulated investment,True
-Iran,Asia,IRN,1967,52.469,Gapminder,Iran_1967,26538000.0,5906.731804999999,Gapminder,75.61,58.02,63.79,Higher simulated investment,True
-Iran,Asia,IRN,1967,47.803,World Bank,Iran_1967,26538000.0,5906.731804999999,Gapminder,75.61,58.02,63.79,Higher simulated investment,True
+Iran,Asia,IRN,1967,52.469,Gapminder,Iran_1967,26538000.0,5906.7318049999985,Gapminder,75.61,58.02,63.79,Higher simulated investment,True
+Iran,Asia,IRN,1967,47.803,World Bank,Iran_1967,26538000.0,5906.7318049999985,Gapminder,75.61,58.02,63.79,Higher simulated investment,True
 Iran,Asia,IRN,1972,55.234,Gapminder,Iran_1972,30614000.0,9613.818607,Gapminder,78.83,69.72,89.85,Higher simulated investment,True
 Iran,Asia,IRN,1972,51.729,World Bank,Iran_1972,30614000.0,9613.818607,Gapminder,78.83,69.72,89.85,Higher simulated investment,True
 Iran,Asia,IRN,1977,57.702,Gapminder,Iran_1977,35480679.0,11888.59508,Gapminder,87.23,72.34,91.63,,True
@@ -1433,8 +1433,8 @@ Jamaica,Americas,JAM,1952,58.53,Gapminder,Jamaica_1952,1426095.0,2898.530881,Gap
 Jamaica,Americas,JAM,1957,62.61,Gapminder,Jamaica_1957,1535090.0,4756.525781,Gapminder,63.0,60.11,56.32,Moderate simulated investment,True
 Jamaica,Americas,JAM,1962,65.61,Gapminder,Jamaica_1962,1665128.0,5246.107524,Gapminder,90.02,86.52,66.04,Higher simulated investment,True
 Jamaica,Americas,JAM,1962,64.619,World Bank,Jamaica_1962,1665128.0,5246.107524,Gapminder,90.02,86.52,66.04,Higher simulated investment,True
-Jamaica,Americas,JAM,1967,67.51,Gapminder,Jamaica_1967,1861096.0,6124.703450999999,Gapminder,69.02,64.89,72.31,Moderate simulated investment,True
-Jamaica,Americas,JAM,1967,66.086,World Bank,Jamaica_1967,1861096.0,6124.703450999999,Gapminder,69.02,64.89,72.31,Moderate simulated investment,True
+Jamaica,Americas,JAM,1967,67.51,Gapminder,Jamaica_1967,1861096.0,6124.7034509999985,Gapminder,69.02,64.89,72.31,Moderate simulated investment,True
+Jamaica,Americas,JAM,1967,66.086,World Bank,Jamaica_1967,1861096.0,6124.7034509999985,Gapminder,69.02,64.89,72.31,Moderate simulated investment,True
 Jamaica,Americas,JAM,1972,69.0,Gapminder,Jamaica_1972,1997616.0,7433.889293000001,Gapminder,76.42,60.33,75.5,Higher simulated investment,True
 Jamaica,Americas,JAM,1972,67.304,World Bank,Jamaica_1972,1997616.0,7433.889293000001,Gapminder,76.42,60.33,75.5,Higher simulated investment,True
 Jamaica,Americas,JAM,1977,70.11,Gapminder,Jamaica_1977,2156814.0,6650.195573,Gapminder,60.22,60.59,92.91,Moderate simulated investment,True
@@ -2811,8 +2811,8 @@ Trinidad and Tobago,Americas,TTO,1962,64.9,Gapminder,Trinidad_and_Tobago_1962,88
 Trinidad and Tobago,Americas,TTO,1962,63.429,World Bank,Trinidad_and_Tobago_1962,887498.0,4997.523971000001,Gapminder,66.64,80.3,85.97,Moderate simulated investment,True
 Trinidad and Tobago,Americas,TTO,1967,65.4,Gapminder,Trinidad_and_Tobago_1967,960155.0,5621.368472,Gapminder,76.43,77.44,85.24,Higher simulated investment,True
 Trinidad and Tobago,Americas,TTO,1967,64.471,World Bank,Trinidad_and_Tobago_1967,960155.0,5621.368472,Gapminder,76.43,77.44,85.24,Higher simulated investment,True
-Trinidad and Tobago,Americas,TTO,1972,65.9,Gapminder,Trinidad_and_Tobago_1972,975199.0,6619.551418999999,Gapminder,72.4,57.84,71.39,Higher simulated investment,True
-Trinidad and Tobago,Americas,TTO,1972,65.183,World Bank,Trinidad_and_Tobago_1972,975199.0,6619.551418999999,Gapminder,72.4,57.84,71.39,Higher simulated investment,True
+Trinidad and Tobago,Americas,TTO,1972,65.9,Gapminder,Trinidad_and_Tobago_1972,975199.0,6619.5514189999985,Gapminder,72.4,57.84,71.39,Higher simulated investment,True
+Trinidad and Tobago,Americas,TTO,1972,65.183,World Bank,Trinidad_and_Tobago_1972,975199.0,6619.5514189999985,Gapminder,72.4,57.84,71.39,Higher simulated investment,True
 Trinidad and Tobago,Americas,TTO,1977,68.3,Gapminder,Trinidad_and_Tobago_1977,1039009.0,7899.554209000001,Gapminder,86.5,75.53,77.21,Higher simulated investment,True
 Trinidad and Tobago,Americas,TTO,1977,66.17,World Bank,Trinidad_and_Tobago_1977,1039009.0,7899.554209000001,Gapminder,86.5,75.53,77.21,Higher simulated investment,True
 Trinidad and Tobago,Americas,TTO,1982,68.832,Gapminder,Trinidad_and_Tobago_1982,1116479.0,9119.528607,Gapminder,94.27,90.66,85.57,Higher simulated investment,True

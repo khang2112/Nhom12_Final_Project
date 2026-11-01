@@ -1,11 +1,14 @@
 {
   "pca_components": 7,
-  "explained_variance": 0.9125601865438817,
+  "explained_variance": 0.9125402630042373,
   "chosen_k": 2,
   "cluster_representation": "PCA features",
-  "winning_silhouette": 0.28810369214350157,
-  "original_same_k_silhouette": 0.2638598625167073,
-  "pca_same_k_silhouette": 0.28810369214350157,
+  "winning_silhouette": 0.28793436296130565,
+  "original_same_k_silhouette": 0.2638074235140153,
+  "pca_same_k_silhouette": 0.28793436296130565,
+  "selection": "country-disjoint validation, then refit fit+validation; final test untouched",
+  "fit_countries": 90,
+  "validation_countries": 23,
   "train_rows": 1356,
   "test_rows": 348,
   "train_countries": 113,
@@ -18,9 +21,9 @@
   "winning_regression": "LinearRegression",
   "winning_classification": "LogisticRegression",
   "best_regression": {
-    "MSE": 38.05606,
-    "RMSE": 6.16896,
-    "R2": 0.77824
+    "MSE": 38.07731,
+    "RMSE": 6.17068,
+    "R2": 0.77811
   },
   "best_classification": {
     "Accuracy": 0.87069,
@@ -28,5 +31,12 @@
     "Recall_macro": 0.86235,
     "F1_macro": 0.84529,
     "F1_positive": 0.78261
+  },
+  "sklearn_version": "1.8.0",
+  "python_version": "3.12.14",
+  "artifact_sha256": {
+    "regression_winner.joblib": "2fb9595c5eb7c4a25b8d05b852517633a9e2d71871d30dc62807fa3221aa57ba",
+    "classification_winner.joblib": "bfaf04437d3e738763ba4732d89a9f918d3958564aff111eed740a7aac02137b",
+    "clustering_pipeline.joblib": "c687805f7788e14714cdb40ea250fde9fbb7cff2bbc2eeac569accbf2f7f8181"
   }
 }

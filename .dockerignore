@@ -1,0 +1,11 @@
+.git
+.venv*
+__pycache__
+*.pyc
+.pytest_cache
+databases/chroma_db
+screenshots
+docs
+slide
+*.pptx
+notebooks

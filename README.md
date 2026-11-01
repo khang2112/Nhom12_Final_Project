@@ -1,96 +1,79 @@
-# ATLAS INSIGHT — DATA ANALYST AI — NHÓM 12
+# Atlas Insight — Nhóm 12
 
-## 1. TỔNG QUAN VÀ PHÂN BIỆT HAI NHÁNH
+Phân tích quốc gia–năm, dự đoán tuổi thọ, phân loại ≥70 năm và phân cụm.
 
-- **Stage 1, nhánh AI (Gapminder):** 1.704 quan sát quốc gia–năm, 142 quốc gia, giai đoạn 1952–2007; 2 nhóm địa lý Feed A=1.020, Feed B=684 từ cùng nguồn Gapminder, nối dọc rồi ghép dữ liệu động do Python mô phỏng. Có 375 ô thiếu nhân tạo trong biến `sim_*`, sau xử lý còn 0.
-- **Stage 1, nhánh đối chiếu hai nhà cung cấp:** Gapminder **1.704** + World Bank **1.400** dòng theo nguồn = **3.104** dòng; chỉ có **1.704 quốc gia–năm duy nhất**. World Bank đóng góp chuỗi tuổi thọ, không trực tiếp cung cấp GDP/người và dân số trong bảng tích hợp. Sau ghép, 6 giá trị tuổi thọ thiếu được điền từ Gapminder có gắn cờ nguồn, còn 690 ô biến mô phỏng được làm sạch; `multisource_clean.csv` không còn ô thiếu.
-- **Stage 2:** PCA, K-Means, Regression, Classification **chỉ huấn luyện trên `master_clean.csv` 1.704 quốc gia–năm Gapminder**, **KHÔNG** huấn luyện trên 3.104 dòng nguồn (tránh đếm trùng quốc gia–năm và không đồng nhất nguồn dữ liệu).
-- **Giới hạn:** Một phần biến giải thích `sim_*` là dữ liệu **mô phỏng**, không phải quan trắc thực; không dùng mô hình để dự báo chính sách hoặc năm 2026. Hai file Gapminder geographic Feed A/B không phải hai nhà phát hành riêng, do đó sử dụng nhánh World Bank để có đối chiếu đa nguồn thực tế.
+## Chạy nhanh bằng Docker
 
-## 2. NGUỒN DỮ LIỆU
-
-- Gapminder (Plotly): https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv
-- Gapminder chính thức: https://www.gapminder.org/data/
-- World Bank indicator **SP.DYN.LE00.IN** (life expectancy at birth, total): https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?format=json&per_page=20000
-- File World Bank cục bộ: `data/raw/worldbank_life_expectancy.json`.
-
-## 3. CÀI ĐẶT VÀ CHẠY TRÊN WINDOWS
-
-Dùng **Python 3.11** (khuyến nghị; từng chạy Notebook thành công):
+Cài Docker Desktop, bật Linux containers. Tại thư mục project:
 
 ```powershell
-cd 'F:\Final Project AI\NHOM_12_FINAL_PROJECT\AI_Data_Analyst_Project'
-py -3.11 -m venv .venv
+docker compose up --build -d --wait
+```
+
+Mở http://localhost:7860. Web gọi ChromaDB qua `chroma:8000`; vector lưu trong named volume `chroma_data`. SQLite lưu bảng dữ liệu nền trong project. Khởi động chỉ đồng bộ vector, không huấn luyện lại model.
+
+```powershell
+docker compose exec web python -m pytest tests -q
+docker compose exec web python tests/smoke_http.py
+docker compose logs --tail 60 web
+docker compose down
+```
+
+Không dùng `down -v` nếu muốn giữ dữ liệu vector. GitHub Actions kiểm tra build, UI, database và restart; ảnh UI chạy Docker nằm trong artifact `docker-ui-evidence` của workflow. **Cấu hình Docker chưa được chạy bằng Docker Engine trong môi trường sửa bài; cần workflow xanh hoặc chạy các lệnh trên trước khi báo cáo Docker thành công.**
+
+## Chạy Python cục bộ
+
+Python 3.12; các package đã ghim phiên bản trong requirements.txt.
+
+```powershell
+py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe tests/test_pipeline.py
-.\.venv\Scripts\python.exe ui/app.py
+.\.venv\Scripts\python.exe src/start_app.py
 ```
 
-Mở Gradio trên http://127.0.0.1:7860. Nếu cần tái tạo pipeline nguyên bản, CHỈ chạy khi đã sao lưu dữ liệu và model vì các bước này ghi đè đầu ra:
+`start_app.py` dùng Chroma nhúng khi không có CHROMA_HOST. Không chạy đồng thời hai tiến trình ghi vào cùng thư mục Chroma nhúng. Muốn nhiều tiến trình, dùng Docker/HTTP.
+
+## Tái tạo dữ liệu và model
 
 ```powershell
-python src/01_prepare_data.py
-python src/02_storage_clean_eda.py
-python src/03_model_stage2.py
-python src/04_chromadb_vector.py
+.\.venv\Scripts\python.exe run_pipeline.py
+# Thêm --crawl nếu cần tải mới từ World Bank bằng Scrapy.
+.\.venv\Scripts\python.exe src/07_build_deliverables.py
 ```
 
-### Tái tạo nhánh World Bank theo đúng thứ tự (yêu cầu có file JSON gốc)
+Pipeline ghi đè đầu ra. Bản kèm theo đã crawl thật 12.768 bản ghi/8 trường; xem `reports/crawl_audit.json`. Sau lọc WB còn 1.400 dòng, nối Gapminder 1.704 thành 3.104 dòng theo nguồn. Chỉ tập 1.704 country-year dùng ML.
 
-```powershell
-python src/09_standardize_worldbank.py
-python src/10_compare_sources.py
-python src/11_concat_two_sources.py
-python src/12_merge_multisource_dynamic.py
-python src/13_fill_missing_lifeexp.py
-python src/14_clean_multisource.py
-python tests/test_pipeline.py
-```
+## Các sửa đổi chính
 
-**Lưu ý phụ thuộc:** Script 09–14 sử dụng bảng `unified_static_master.csv` và `simulated_country_year_indicators.csv` đã tạo ở nhánh Gapminder. Mỗi bước giữ dữ liệu gốc và có audit CSV trong `reports/`.
+- Scrapy thu thập API World Bank, có URL, timestamp, SHA256; đưa vào nhánh 09–14.
+- Missingno, thống kê thiếu, so sánh phân phối; IQR clipping feature GDP/dân số sau log.
+- Supervised đọc dữ liệu chưa điền thiếu; imputer, scaler, encoder chỉ fit train.
+- Chia quốc gia thành fit 90 / validation 23 / test 29. Chọn model bằng validation, refit 113 nước, báo cáo test cuối 29 nước.
+- Xuất lại cả 3 model với sklearn 1.8.0; UI chặn sai phiên bản và input không hợp lệ.
+- Chroma round-trip DataFrame; UI truy vấn 5 vector gần nhất, không lấy mẫu giả tương đồng.
+- Docker Web/Chroma tách riêng, volume, startup retry, healthcheck và CI.
 
-## 4. LƯU TRỮ & BẰNG CHỨNG
+## Báo cáo ngắn
 
-- SQLite: `databases/gapminder_project.sqlite`, các bảng `master_sparse`, `master_clean`, `master_with_clusters`; kiểm tra trong `tests/test_pipeline.py`.
-- **ChromaDB đã nạp thành công**: `databases/chroma_db/`, collection `country_year_embeddings`, **1.704 vector 7 chiều**. Xem `reports/chroma_status.json` (`ingested=true`, `count=1704`) và `screenshots/05_Stage1_ChromaDB_Success.png`.
-- **Gradio đã chạy có ảnh thật**: `screenshots/01_UI_Du_doan_Asia.png`, `02_UI_Truc_quan_hoa.png`, `03_UI_Ket_qua_danh_gia.png`, `04_UI_Nguon_du_lieu.png`; thêm `06_Stage1_Multisource_Validation.png`, `07_Final_Project_Test_PASS.png`.
-- EDA Stage 1: `charts/01_*.png` đến `10_*.png` (10 biểu đồ); Stage 2: `charts/11_*.png` đến `16_*.png` (6 biểu đồ).
-- Notebook cuối có kết quả: `notebooks/Project_Stage1_Stage2_NHOM12.ipynb` (không thay bằng bản generator cũ).
+- `docs/Bao_Cao_Final.pdf`: 8 trang, phân công 4 người và code cần mở.
+- `slide/Slides_Final_Project.pdf`: slide ngắn, cùng số liệu hiện tại.
+- `notebooks/Project_Stage1_Stage2_NHOM12.ipynb`: EDA, 17 biểu đồ và insight; chỉ đọc artifact khi Run All.
+- `reports/model_results.json`: số liệu gốc; `reports/validation_benchmark.csv`: căn cứ chọn winner.
+- `reports/integration_status.json`: kiểm tra HTTP/DB thật; không phải chứng nhận Docker.
 
-## 5. METRICS AI (BẢN GAPMINDER 1.704 DÒNG)
+Các DOCX/PPTX dài cũ và ảnh cũ đã bỏ khỏi bản cập nhật để tránh trình bày nhầm metric. Có thể lấy lại từ lịch sử Git. Hai script bonus 05/06 giữ lại làm tham khảo, không dùng chứng minh rubric thu thập.
 
-- PCA: 7 components, khoảng 91,26% explained variance.
-- K-Means: K=2; Silhouette PCA khoảng 0,288, gốc cùng K khoảng 0,264.
-- Linear Regression: RMSE khoảng 6,169 năm; R² khoảng 0,778.
-- Logistic Regression: Accuracy khoảng 87,07%; F1-macro khoảng 0,845.
-- Supervised validation: 29 quốc gia test; không dùng quốc gia đó trong train.
-- Bài kiểm thử: `python tests/test_pipeline.py` kiểm tra cả 1.704 dòng AI và 3.104 dòng đối chiếu World Bank.
+## Phân công 4 người
 
-## 6. CÁC FILE VÀ ĐÓNG GÓI BÀI NỘP
+| Người | Nội dung | Code |
+|---|---|---|
+| 1 | Nguồn, Scrapy, concat/merge | 00, 01, 09–14 |
+| 2 | SQLite/Chroma, thiếu dữ liệu, EDA | 02, 04, vector_store |
+| 3 | Feature, split, 6 thuật toán, metrics | 03, transforms |
+| 4 | UI, Docker, demo, kết luận | ui/app.py, start_app, tests, Compose |
 
-```text
-NHOM_12_FINAL_PROJECT/
-├── Bao_Cao_Final.docx
-├── Slides_Thuyet_Trinh.pptx
-└── AI_Data_Analyst_Project/
-    ├── README.md                  (tài liệu này)
-    ├── requirements.txt
-    ├── notebooks/Project_Stage1_Stage2_NHOM12.ipynb
-    ├── src/                       (01–14 và script hỗ trợ)
-    ├── data/                      (raw, synthetic, processed)
-    ├── databases/                 (SQLite, ChromaDB)
-    ├── models/                    (joblib)
-    ├── charts/                    (16 PNG)
-    ├── reports/                   (audit, benchmark)
-    ├── screenshots/               (ảnh chạy thực tế)
-    ├── ui/app.py
-    └── tests/test_pipeline.py
-```
+Giữ danh sách tác giả gốc: Nguyễn Dương Khang, Đào Gia Huy, Lê Ngọc Quỳnh Hương, Võ Tiến Đạt, Nguyễn Ngọc Hoàng. Nhóm tự gán 4 người báo cáo.
 
-File `src/07_build_deliverables.py` chỉ tạo **tài liệu bản tự sinh nằm trong project**, không phải bản Word/PowerPoint cuối đặt ở thư mục cha. `src/08_make_notebook.py` xuất bản sao an toàn của Notebook đã được kiểm chứng, không tạo lại Notebook lỗi thời.
+Dữ liệu 1952–2007 và các biến sim_* mô phỏng chỉ phục vụ thực hành. Không suy luận nhân quả hoặc dự báo hiện tại.
 
-**Không đưa vào ZIP:** `.venv/`, `__pycache__/`, `.git/`, các tệp tạm `.tmp`, `~$...`. Không xoá `databases/chroma_db/`, `.joblib`, CSV/JSON gốc hoặc các ảnh bằng chứng.
-
-## 7. PHẦN BONUS
-
-`src/05_bonus_web_crawler.py` và `src/06_bonus_ollama_text.py` là code cho phần cộng điểm. Không đánh dấu đã chạy nếu chưa có dữ liệu đầu ra thực và bằng chứng riêng.
+Nguồn: [Gapminder](https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv), [World Bank API](https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?format=json).
