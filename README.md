@@ -1,79 +1,113 @@
-# Atlas Insight — Nhóm 12
+# Atlas Insight - Nhóm 12
 
-Phân tích quốc gia–năm, dự đoán tuổi thọ, phân loại ≥70 năm và phân cụm.
+Hệ thống phân tích dữ liệu quốc gia theo năm để:
 
-## Chạy nhanh bằng Docker
+- Dự đoán tuổi thọ bằng hồi quy.
+- Phân loại tuổi thọ từ 70 năm trở lên.
+- Phân cụm hồ sơ quốc gia-năm bằng PCA và K-Means.
+- Tìm các hồ sơ tương đồng bằng ChromaDB.
+- Trình bày kết quả trên giao diện Gradio.
 
-Cài Docker Desktop, bật Linux containers. Tại thư mục project:
+## Dữ liệu
 
-```powershell
-docker compose up --build -d --wait
-```
+| Nguồn | Quy mô | Mục đích |
+|---|---:|---|
+| Gapminder | 1.704 dòng | Dữ liệu chính cho EDA và Machine Learning |
+| World Bank API | 12.768 bản ghi thô | Nguồn độc lập để kiểm tra và tích hợp |
+| World Bank sau chuẩn hóa | 1.400 dòng | So sánh cùng phạm vi với Gapminder |
+| Bảng đa nguồn | 3.104 dòng | Giữ riêng từng nguồn, không dùng toàn bộ để train |
 
-Mở http://localhost:7860. Web gọi ChromaDB qua `chroma:8000`; vector lưu trong named volume `chroma_data`. SQLite lưu bảng dữ liệu nền trong project. Khởi động chỉ đồng bộ vector, không huấn luyện lại model.
+Dữ liệu thuộc giai đoạn **1952-2007**. Các biến `sim_*` là dữ liệu mô phỏng phục vụ thực hành.
 
-```powershell
-docker compose exec web python -m pytest tests -q
-docker compose exec web python tests/smoke_http.py
-docker compose logs --tail 60 web
-docker compose down
-```
+## Kết quả chính
 
-Không dùng `down -v` nếu muốn giữ dữ liệu vector. GitHub Actions kiểm tra build, UI, database và restart; ảnh UI chạy Docker nằm trong artifact `docker-ui-evidence` của workflow. **Cấu hình Docker chưa được chạy bằng Docker Engine trong môi trường sửa bài; cần workflow xanh hoặc chạy các lệnh trên trước khi báo cáo Docker thành công.**
+| Hạng mục | Kết quả |
+|---|---|
+| PCA | 7 thành phần, giữ 91,25% phương sai |
+| K-Means | K=2, Silhouette=0,2879 |
+| Hồi quy tốt nhất | Linear Regression, RMSE=6,17068, R²=0,77811 |
+| Phân loại tốt nhất | Logistic Regression, Accuracy=0,87069, F1 macro=0,84529 |
+| ChromaDB | 1.704 vector, 7 chiều |
 
-## Chạy Python cục bộ
+Chi tiết nằm trong `reports/model_results.json` và các file benchmark trong `reports/`.
 
-Python 3.12; các package đã ghim phiên bản trong requirements.txt.
+## Chạy bằng Python
+
+Yêu cầu Python 3.12.
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe src/start_app.py
+.\.venv\Scripts\python.exe -m pytest tests -q
+.\.venv\Scripts\python.exe src\start_app.py
 ```
 
-`start_app.py` dùng Chroma nhúng khi không có CHROMA_HOST. Không chạy đồng thời hai tiến trình ghi vào cùng thư mục Chroma nhúng. Muốn nhiều tiến trình, dùng Docker/HTTP.
+Mở: http://127.0.0.1:7860
 
-## Tái tạo dữ liệu và model
+Nếu `.venv` đã tồn tại và test đã đạt thì chỉ cần chạy `src\start_app.py`.
+
+## Chạy bằng Docker
+
+```powershell
+docker compose up --build -d --wait
+docker compose exec -T web python -m pytest tests -q
+docker compose exec -T web python tests/smoke_http.py
+```
+
+Mở: http://127.0.0.1:7860
+
+Dừng hệ thống:
+
+```powershell
+docker compose down
+```
+
+Chỉ chọn một cách chạy tại một thời điểm vì Python local và Docker cùng sử dụng cổng `7860`.
+
+## Tái tạo pipeline
+
+Chỉ chạy khi cần tạo lại dữ liệu, biểu đồ và model:
 
 ```powershell
 .\.venv\Scripts\python.exe run_pipeline.py
-# Thêm --crawl nếu cần tải mới từ World Bank bằng Scrapy.
-.\.venv\Scripts\python.exe src/07_build_deliverables.py
 ```
 
-Pipeline ghi đè đầu ra. Bản kèm theo đã crawl thật 12.768 bản ghi/8 trường; xem `reports/crawl_audit.json`. Sau lọc WB còn 1.400 dòng, nối Gapminder 1.704 thành 3.104 dòng theo nguồn. Chỉ tập 1.704 country-year dùng ML.
+Tải lại World Bank bằng Scrapy:
 
-## Các sửa đổi chính
+```powershell
+.\.venv\Scripts\python.exe run_pipeline.py --crawl
+```
 
-- Scrapy thu thập API World Bank, có URL, timestamp, SHA256; đưa vào nhánh 09–14.
-- Missingno, thống kê thiếu, so sánh phân phối; IQR clipping feature GDP/dân số sau log.
-- Supervised đọc dữ liệu chưa điền thiếu; imputer, scaler, encoder chỉ fit train.
-- Chia quốc gia thành fit 90 / validation 23 / test 29. Chọn model bằng validation, refit 113 nước, báo cáo test cuối 29 nước.
-- Xuất lại cả 3 model với sklearn 1.8.0; UI chặn sai phiên bản và input không hợp lệ.
-- Chroma round-trip DataFrame; UI truy vấn 5 vector gần nhất, không lấy mẫu giả tương đồng.
-- Docker Web/Chroma tách riêng, volume, startup retry, healthcheck và CI.
+## Cấu trúc chính
 
-## Báo cáo ngắn
+```text
+src/        Xử lý dữ liệu, EDA, Machine Learning và ChromaDB
+ui/         Giao diện Gradio
+data/       Dữ liệu thô và đã xử lý
+models/     Model đã huấn luyện
+reports/    Kết quả đánh giá và audit
+charts/     Biểu đồ
+databases/  SQLite và ChromaDB
+tests/      Kiểm thử pipeline, database và giao diện
+docs/       Báo cáo và đóng góp thành viên
+slide/      Slide thuyết trình
+```
 
-- `docs/Bao_Cao_Final.pdf`: 8 trang, phân công 4 người và code cần mở.
-- `slide/Slides_Final_Project.pdf`: slide ngắn, cùng số liệu hiện tại.
-- `notebooks/Project_Stage1_Stage2_NHOM12.ipynb`: EDA, 17 biểu đồ và insight; chỉ đọc artifact khi Run All.
-- `reports/model_results.json`: số liệu gốc; `reports/validation_benchmark.csv`: căn cứ chọn winner.
-- `reports/integration_status.json`: kiểm tra HTTP/DB thật; không phải chứng nhận Docker.
+## Phân công 5 thành viên
 
-Các DOCX/PPTX dài cũ và ảnh cũ đã bỏ khỏi bản cập nhật để tránh trình bày nhầm metric. Có thể lấy lại từ lịch sử Git. Hai script bonus 05/06 giữ lại làm tham khảo, không dùng chứng minh rubric thu thập.
+| Thành viên | Phần phụ trách |
+|---|---|
+| Nguyễn Dương Khang | Nguồn dữ liệu và tích hợp |
+| Đào Gia Huy | Làm sạch, SQLite và ChromaDB |
+| Lê Ngọc Quỳnh Hương | EDA, biểu đồ và insight |
+| Võ Tiến Đạt | PCA, K-Means, hồi quy và phân loại |
+| Nguyễn Ngọc Hoàng | UI, Docker và demo |
 
-## Phân công 4 người
+## Giới hạn
 
-| Người | Nội dung | Code |
-|---|---|---|
-| 1 | Nguồn, Scrapy, concat/merge | 00, 01, 09–14 |
-| 2 | SQLite/Chroma, thiếu dữ liệu, EDA | 02, 04, vector_store |
-| 3 | Feature, split, 6 thuật toán, metrics | 03, transforms |
-| 4 | UI, Docker, demo, kết luận | ui/app.py, start_app, tests, Compose |
+- Không suy luận quan hệ nhân quả từ tương quan.
+- Không dùng để dự đoán tuổi thọ cá nhân.
+- Không dùng dữ liệu 1952-2007 để khẳng định hiện trạng năm 2026.
+- Các biến mô phỏng không phải số liệu y tế hoặc giáo dục thực tế.
 
-Giữ danh sách tác giả gốc: Nguyễn Dương Khang, Đào Gia Huy, Lê Ngọc Quỳnh Hương, Võ Tiến Đạt, Nguyễn Ngọc Hoàng. Nhóm tự gán 4 người báo cáo.
-
-Dữ liệu 1952–2007 và các biến sim_* mô phỏng chỉ phục vụ thực hành. Không suy luận nhân quả hoặc dự báo hiện tại.
-
-Nguồn: [Gapminder](https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv), [World Bank API](https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?format=json).
+Nguồn: [Gapminder](https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv) và [World Bank API](https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN?format=json).
