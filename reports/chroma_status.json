@@ -1,6 +1,7 @@
 {
   "ingested": true,
-  "backend": "ChromaDB PersistentClient",
+  "backend": "Client",
+  "roundtrip_dataframe": true,
   "collection": "country_year_embeddings",
   "count": 1704,
   "dimensions": 7,

@@ -10,6 +10,7 @@ from pathlib import Path
 import matplotlib
 import pandas as pd
 import seaborn as sns
+import missingno as msno
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -217,6 +218,9 @@ def prepare():
 def charts(before, df):
     """Generate the same 10 descriptive and exploratory charts."""
 
+    msno.matrix(before[SIMULATED_NUMERIC_COLUMNS + ['sim_policy_group']], sparkline=False)
+    plt.title('Missingness matrix before imputation (simulated features)')
+    save('17_missingno_matrix.png')
     # Chart 01: Missing values before imputation.
     counts = before.isna().sum()
     counts = counts[counts > 0].sort_values()

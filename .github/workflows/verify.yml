@@ -1,0 +1,34 @@
+name: Verify project and Docker
+on: [push, pull_request]
+jobs:
+  docker-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start both services
+        run: docker compose up --build -d --wait --wait-timeout 240
+      - name: Test data, models, live DB and UI
+        run: |
+          docker compose exec -T web python -m pytest tests -q
+          docker compose exec -T web python tests/smoke_http.py
+      - name: Restart and verify persistence
+        run: |
+          docker compose restart chroma
+          sleep 10
+          docker compose exec -T web python tests/smoke_http.py
+      - name: Docker logs
+        if: always()
+        run: docker compose logs --no-color
+      - name: Capture actual Docker UI
+        run: |
+          python -m pip install playwright==1.64.1
+          python -m playwright install --with-deps chromium
+          python tests/capture_ui.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docker-ui-evidence
+          path: screenshots/current/
+      - name: Stop
+        if: always()
+        run: docker compose down

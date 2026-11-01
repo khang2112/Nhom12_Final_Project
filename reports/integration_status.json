@@ -1,0 +1,6 @@
+{
+  "http_db": true,
+  "gradio_http": true,
+  "restart_persistence": true,
+  "docker_engine_tested": false
+}
