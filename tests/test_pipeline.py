@@ -52,7 +52,8 @@ def test_multisource():
     status=json.loads((ROOT/'reports/chroma_status.json').read_text(encoding='utf-8'))
     assert status.get('ingested') is True and status.get('count')==1704
     assert status.get('dimensions')==7
-    assert (ROOT/'databases/chroma_db/chroma.sqlite3').exists()
+    from vector_store import collection
+    assert collection().count() == 1704
     print('PASS MULTISOURCE: 3,104 source-rows; 1,704 unique country-years; 0 missing; ChromaDB and UI evidence.')
 
 if __name__=='__main__':
