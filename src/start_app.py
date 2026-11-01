@@ -19,7 +19,11 @@ def main():
                 raise
             time.sleep(2)
     subprocess.run([sys.executable, str(ROOT/'src/04_chromadb_vector.py')], check=True, cwd=ROOT)
-    os.execv(sys.executable, [sys.executable, str(ROOT/'ui/app.py')])
+    subprocess.run(
+    [sys.executable, str(ROOT / 'ui/app.py')],
+    check=True,
+    cwd=ROOT,
+)
 
 
 if __name__ == '__main__':
