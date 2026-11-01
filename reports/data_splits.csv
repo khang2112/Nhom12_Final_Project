@@ -1,0 +1,1705 @@
+record_id,country,year,split
+Afghanistan_1952,Afghanistan,1952,validation
+Afghanistan_1957,Afghanistan,1957,validation
+Afghanistan_1962,Afghanistan,1962,validation
+Afghanistan_1967,Afghanistan,1967,validation
+Afghanistan_1972,Afghanistan,1972,validation
+Afghanistan_1977,Afghanistan,1977,validation
+Afghanistan_1982,Afghanistan,1982,validation
+Afghanistan_1987,Afghanistan,1987,validation
+Afghanistan_1992,Afghanistan,1992,validation
+Afghanistan_1997,Afghanistan,1997,validation
+Afghanistan_2002,Afghanistan,2002,validation
+Afghanistan_2007,Afghanistan,2007,validation
+Algeria_1952,Algeria,1952,fit
+Algeria_1957,Algeria,1957,fit
+Algeria_1962,Algeria,1962,fit
+Algeria_1967,Algeria,1967,fit
+Algeria_1972,Algeria,1972,fit
+Algeria_1977,Algeria,1977,fit
+Algeria_1982,Algeria,1982,fit
+Algeria_1987,Algeria,1987,fit
+Algeria_1992,Algeria,1992,fit
+Algeria_1997,Algeria,1997,fit
+Algeria_2002,Algeria,2002,fit
+Algeria_2007,Algeria,2007,fit
+Angola_1952,Angola,1952,fit
+Angola_1957,Angola,1957,fit
+Angola_1962,Angola,1962,fit
+Angola_1967,Angola,1967,fit
+Angola_1972,Angola,1972,fit
+Angola_1977,Angola,1977,fit
+Angola_1982,Angola,1982,fit
+Angola_1987,Angola,1987,fit
+Angola_1992,Angola,1992,fit
+Angola_1997,Angola,1997,fit
+Angola_2002,Angola,2002,fit
+Angola_2007,Angola,2007,fit
+Bahrain_1952,Bahrain,1952,fit
+Bahrain_1957,Bahrain,1957,fit
+Bahrain_1962,Bahrain,1962,fit
+Bahrain_1967,Bahrain,1967,fit
+Bahrain_1972,Bahrain,1972,fit
+Bahrain_1977,Bahrain,1977,fit
+Bahrain_1982,Bahrain,1982,fit
+Bahrain_1987,Bahrain,1987,fit
+Bahrain_1992,Bahrain,1992,fit
+Bahrain_1997,Bahrain,1997,fit
+Bahrain_2002,Bahrain,2002,fit
+Bahrain_2007,Bahrain,2007,fit
+Bangladesh_1952,Bangladesh,1952,fit
+Bangladesh_1957,Bangladesh,1957,fit
+Bangladesh_1962,Bangladesh,1962,fit
+Bangladesh_1967,Bangladesh,1967,fit
+Bangladesh_1972,Bangladesh,1972,fit
+Bangladesh_1977,Bangladesh,1977,fit
+Bangladesh_1982,Bangladesh,1982,fit
+Bangladesh_1987,Bangladesh,1987,fit
+Bangladesh_1992,Bangladesh,1992,fit
+Bangladesh_1997,Bangladesh,1997,fit
+Bangladesh_2002,Bangladesh,2002,fit
+Bangladesh_2007,Bangladesh,2007,fit
+Benin_1952,Benin,1952,fit
+Benin_1957,Benin,1957,fit
+Benin_1962,Benin,1962,fit
+Benin_1967,Benin,1967,fit
+Benin_1972,Benin,1972,fit
+Benin_1977,Benin,1977,fit
+Benin_1982,Benin,1982,fit
+Benin_1987,Benin,1987,fit
+Benin_1992,Benin,1992,fit
+Benin_1997,Benin,1997,fit
+Benin_2002,Benin,2002,fit
+Benin_2007,Benin,2007,fit
+Botswana_1952,Botswana,1952,fit
+Botswana_1957,Botswana,1957,fit
+Botswana_1962,Botswana,1962,fit
+Botswana_1967,Botswana,1967,fit
+Botswana_1972,Botswana,1972,fit
+Botswana_1977,Botswana,1977,fit
+Botswana_1982,Botswana,1982,fit
+Botswana_1987,Botswana,1987,fit
+Botswana_1992,Botswana,1992,fit
+Botswana_1997,Botswana,1997,fit
+Botswana_2002,Botswana,2002,fit
+Botswana_2007,Botswana,2007,fit
+Burkina_Faso_1952,Burkina Faso,1952,fit
+Burkina_Faso_1957,Burkina Faso,1957,fit
+Burkina_Faso_1962,Burkina Faso,1962,fit
+Burkina_Faso_1967,Burkina Faso,1967,fit
+Burkina_Faso_1972,Burkina Faso,1972,fit
+Burkina_Faso_1977,Burkina Faso,1977,fit
+Burkina_Faso_1982,Burkina Faso,1982,fit
+Burkina_Faso_1987,Burkina Faso,1987,fit
+Burkina_Faso_1992,Burkina Faso,1992,fit
+Burkina_Faso_1997,Burkina Faso,1997,fit
+Burkina_Faso_2002,Burkina Faso,2002,fit
+Burkina_Faso_2007,Burkina Faso,2007,fit
+Burundi_1952,Burundi,1952,validation
+Burundi_1957,Burundi,1957,validation
+Burundi_1962,Burundi,1962,validation
+Burundi_1967,Burundi,1967,validation
+Burundi_1972,Burundi,1972,validation
+Burundi_1977,Burundi,1977,validation
+Burundi_1982,Burundi,1982,validation
+Burundi_1987,Burundi,1987,validation
+Burundi_1992,Burundi,1992,validation
+Burundi_1997,Burundi,1997,validation
+Burundi_2002,Burundi,2002,validation
+Burundi_2007,Burundi,2007,validation
+Cambodia_1952,Cambodia,1952,test
+Cambodia_1957,Cambodia,1957,test
+Cambodia_1962,Cambodia,1962,test
+Cambodia_1967,Cambodia,1967,test
+Cambodia_1972,Cambodia,1972,test
+Cambodia_1977,Cambodia,1977,test
+Cambodia_1982,Cambodia,1982,test
+Cambodia_1987,Cambodia,1987,test
+Cambodia_1992,Cambodia,1992,test
+Cambodia_1997,Cambodia,1997,test
+Cambodia_2002,Cambodia,2002,test
+Cambodia_2007,Cambodia,2007,test
+Cameroon_1952,Cameroon,1952,fit
+Cameroon_1957,Cameroon,1957,fit
+Cameroon_1962,Cameroon,1962,fit
+Cameroon_1967,Cameroon,1967,fit
+Cameroon_1972,Cameroon,1972,fit
+Cameroon_1977,Cameroon,1977,fit
+Cameroon_1982,Cameroon,1982,fit
+Cameroon_1987,Cameroon,1987,fit
+Cameroon_1992,Cameroon,1992,fit
+Cameroon_1997,Cameroon,1997,fit
+Cameroon_2002,Cameroon,2002,fit
+Cameroon_2007,Cameroon,2007,fit
+Central_African_Republic_1952,Central African Republic,1952,test
+Central_African_Republic_1957,Central African Republic,1957,test
+Central_African_Republic_1962,Central African Republic,1962,test
+Central_African_Republic_1967,Central African Republic,1967,test
+Central_African_Republic_1972,Central African Republic,1972,test
+Central_African_Republic_1977,Central African Republic,1977,test
+Central_African_Republic_1982,Central African Republic,1982,test
+Central_African_Republic_1987,Central African Republic,1987,test
+Central_African_Republic_1992,Central African Republic,1992,test
+Central_African_Republic_1997,Central African Republic,1997,test
+Central_African_Republic_2002,Central African Republic,2002,test
+Central_African_Republic_2007,Central African Republic,2007,test
+Chad_1952,Chad,1952,fit
+Chad_1957,Chad,1957,fit
+Chad_1962,Chad,1962,fit
+Chad_1967,Chad,1967,fit
+Chad_1972,Chad,1972,fit
+Chad_1977,Chad,1977,fit
+Chad_1982,Chad,1982,fit
+Chad_1987,Chad,1987,fit
+Chad_1992,Chad,1992,fit
+Chad_1997,Chad,1997,fit
+Chad_2002,Chad,2002,fit
+Chad_2007,Chad,2007,fit
+China_1952,China,1952,fit
+China_1957,China,1957,fit
+China_1962,China,1962,fit
+China_1967,China,1967,fit
+China_1972,China,1972,fit
+China_1977,China,1977,fit
+China_1982,China,1982,fit
+China_1987,China,1987,fit
+China_1992,China,1992,fit
+China_1997,China,1997,fit
+China_2002,China,2002,fit
+China_2007,China,2007,fit
+Comoros_1952,Comoros,1952,fit
+Comoros_1957,Comoros,1957,fit
+Comoros_1962,Comoros,1962,fit
+Comoros_1967,Comoros,1967,fit
+Comoros_1972,Comoros,1972,fit
+Comoros_1977,Comoros,1977,fit
+Comoros_1982,Comoros,1982,fit
+Comoros_1987,Comoros,1987,fit
+Comoros_1992,Comoros,1992,fit
+Comoros_1997,Comoros,1997,fit
+Comoros_2002,Comoros,2002,fit
+Comoros_2007,Comoros,2007,fit
+Congo_Dem_Rep_1952,"Congo, Dem. Rep.",1952,test
+Congo_Dem_Rep_1957,"Congo, Dem. Rep.",1957,test
+Congo_Dem_Rep_1962,"Congo, Dem. Rep.",1962,test
+Congo_Dem_Rep_1967,"Congo, Dem. Rep.",1967,test
+Congo_Dem_Rep_1972,"Congo, Dem. Rep.",1972,test
+Congo_Dem_Rep_1977,"Congo, Dem. Rep.",1977,test
+Congo_Dem_Rep_1982,"Congo, Dem. Rep.",1982,test
+Congo_Dem_Rep_1987,"Congo, Dem. Rep.",1987,test
+Congo_Dem_Rep_1992,"Congo, Dem. Rep.",1992,test
+Congo_Dem_Rep_1997,"Congo, Dem. Rep.",1997,test
+Congo_Dem_Rep_2002,"Congo, Dem. Rep.",2002,test
+Congo_Dem_Rep_2007,"Congo, Dem. Rep.",2007,test
+Congo_Rep_1952,"Congo, Rep.",1952,fit
+Congo_Rep_1957,"Congo, Rep.",1957,fit
+Congo_Rep_1962,"Congo, Rep.",1962,fit
+Congo_Rep_1967,"Congo, Rep.",1967,fit
+Congo_Rep_1972,"Congo, Rep.",1972,fit
+Congo_Rep_1977,"Congo, Rep.",1977,fit
+Congo_Rep_1982,"Congo, Rep.",1982,fit
+Congo_Rep_1987,"Congo, Rep.",1987,fit
+Congo_Rep_1992,"Congo, Rep.",1992,fit
+Congo_Rep_1997,"Congo, Rep.",1997,fit
+Congo_Rep_2002,"Congo, Rep.",2002,fit
+Congo_Rep_2007,"Congo, Rep.",2007,fit
+Cote_d_Ivoire_1952,Cote d'Ivoire,1952,validation
+Cote_d_Ivoire_1957,Cote d'Ivoire,1957,validation
+Cote_d_Ivoire_1962,Cote d'Ivoire,1962,validation
+Cote_d_Ivoire_1967,Cote d'Ivoire,1967,validation
+Cote_d_Ivoire_1972,Cote d'Ivoire,1972,validation
+Cote_d_Ivoire_1977,Cote d'Ivoire,1977,validation
+Cote_d_Ivoire_1982,Cote d'Ivoire,1982,validation
+Cote_d_Ivoire_1987,Cote d'Ivoire,1987,validation
+Cote_d_Ivoire_1992,Cote d'Ivoire,1992,validation
+Cote_d_Ivoire_1997,Cote d'Ivoire,1997,validation
+Cote_d_Ivoire_2002,Cote d'Ivoire,2002,validation
+Cote_d_Ivoire_2007,Cote d'Ivoire,2007,validation
+Djibouti_1952,Djibouti,1952,fit
+Djibouti_1957,Djibouti,1957,fit
+Djibouti_1962,Djibouti,1962,fit
+Djibouti_1967,Djibouti,1967,fit
+Djibouti_1972,Djibouti,1972,fit
+Djibouti_1977,Djibouti,1977,fit
+Djibouti_1982,Djibouti,1982,fit
+Djibouti_1987,Djibouti,1987,fit
+Djibouti_1992,Djibouti,1992,fit
+Djibouti_1997,Djibouti,1997,fit
+Djibouti_2002,Djibouti,2002,fit
+Djibouti_2007,Djibouti,2007,fit
+Egypt_1952,Egypt,1952,test
+Egypt_1957,Egypt,1957,test
+Egypt_1962,Egypt,1962,test
+Egypt_1967,Egypt,1967,test
+Egypt_1972,Egypt,1972,test
+Egypt_1977,Egypt,1977,test
+Egypt_1982,Egypt,1982,test
+Egypt_1987,Egypt,1987,test
+Egypt_1992,Egypt,1992,test
+Egypt_1997,Egypt,1997,test
+Egypt_2002,Egypt,2002,test
+Egypt_2007,Egypt,2007,test
+Equatorial_Guinea_1952,Equatorial Guinea,1952,validation
+Equatorial_Guinea_1957,Equatorial Guinea,1957,validation
+Equatorial_Guinea_1962,Equatorial Guinea,1962,validation
+Equatorial_Guinea_1967,Equatorial Guinea,1967,validation
+Equatorial_Guinea_1972,Equatorial Guinea,1972,validation
+Equatorial_Guinea_1977,Equatorial Guinea,1977,validation
+Equatorial_Guinea_1982,Equatorial Guinea,1982,validation
+Equatorial_Guinea_1987,Equatorial Guinea,1987,validation
+Equatorial_Guinea_1992,Equatorial Guinea,1992,validation
+Equatorial_Guinea_1997,Equatorial Guinea,1997,validation
+Equatorial_Guinea_2002,Equatorial Guinea,2002,validation
+Equatorial_Guinea_2007,Equatorial Guinea,2007,validation
+Eritrea_1952,Eritrea,1952,fit
+Eritrea_1957,Eritrea,1957,fit
+Eritrea_1962,Eritrea,1962,fit
+Eritrea_1967,Eritrea,1967,fit
+Eritrea_1972,Eritrea,1972,fit
+Eritrea_1977,Eritrea,1977,fit
+Eritrea_1982,Eritrea,1982,fit
+Eritrea_1987,Eritrea,1987,fit
+Eritrea_1992,Eritrea,1992,fit
+Eritrea_1997,Eritrea,1997,fit
+Eritrea_2002,Eritrea,2002,fit
+Eritrea_2007,Eritrea,2007,fit
+Ethiopia_1952,Ethiopia,1952,fit
+Ethiopia_1957,Ethiopia,1957,fit
+Ethiopia_1962,Ethiopia,1962,fit
+Ethiopia_1967,Ethiopia,1967,fit
+Ethiopia_1972,Ethiopia,1972,fit
+Ethiopia_1977,Ethiopia,1977,fit
+Ethiopia_1982,Ethiopia,1982,fit
+Ethiopia_1987,Ethiopia,1987,fit
+Ethiopia_1992,Ethiopia,1992,fit
+Ethiopia_1997,Ethiopia,1997,fit
+Ethiopia_2002,Ethiopia,2002,fit
+Ethiopia_2007,Ethiopia,2007,fit
+Gabon_1952,Gabon,1952,test
+Gabon_1957,Gabon,1957,test
+Gabon_1962,Gabon,1962,test
+Gabon_1967,Gabon,1967,test
+Gabon_1972,Gabon,1972,test
+Gabon_1977,Gabon,1977,test
+Gabon_1982,Gabon,1982,test
+Gabon_1987,Gabon,1987,test
+Gabon_1992,Gabon,1992,test
+Gabon_1997,Gabon,1997,test
+Gabon_2002,Gabon,2002,test
+Gabon_2007,Gabon,2007,test
+Gambia_1952,Gambia,1952,validation
+Gambia_1957,Gambia,1957,validation
+Gambia_1962,Gambia,1962,validation
+Gambia_1967,Gambia,1967,validation
+Gambia_1972,Gambia,1972,validation
+Gambia_1977,Gambia,1977,validation
+Gambia_1982,Gambia,1982,validation
+Gambia_1987,Gambia,1987,validation
+Gambia_1992,Gambia,1992,validation
+Gambia_1997,Gambia,1997,validation
+Gambia_2002,Gambia,2002,validation
+Gambia_2007,Gambia,2007,validation
+Ghana_1952,Ghana,1952,test
+Ghana_1957,Ghana,1957,test
+Ghana_1962,Ghana,1962,test
+Ghana_1967,Ghana,1967,test
+Ghana_1972,Ghana,1972,test
+Ghana_1977,Ghana,1977,test
+Ghana_1982,Ghana,1982,test
+Ghana_1987,Ghana,1987,test
+Ghana_1992,Ghana,1992,test
+Ghana_1997,Ghana,1997,test
+Ghana_2002,Ghana,2002,test
+Ghana_2007,Ghana,2007,test
+Guinea_1952,Guinea,1952,fit
+Guinea_1957,Guinea,1957,fit
+Guinea_1962,Guinea,1962,fit
+Guinea_1967,Guinea,1967,fit
+Guinea_1972,Guinea,1972,fit
+Guinea_1977,Guinea,1977,fit
+Guinea_1982,Guinea,1982,fit
+Guinea_1987,Guinea,1987,fit
+Guinea_1992,Guinea,1992,fit
+Guinea_1997,Guinea,1997,fit
+Guinea_2002,Guinea,2002,fit
+Guinea_2007,Guinea,2007,fit
+Guinea_Bissau_1952,Guinea-Bissau,1952,test
+Guinea_Bissau_1957,Guinea-Bissau,1957,test
+Guinea_Bissau_1962,Guinea-Bissau,1962,test
+Guinea_Bissau_1967,Guinea-Bissau,1967,test
+Guinea_Bissau_1972,Guinea-Bissau,1972,test
+Guinea_Bissau_1977,Guinea-Bissau,1977,test
+Guinea_Bissau_1982,Guinea-Bissau,1982,test
+Guinea_Bissau_1987,Guinea-Bissau,1987,test
+Guinea_Bissau_1992,Guinea-Bissau,1992,test
+Guinea_Bissau_1997,Guinea-Bissau,1997,test
+Guinea_Bissau_2002,Guinea-Bissau,2002,test
+Guinea_Bissau_2007,Guinea-Bissau,2007,test
+Hong_Kong_China_1952,"Hong Kong, China",1952,fit
+Hong_Kong_China_1957,"Hong Kong, China",1957,fit
+Hong_Kong_China_1962,"Hong Kong, China",1962,fit
+Hong_Kong_China_1967,"Hong Kong, China",1967,fit
+Hong_Kong_China_1972,"Hong Kong, China",1972,fit
+Hong_Kong_China_1977,"Hong Kong, China",1977,fit
+Hong_Kong_China_1982,"Hong Kong, China",1982,fit
+Hong_Kong_China_1987,"Hong Kong, China",1987,fit
+Hong_Kong_China_1992,"Hong Kong, China",1992,fit
+Hong_Kong_China_1997,"Hong Kong, China",1997,fit
+Hong_Kong_China_2002,"Hong Kong, China",2002,fit
+Hong_Kong_China_2007,"Hong Kong, China",2007,fit
+India_1952,India,1952,fit
+India_1957,India,1957,fit
+India_1962,India,1962,fit
+India_1967,India,1967,fit
+India_1972,India,1972,fit
+India_1977,India,1977,fit
+India_1982,India,1982,fit
+India_1987,India,1987,fit
+India_1992,India,1992,fit
+India_1997,India,1997,fit
+India_2002,India,2002,fit
+India_2007,India,2007,fit
+Indonesia_1952,Indonesia,1952,test
+Indonesia_1957,Indonesia,1957,test
+Indonesia_1962,Indonesia,1962,test
+Indonesia_1967,Indonesia,1967,test
+Indonesia_1972,Indonesia,1972,test
+Indonesia_1977,Indonesia,1977,test
+Indonesia_1982,Indonesia,1982,test
+Indonesia_1987,Indonesia,1987,test
+Indonesia_1992,Indonesia,1992,test
+Indonesia_1997,Indonesia,1997,test
+Indonesia_2002,Indonesia,2002,test
+Indonesia_2007,Indonesia,2007,test
+Iran_1952,Iran,1952,fit
+Iran_1957,Iran,1957,fit
+Iran_1962,Iran,1962,fit
+Iran_1967,Iran,1967,fit
+Iran_1972,Iran,1972,fit
+Iran_1977,Iran,1977,fit
+Iran_1982,Iran,1982,fit
+Iran_1987,Iran,1987,fit
+Iran_1992,Iran,1992,fit
+Iran_1997,Iran,1997,fit
+Iran_2002,Iran,2002,fit
+Iran_2007,Iran,2007,fit
+Iraq_1952,Iraq,1952,test
+Iraq_1957,Iraq,1957,test
+Iraq_1962,Iraq,1962,test
+Iraq_1967,Iraq,1967,test
+Iraq_1972,Iraq,1972,test
+Iraq_1977,Iraq,1977,test
+Iraq_1982,Iraq,1982,test
+Iraq_1987,Iraq,1987,test
+Iraq_1992,Iraq,1992,test
+Iraq_1997,Iraq,1997,test
+Iraq_2002,Iraq,2002,test
+Iraq_2007,Iraq,2007,test
+Israel_1952,Israel,1952,fit
+Israel_1957,Israel,1957,fit
+Israel_1962,Israel,1962,fit
+Israel_1967,Israel,1967,fit
+Israel_1972,Israel,1972,fit
+Israel_1977,Israel,1977,fit
+Israel_1982,Israel,1982,fit
+Israel_1987,Israel,1987,fit
+Israel_1992,Israel,1992,fit
+Israel_1997,Israel,1997,fit
+Israel_2002,Israel,2002,fit
+Israel_2007,Israel,2007,fit
+Japan_1952,Japan,1952,fit
+Japan_1957,Japan,1957,fit
+Japan_1962,Japan,1962,fit
+Japan_1967,Japan,1967,fit
+Japan_1972,Japan,1972,fit
+Japan_1977,Japan,1977,fit
+Japan_1982,Japan,1982,fit
+Japan_1987,Japan,1987,fit
+Japan_1992,Japan,1992,fit
+Japan_1997,Japan,1997,fit
+Japan_2002,Japan,2002,fit
+Japan_2007,Japan,2007,fit
+Jordan_1952,Jordan,1952,fit
+Jordan_1957,Jordan,1957,fit
+Jordan_1962,Jordan,1962,fit
+Jordan_1967,Jordan,1967,fit
+Jordan_1972,Jordan,1972,fit
+Jordan_1977,Jordan,1977,fit
+Jordan_1982,Jordan,1982,fit
+Jordan_1987,Jordan,1987,fit
+Jordan_1992,Jordan,1992,fit
+Jordan_1997,Jordan,1997,fit
+Jordan_2002,Jordan,2002,fit
+Jordan_2007,Jordan,2007,fit
+Kenya_1952,Kenya,1952,fit
+Kenya_1957,Kenya,1957,fit
+Kenya_1962,Kenya,1962,fit
+Kenya_1967,Kenya,1967,fit
+Kenya_1972,Kenya,1972,fit
+Kenya_1977,Kenya,1977,fit
+Kenya_1982,Kenya,1982,fit
+Kenya_1987,Kenya,1987,fit
+Kenya_1992,Kenya,1992,fit
+Kenya_1997,Kenya,1997,fit
+Kenya_2002,Kenya,2002,fit
+Kenya_2007,Kenya,2007,fit
+Korea_Dem_Rep_1952,"Korea, Dem. Rep.",1952,test
+Korea_Dem_Rep_1957,"Korea, Dem. Rep.",1957,test
+Korea_Dem_Rep_1962,"Korea, Dem. Rep.",1962,test
+Korea_Dem_Rep_1967,"Korea, Dem. Rep.",1967,test
+Korea_Dem_Rep_1972,"Korea, Dem. Rep.",1972,test
+Korea_Dem_Rep_1977,"Korea, Dem. Rep.",1977,test
+Korea_Dem_Rep_1982,"Korea, Dem. Rep.",1982,test
+Korea_Dem_Rep_1987,"Korea, Dem. Rep.",1987,test
+Korea_Dem_Rep_1992,"Korea, Dem. Rep.",1992,test
+Korea_Dem_Rep_1997,"Korea, Dem. Rep.",1997,test
+Korea_Dem_Rep_2002,"Korea, Dem. Rep.",2002,test
+Korea_Dem_Rep_2007,"Korea, Dem. Rep.",2007,test
+Korea_Rep_1952,"Korea, Rep.",1952,test
+Korea_Rep_1957,"Korea, Rep.",1957,test
+Korea_Rep_1962,"Korea, Rep.",1962,test
+Korea_Rep_1967,"Korea, Rep.",1967,test
+Korea_Rep_1972,"Korea, Rep.",1972,test
+Korea_Rep_1977,"Korea, Rep.",1977,test
+Korea_Rep_1982,"Korea, Rep.",1982,test
+Korea_Rep_1987,"Korea, Rep.",1987,test
+Korea_Rep_1992,"Korea, Rep.",1992,test
+Korea_Rep_1997,"Korea, Rep.",1997,test
+Korea_Rep_2002,"Korea, Rep.",2002,test
+Korea_Rep_2007,"Korea, Rep.",2007,test
+Kuwait_1952,Kuwait,1952,test
+Kuwait_1957,Kuwait,1957,test
+Kuwait_1962,Kuwait,1962,test
+Kuwait_1967,Kuwait,1967,test
+Kuwait_1972,Kuwait,1972,test
+Kuwait_1977,Kuwait,1977,test
+Kuwait_1982,Kuwait,1982,test
+Kuwait_1987,Kuwait,1987,test
+Kuwait_1992,Kuwait,1992,test
+Kuwait_1997,Kuwait,1997,test
+Kuwait_2002,Kuwait,2002,test
+Kuwait_2007,Kuwait,2007,test
+Lebanon_1952,Lebanon,1952,fit
+Lebanon_1957,Lebanon,1957,fit
+Lebanon_1962,Lebanon,1962,fit
+Lebanon_1967,Lebanon,1967,fit
+Lebanon_1972,Lebanon,1972,fit
+Lebanon_1977,Lebanon,1977,fit
+Lebanon_1982,Lebanon,1982,fit
+Lebanon_1987,Lebanon,1987,fit
+Lebanon_1992,Lebanon,1992,fit
+Lebanon_1997,Lebanon,1997,fit
+Lebanon_2002,Lebanon,2002,fit
+Lebanon_2007,Lebanon,2007,fit
+Lesotho_1952,Lesotho,1952,fit
+Lesotho_1957,Lesotho,1957,fit
+Lesotho_1962,Lesotho,1962,fit
+Lesotho_1967,Lesotho,1967,fit
+Lesotho_1972,Lesotho,1972,fit
+Lesotho_1977,Lesotho,1977,fit
+Lesotho_1982,Lesotho,1982,fit
+Lesotho_1987,Lesotho,1987,fit
+Lesotho_1992,Lesotho,1992,fit
+Lesotho_1997,Lesotho,1997,fit
+Lesotho_2002,Lesotho,2002,fit
+Lesotho_2007,Lesotho,2007,fit
+Liberia_1952,Liberia,1952,fit
+Liberia_1957,Liberia,1957,fit
+Liberia_1962,Liberia,1962,fit
+Liberia_1967,Liberia,1967,fit
+Liberia_1972,Liberia,1972,fit
+Liberia_1977,Liberia,1977,fit
+Liberia_1982,Liberia,1982,fit
+Liberia_1987,Liberia,1987,fit
+Liberia_1992,Liberia,1992,fit
+Liberia_1997,Liberia,1997,fit
+Liberia_2002,Liberia,2002,fit
+Liberia_2007,Liberia,2007,fit
+Libya_1952,Libya,1952,validation
+Libya_1957,Libya,1957,validation
+Libya_1962,Libya,1962,validation
+Libya_1967,Libya,1967,validation
+Libya_1972,Libya,1972,validation
+Libya_1977,Libya,1977,validation
+Libya_1982,Libya,1982,validation
+Libya_1987,Libya,1987,validation
+Libya_1992,Libya,1992,validation
+Libya_1997,Libya,1997,validation
+Libya_2002,Libya,2002,validation
+Libya_2007,Libya,2007,validation
+Madagascar_1952,Madagascar,1952,fit
+Madagascar_1957,Madagascar,1957,fit
+Madagascar_1962,Madagascar,1962,fit
+Madagascar_1967,Madagascar,1967,fit
+Madagascar_1972,Madagascar,1972,fit
+Madagascar_1977,Madagascar,1977,fit
+Madagascar_1982,Madagascar,1982,fit
+Madagascar_1987,Madagascar,1987,fit
+Madagascar_1992,Madagascar,1992,fit
+Madagascar_1997,Madagascar,1997,fit
+Madagascar_2002,Madagascar,2002,fit
+Madagascar_2007,Madagascar,2007,fit
+Malawi_1952,Malawi,1952,test
+Malawi_1957,Malawi,1957,test
+Malawi_1962,Malawi,1962,test
+Malawi_1967,Malawi,1967,test
+Malawi_1972,Malawi,1972,test
+Malawi_1977,Malawi,1977,test
+Malawi_1982,Malawi,1982,test
+Malawi_1987,Malawi,1987,test
+Malawi_1992,Malawi,1992,test
+Malawi_1997,Malawi,1997,test
+Malawi_2002,Malawi,2002,test
+Malawi_2007,Malawi,2007,test
+Malaysia_1952,Malaysia,1952,fit
+Malaysia_1957,Malaysia,1957,fit
+Malaysia_1962,Malaysia,1962,fit
+Malaysia_1967,Malaysia,1967,fit
+Malaysia_1972,Malaysia,1972,fit
+Malaysia_1977,Malaysia,1977,fit
+Malaysia_1982,Malaysia,1982,fit
+Malaysia_1987,Malaysia,1987,fit
+Malaysia_1992,Malaysia,1992,fit
+Malaysia_1997,Malaysia,1997,fit
+Malaysia_2002,Malaysia,2002,fit
+Malaysia_2007,Malaysia,2007,fit
+Mali_1952,Mali,1952,fit
+Mali_1957,Mali,1957,fit
+Mali_1962,Mali,1962,fit
+Mali_1967,Mali,1967,fit
+Mali_1972,Mali,1972,fit
+Mali_1977,Mali,1977,fit
+Mali_1982,Mali,1982,fit
+Mali_1987,Mali,1987,fit
+Mali_1992,Mali,1992,fit
+Mali_1997,Mali,1997,fit
+Mali_2002,Mali,2002,fit
+Mali_2007,Mali,2007,fit
+Mauritania_1952,Mauritania,1952,fit
+Mauritania_1957,Mauritania,1957,fit
+Mauritania_1962,Mauritania,1962,fit
+Mauritania_1967,Mauritania,1967,fit
+Mauritania_1972,Mauritania,1972,fit
+Mauritania_1977,Mauritania,1977,fit
+Mauritania_1982,Mauritania,1982,fit
+Mauritania_1987,Mauritania,1987,fit
+Mauritania_1992,Mauritania,1992,fit
+Mauritania_1997,Mauritania,1997,fit
+Mauritania_2002,Mauritania,2002,fit
+Mauritania_2007,Mauritania,2007,fit
+Mauritius_1952,Mauritius,1952,fit
+Mauritius_1957,Mauritius,1957,fit
+Mauritius_1962,Mauritius,1962,fit
+Mauritius_1967,Mauritius,1967,fit
+Mauritius_1972,Mauritius,1972,fit
+Mauritius_1977,Mauritius,1977,fit
+Mauritius_1982,Mauritius,1982,fit
+Mauritius_1987,Mauritius,1987,fit
+Mauritius_1992,Mauritius,1992,fit
+Mauritius_1997,Mauritius,1997,fit
+Mauritius_2002,Mauritius,2002,fit
+Mauritius_2007,Mauritius,2007,fit
+Mongolia_1952,Mongolia,1952,fit
+Mongolia_1957,Mongolia,1957,fit
+Mongolia_1962,Mongolia,1962,fit
+Mongolia_1967,Mongolia,1967,fit
+Mongolia_1972,Mongolia,1972,fit
+Mongolia_1977,Mongolia,1977,fit
+Mongolia_1982,Mongolia,1982,fit
+Mongolia_1987,Mongolia,1987,fit
+Mongolia_1992,Mongolia,1992,fit
+Mongolia_1997,Mongolia,1997,fit
+Mongolia_2002,Mongolia,2002,fit
+Mongolia_2007,Mongolia,2007,fit
+Morocco_1952,Morocco,1952,fit
+Morocco_1957,Morocco,1957,fit
+Morocco_1962,Morocco,1962,fit
+Morocco_1967,Morocco,1967,fit
+Morocco_1972,Morocco,1972,fit
+Morocco_1977,Morocco,1977,fit
+Morocco_1982,Morocco,1982,fit
+Morocco_1987,Morocco,1987,fit
+Morocco_1992,Morocco,1992,fit
+Morocco_1997,Morocco,1997,fit
+Morocco_2002,Morocco,2002,fit
+Morocco_2007,Morocco,2007,fit
+Mozambique_1952,Mozambique,1952,fit
+Mozambique_1957,Mozambique,1957,fit
+Mozambique_1962,Mozambique,1962,fit
+Mozambique_1967,Mozambique,1967,fit
+Mozambique_1972,Mozambique,1972,fit
+Mozambique_1977,Mozambique,1977,fit
+Mozambique_1982,Mozambique,1982,fit
+Mozambique_1987,Mozambique,1987,fit
+Mozambique_1992,Mozambique,1992,fit
+Mozambique_1997,Mozambique,1997,fit
+Mozambique_2002,Mozambique,2002,fit
+Mozambique_2007,Mozambique,2007,fit
+Myanmar_1952,Myanmar,1952,validation
+Myanmar_1957,Myanmar,1957,validation
+Myanmar_1962,Myanmar,1962,validation
+Myanmar_1967,Myanmar,1967,validation
+Myanmar_1972,Myanmar,1972,validation
+Myanmar_1977,Myanmar,1977,validation
+Myanmar_1982,Myanmar,1982,validation
+Myanmar_1987,Myanmar,1987,validation
+Myanmar_1992,Myanmar,1992,validation
+Myanmar_1997,Myanmar,1997,validation
+Myanmar_2002,Myanmar,2002,validation
+Myanmar_2007,Myanmar,2007,validation
+Namibia_1952,Namibia,1952,fit
+Namibia_1957,Namibia,1957,fit
+Namibia_1962,Namibia,1962,fit
+Namibia_1967,Namibia,1967,fit
+Namibia_1972,Namibia,1972,fit
+Namibia_1977,Namibia,1977,fit
+Namibia_1982,Namibia,1982,fit
+Namibia_1987,Namibia,1987,fit
+Namibia_1992,Namibia,1992,fit
+Namibia_1997,Namibia,1997,fit
+Namibia_2002,Namibia,2002,fit
+Namibia_2007,Namibia,2007,fit
+Nepal_1952,Nepal,1952,fit
+Nepal_1957,Nepal,1957,fit
+Nepal_1962,Nepal,1962,fit
+Nepal_1967,Nepal,1967,fit
+Nepal_1972,Nepal,1972,fit
+Nepal_1977,Nepal,1977,fit
+Nepal_1982,Nepal,1982,fit
+Nepal_1987,Nepal,1987,fit
+Nepal_1992,Nepal,1992,fit
+Nepal_1997,Nepal,1997,fit
+Nepal_2002,Nepal,2002,fit
+Nepal_2007,Nepal,2007,fit
+Niger_1952,Niger,1952,fit
+Niger_1957,Niger,1957,fit
+Niger_1962,Niger,1962,fit
+Niger_1967,Niger,1967,fit
+Niger_1972,Niger,1972,fit
+Niger_1977,Niger,1977,fit
+Niger_1982,Niger,1982,fit
+Niger_1987,Niger,1987,fit
+Niger_1992,Niger,1992,fit
+Niger_1997,Niger,1997,fit
+Niger_2002,Niger,2002,fit
+Niger_2007,Niger,2007,fit
+Nigeria_1952,Nigeria,1952,fit
+Nigeria_1957,Nigeria,1957,fit
+Nigeria_1962,Nigeria,1962,fit
+Nigeria_1967,Nigeria,1967,fit
+Nigeria_1972,Nigeria,1972,fit
+Nigeria_1977,Nigeria,1977,fit
+Nigeria_1982,Nigeria,1982,fit
+Nigeria_1987,Nigeria,1987,fit
+Nigeria_1992,Nigeria,1992,fit
+Nigeria_1997,Nigeria,1997,fit
+Nigeria_2002,Nigeria,2002,fit
+Nigeria_2007,Nigeria,2007,fit
+Oman_1952,Oman,1952,fit
+Oman_1957,Oman,1957,fit
+Oman_1962,Oman,1962,fit
+Oman_1967,Oman,1967,fit
+Oman_1972,Oman,1972,fit
+Oman_1977,Oman,1977,fit
+Oman_1982,Oman,1982,fit
+Oman_1987,Oman,1987,fit
+Oman_1992,Oman,1992,fit
+Oman_1997,Oman,1997,fit
+Oman_2002,Oman,2002,fit
+Oman_2007,Oman,2007,fit
+Pakistan_1952,Pakistan,1952,fit
+Pakistan_1957,Pakistan,1957,fit
+Pakistan_1962,Pakistan,1962,fit
+Pakistan_1967,Pakistan,1967,fit
+Pakistan_1972,Pakistan,1972,fit
+Pakistan_1977,Pakistan,1977,fit
+Pakistan_1982,Pakistan,1982,fit
+Pakistan_1987,Pakistan,1987,fit
+Pakistan_1992,Pakistan,1992,fit
+Pakistan_1997,Pakistan,1997,fit
+Pakistan_2002,Pakistan,2002,fit
+Pakistan_2007,Pakistan,2007,fit
+Philippines_1952,Philippines,1952,validation
+Philippines_1957,Philippines,1957,validation
+Philippines_1962,Philippines,1962,validation
+Philippines_1967,Philippines,1967,validation
+Philippines_1972,Philippines,1972,validation
+Philippines_1977,Philippines,1977,validation
+Philippines_1982,Philippines,1982,validation
+Philippines_1987,Philippines,1987,validation
+Philippines_1992,Philippines,1992,validation
+Philippines_1997,Philippines,1997,validation
+Philippines_2002,Philippines,2002,validation
+Philippines_2007,Philippines,2007,validation
+Reunion_1952,Reunion,1952,validation
+Reunion_1957,Reunion,1957,validation
+Reunion_1962,Reunion,1962,validation
+Reunion_1967,Reunion,1967,validation
+Reunion_1972,Reunion,1972,validation
+Reunion_1977,Reunion,1977,validation
+Reunion_1982,Reunion,1982,validation
+Reunion_1987,Reunion,1987,validation
+Reunion_1992,Reunion,1992,validation
+Reunion_1997,Reunion,1997,validation
+Reunion_2002,Reunion,2002,validation
+Reunion_2007,Reunion,2007,validation
+Rwanda_1952,Rwanda,1952,test
+Rwanda_1957,Rwanda,1957,test
+Rwanda_1962,Rwanda,1962,test
+Rwanda_1967,Rwanda,1967,test
+Rwanda_1972,Rwanda,1972,test
+Rwanda_1977,Rwanda,1977,test
+Rwanda_1982,Rwanda,1982,test
+Rwanda_1987,Rwanda,1987,test
+Rwanda_1992,Rwanda,1992,test
+Rwanda_1997,Rwanda,1997,test
+Rwanda_2002,Rwanda,2002,test
+Rwanda_2007,Rwanda,2007,test
+Sao_Tome_and_Principe_1952,Sao Tome and Principe,1952,fit
+Sao_Tome_and_Principe_1957,Sao Tome and Principe,1957,fit
+Sao_Tome_and_Principe_1962,Sao Tome and Principe,1962,fit
+Sao_Tome_and_Principe_1967,Sao Tome and Principe,1967,fit
+Sao_Tome_and_Principe_1972,Sao Tome and Principe,1972,fit
+Sao_Tome_and_Principe_1977,Sao Tome and Principe,1977,fit
+Sao_Tome_and_Principe_1982,Sao Tome and Principe,1982,fit
+Sao_Tome_and_Principe_1987,Sao Tome and Principe,1987,fit
+Sao_Tome_and_Principe_1992,Sao Tome and Principe,1992,fit
+Sao_Tome_and_Principe_1997,Sao Tome and Principe,1997,fit
+Sao_Tome_and_Principe_2002,Sao Tome and Principe,2002,fit
+Sao_Tome_and_Principe_2007,Sao Tome and Principe,2007,fit
+Saudi_Arabia_1952,Saudi Arabia,1952,fit
+Saudi_Arabia_1957,Saudi Arabia,1957,fit
+Saudi_Arabia_1962,Saudi Arabia,1962,fit
+Saudi_Arabia_1967,Saudi Arabia,1967,fit
+Saudi_Arabia_1972,Saudi Arabia,1972,fit
+Saudi_Arabia_1977,Saudi Arabia,1977,fit
+Saudi_Arabia_1982,Saudi Arabia,1982,fit
+Saudi_Arabia_1987,Saudi Arabia,1987,fit
+Saudi_Arabia_1992,Saudi Arabia,1992,fit
+Saudi_Arabia_1997,Saudi Arabia,1997,fit
+Saudi_Arabia_2002,Saudi Arabia,2002,fit
+Saudi_Arabia_2007,Saudi Arabia,2007,fit
+Senegal_1952,Senegal,1952,fit
+Senegal_1957,Senegal,1957,fit
+Senegal_1962,Senegal,1962,fit
+Senegal_1967,Senegal,1967,fit
+Senegal_1972,Senegal,1972,fit
+Senegal_1977,Senegal,1977,fit
+Senegal_1982,Senegal,1982,fit
+Senegal_1987,Senegal,1987,fit
+Senegal_1992,Senegal,1992,fit
+Senegal_1997,Senegal,1997,fit
+Senegal_2002,Senegal,2002,fit
+Senegal_2007,Senegal,2007,fit
+Sierra_Leone_1952,Sierra Leone,1952,fit
+Sierra_Leone_1957,Sierra Leone,1957,fit
+Sierra_Leone_1962,Sierra Leone,1962,fit
+Sierra_Leone_1967,Sierra Leone,1967,fit
+Sierra_Leone_1972,Sierra Leone,1972,fit
+Sierra_Leone_1977,Sierra Leone,1977,fit
+Sierra_Leone_1982,Sierra Leone,1982,fit
+Sierra_Leone_1987,Sierra Leone,1987,fit
+Sierra_Leone_1992,Sierra Leone,1992,fit
+Sierra_Leone_1997,Sierra Leone,1997,fit
+Sierra_Leone_2002,Sierra Leone,2002,fit
+Sierra_Leone_2007,Sierra Leone,2007,fit
+Singapore_1952,Singapore,1952,fit
+Singapore_1957,Singapore,1957,fit
+Singapore_1962,Singapore,1962,fit
+Singapore_1967,Singapore,1967,fit
+Singapore_1972,Singapore,1972,fit
+Singapore_1977,Singapore,1977,fit
+Singapore_1982,Singapore,1982,fit
+Singapore_1987,Singapore,1987,fit
+Singapore_1992,Singapore,1992,fit
+Singapore_1997,Singapore,1997,fit
+Singapore_2002,Singapore,2002,fit
+Singapore_2007,Singapore,2007,fit
+Somalia_1952,Somalia,1952,test
+Somalia_1957,Somalia,1957,test
+Somalia_1962,Somalia,1962,test
+Somalia_1967,Somalia,1967,test
+Somalia_1972,Somalia,1972,test
+Somalia_1977,Somalia,1977,test
+Somalia_1982,Somalia,1982,test
+Somalia_1987,Somalia,1987,test
+Somalia_1992,Somalia,1992,test
+Somalia_1997,Somalia,1997,test
+Somalia_2002,Somalia,2002,test
+Somalia_2007,Somalia,2007,test
+South_Africa_1952,South Africa,1952,fit
+South_Africa_1957,South Africa,1957,fit
+South_Africa_1962,South Africa,1962,fit
+South_Africa_1967,South Africa,1967,fit
+South_Africa_1972,South Africa,1972,fit
+South_Africa_1977,South Africa,1977,fit
+South_Africa_1982,South Africa,1982,fit
+South_Africa_1987,South Africa,1987,fit
+South_Africa_1992,South Africa,1992,fit
+South_Africa_1997,South Africa,1997,fit
+South_Africa_2002,South Africa,2002,fit
+South_Africa_2007,South Africa,2007,fit
+Sri_Lanka_1952,Sri Lanka,1952,fit
+Sri_Lanka_1957,Sri Lanka,1957,fit
+Sri_Lanka_1962,Sri Lanka,1962,fit
+Sri_Lanka_1967,Sri Lanka,1967,fit
+Sri_Lanka_1972,Sri Lanka,1972,fit
+Sri_Lanka_1977,Sri Lanka,1977,fit
+Sri_Lanka_1982,Sri Lanka,1982,fit
+Sri_Lanka_1987,Sri Lanka,1987,fit
+Sri_Lanka_1992,Sri Lanka,1992,fit
+Sri_Lanka_1997,Sri Lanka,1997,fit
+Sri_Lanka_2002,Sri Lanka,2002,fit
+Sri_Lanka_2007,Sri Lanka,2007,fit
+Sudan_1952,Sudan,1952,validation
+Sudan_1957,Sudan,1957,validation
+Sudan_1962,Sudan,1962,validation
+Sudan_1967,Sudan,1967,validation
+Sudan_1972,Sudan,1972,validation
+Sudan_1977,Sudan,1977,validation
+Sudan_1982,Sudan,1982,validation
+Sudan_1987,Sudan,1987,validation
+Sudan_1992,Sudan,1992,validation
+Sudan_1997,Sudan,1997,validation
+Sudan_2002,Sudan,2002,validation
+Sudan_2007,Sudan,2007,validation
+Swaziland_1952,Swaziland,1952,validation
+Swaziland_1957,Swaziland,1957,validation
+Swaziland_1962,Swaziland,1962,validation
+Swaziland_1967,Swaziland,1967,validation
+Swaziland_1972,Swaziland,1972,validation
+Swaziland_1977,Swaziland,1977,validation
+Swaziland_1982,Swaziland,1982,validation
+Swaziland_1987,Swaziland,1987,validation
+Swaziland_1992,Swaziland,1992,validation
+Swaziland_1997,Swaziland,1997,validation
+Swaziland_2002,Swaziland,2002,validation
+Swaziland_2007,Swaziland,2007,validation
+Syria_1952,Syria,1952,fit
+Syria_1957,Syria,1957,fit
+Syria_1962,Syria,1962,fit
+Syria_1967,Syria,1967,fit
+Syria_1972,Syria,1972,fit
+Syria_1977,Syria,1977,fit
+Syria_1982,Syria,1982,fit
+Syria_1987,Syria,1987,fit
+Syria_1992,Syria,1992,fit
+Syria_1997,Syria,1997,fit
+Syria_2002,Syria,2002,fit
+Syria_2007,Syria,2007,fit
+Taiwan_1952,Taiwan,1952,fit
+Taiwan_1957,Taiwan,1957,fit
+Taiwan_1962,Taiwan,1962,fit
+Taiwan_1967,Taiwan,1967,fit
+Taiwan_1972,Taiwan,1972,fit
+Taiwan_1977,Taiwan,1977,fit
+Taiwan_1982,Taiwan,1982,fit
+Taiwan_1987,Taiwan,1987,fit
+Taiwan_1992,Taiwan,1992,fit
+Taiwan_1997,Taiwan,1997,fit
+Taiwan_2002,Taiwan,2002,fit
+Taiwan_2007,Taiwan,2007,fit
+Tanzania_1952,Tanzania,1952,fit
+Tanzania_1957,Tanzania,1957,fit
+Tanzania_1962,Tanzania,1962,fit
+Tanzania_1967,Tanzania,1967,fit
+Tanzania_1972,Tanzania,1972,fit
+Tanzania_1977,Tanzania,1977,fit
+Tanzania_1982,Tanzania,1982,fit
+Tanzania_1987,Tanzania,1987,fit
+Tanzania_1992,Tanzania,1992,fit
+Tanzania_1997,Tanzania,1997,fit
+Tanzania_2002,Tanzania,2002,fit
+Tanzania_2007,Tanzania,2007,fit
+Thailand_1952,Thailand,1952,test
+Thailand_1957,Thailand,1957,test
+Thailand_1962,Thailand,1962,test
+Thailand_1967,Thailand,1967,test
+Thailand_1972,Thailand,1972,test
+Thailand_1977,Thailand,1977,test
+Thailand_1982,Thailand,1982,test
+Thailand_1987,Thailand,1987,test
+Thailand_1992,Thailand,1992,test
+Thailand_1997,Thailand,1997,test
+Thailand_2002,Thailand,2002,test
+Thailand_2007,Thailand,2007,test
+Togo_1952,Togo,1952,validation
+Togo_1957,Togo,1957,validation
+Togo_1962,Togo,1962,validation
+Togo_1967,Togo,1967,validation
+Togo_1972,Togo,1972,validation
+Togo_1977,Togo,1977,validation
+Togo_1982,Togo,1982,validation
+Togo_1987,Togo,1987,validation
+Togo_1992,Togo,1992,validation
+Togo_1997,Togo,1997,validation
+Togo_2002,Togo,2002,validation
+Togo_2007,Togo,2007,validation
+Tunisia_1952,Tunisia,1952,test
+Tunisia_1957,Tunisia,1957,test
+Tunisia_1962,Tunisia,1962,test
+Tunisia_1967,Tunisia,1967,test
+Tunisia_1972,Tunisia,1972,test
+Tunisia_1977,Tunisia,1977,test
+Tunisia_1982,Tunisia,1982,test
+Tunisia_1987,Tunisia,1987,test
+Tunisia_1992,Tunisia,1992,test
+Tunisia_1997,Tunisia,1997,test
+Tunisia_2002,Tunisia,2002,test
+Tunisia_2007,Tunisia,2007,test
+Uganda_1952,Uganda,1952,fit
+Uganda_1957,Uganda,1957,fit
+Uganda_1962,Uganda,1962,fit
+Uganda_1967,Uganda,1967,fit
+Uganda_1972,Uganda,1972,fit
+Uganda_1977,Uganda,1977,fit
+Uganda_1982,Uganda,1982,fit
+Uganda_1987,Uganda,1987,fit
+Uganda_1992,Uganda,1992,fit
+Uganda_1997,Uganda,1997,fit
+Uganda_2002,Uganda,2002,fit
+Uganda_2007,Uganda,2007,fit
+Vietnam_1952,Vietnam,1952,fit
+Vietnam_1957,Vietnam,1957,fit
+Vietnam_1962,Vietnam,1962,fit
+Vietnam_1967,Vietnam,1967,fit
+Vietnam_1972,Vietnam,1972,fit
+Vietnam_1977,Vietnam,1977,fit
+Vietnam_1982,Vietnam,1982,fit
+Vietnam_1987,Vietnam,1987,fit
+Vietnam_1992,Vietnam,1992,fit
+Vietnam_1997,Vietnam,1997,fit
+Vietnam_2002,Vietnam,2002,fit
+Vietnam_2007,Vietnam,2007,fit
+West_Bank_and_Gaza_1952,West Bank and Gaza,1952,fit
+West_Bank_and_Gaza_1957,West Bank and Gaza,1957,fit
+West_Bank_and_Gaza_1962,West Bank and Gaza,1962,fit
+West_Bank_and_Gaza_1967,West Bank and Gaza,1967,fit
+West_Bank_and_Gaza_1972,West Bank and Gaza,1972,fit
+West_Bank_and_Gaza_1977,West Bank and Gaza,1977,fit
+West_Bank_and_Gaza_1982,West Bank and Gaza,1982,fit
+West_Bank_and_Gaza_1987,West Bank and Gaza,1987,fit
+West_Bank_and_Gaza_1992,West Bank and Gaza,1992,fit
+West_Bank_and_Gaza_1997,West Bank and Gaza,1997,fit
+West_Bank_and_Gaza_2002,West Bank and Gaza,2002,fit
+West_Bank_and_Gaza_2007,West Bank and Gaza,2007,fit
+Yemen_Rep_1952,"Yemen, Rep.",1952,fit
+Yemen_Rep_1957,"Yemen, Rep.",1957,fit
+Yemen_Rep_1962,"Yemen, Rep.",1962,fit
+Yemen_Rep_1967,"Yemen, Rep.",1967,fit
+Yemen_Rep_1972,"Yemen, Rep.",1972,fit
+Yemen_Rep_1977,"Yemen, Rep.",1977,fit
+Yemen_Rep_1982,"Yemen, Rep.",1982,fit
+Yemen_Rep_1987,"Yemen, Rep.",1987,fit
+Yemen_Rep_1992,"Yemen, Rep.",1992,fit
+Yemen_Rep_1997,"Yemen, Rep.",1997,fit
+Yemen_Rep_2002,"Yemen, Rep.",2002,fit
+Yemen_Rep_2007,"Yemen, Rep.",2007,fit
+Zambia_1952,Zambia,1952,fit
+Zambia_1957,Zambia,1957,fit
+Zambia_1962,Zambia,1962,fit
+Zambia_1967,Zambia,1967,fit
+Zambia_1972,Zambia,1972,fit
+Zambia_1977,Zambia,1977,fit
+Zambia_1982,Zambia,1982,fit
+Zambia_1987,Zambia,1987,fit
+Zambia_1992,Zambia,1992,fit
+Zambia_1997,Zambia,1997,fit
+Zambia_2002,Zambia,2002,fit
+Zambia_2007,Zambia,2007,fit
+Zimbabwe_1952,Zimbabwe,1952,test
+Zimbabwe_1957,Zimbabwe,1957,test
+Zimbabwe_1962,Zimbabwe,1962,test
+Zimbabwe_1967,Zimbabwe,1967,test
+Zimbabwe_1972,Zimbabwe,1972,test
+Zimbabwe_1977,Zimbabwe,1977,test
+Zimbabwe_1982,Zimbabwe,1982,test
+Zimbabwe_1987,Zimbabwe,1987,test
+Zimbabwe_1992,Zimbabwe,1992,test
+Zimbabwe_1997,Zimbabwe,1997,test
+Zimbabwe_2002,Zimbabwe,2002,test
+Zimbabwe_2007,Zimbabwe,2007,test
+Albania_1952,Albania,1952,test
+Albania_1957,Albania,1957,test
+Albania_1962,Albania,1962,test
+Albania_1967,Albania,1967,test
+Albania_1972,Albania,1972,test
+Albania_1977,Albania,1977,test
+Albania_1982,Albania,1982,test
+Albania_1987,Albania,1987,test
+Albania_1992,Albania,1992,test
+Albania_1997,Albania,1997,test
+Albania_2002,Albania,2002,test
+Albania_2007,Albania,2007,test
+Argentina_1952,Argentina,1952,validation
+Argentina_1957,Argentina,1957,validation
+Argentina_1962,Argentina,1962,validation
+Argentina_1967,Argentina,1967,validation
+Argentina_1972,Argentina,1972,validation
+Argentina_1977,Argentina,1977,validation
+Argentina_1982,Argentina,1982,validation
+Argentina_1987,Argentina,1987,validation
+Argentina_1992,Argentina,1992,validation
+Argentina_1997,Argentina,1997,validation
+Argentina_2002,Argentina,2002,validation
+Argentina_2007,Argentina,2007,validation
+Australia_1952,Australia,1952,validation
+Australia_1957,Australia,1957,validation
+Australia_1962,Australia,1962,validation
+Australia_1967,Australia,1967,validation
+Australia_1972,Australia,1972,validation
+Australia_1977,Australia,1977,validation
+Australia_1982,Australia,1982,validation
+Australia_1987,Australia,1987,validation
+Australia_1992,Australia,1992,validation
+Australia_1997,Australia,1997,validation
+Australia_2002,Australia,2002,validation
+Australia_2007,Australia,2007,validation
+Austria_1952,Austria,1952,validation
+Austria_1957,Austria,1957,validation
+Austria_1962,Austria,1962,validation
+Austria_1967,Austria,1967,validation
+Austria_1972,Austria,1972,validation
+Austria_1977,Austria,1977,validation
+Austria_1982,Austria,1982,validation
+Austria_1987,Austria,1987,validation
+Austria_1992,Austria,1992,validation
+Austria_1997,Austria,1997,validation
+Austria_2002,Austria,2002,validation
+Austria_2007,Austria,2007,validation
+Belgium_1952,Belgium,1952,validation
+Belgium_1957,Belgium,1957,validation
+Belgium_1962,Belgium,1962,validation
+Belgium_1967,Belgium,1967,validation
+Belgium_1972,Belgium,1972,validation
+Belgium_1977,Belgium,1977,validation
+Belgium_1982,Belgium,1982,validation
+Belgium_1987,Belgium,1987,validation
+Belgium_1992,Belgium,1992,validation
+Belgium_1997,Belgium,1997,validation
+Belgium_2002,Belgium,2002,validation
+Belgium_2007,Belgium,2007,validation
+Bolivia_1952,Bolivia,1952,test
+Bolivia_1957,Bolivia,1957,test
+Bolivia_1962,Bolivia,1962,test
+Bolivia_1967,Bolivia,1967,test
+Bolivia_1972,Bolivia,1972,test
+Bolivia_1977,Bolivia,1977,test
+Bolivia_1982,Bolivia,1982,test
+Bolivia_1987,Bolivia,1987,test
+Bolivia_1992,Bolivia,1992,test
+Bolivia_1997,Bolivia,1997,test
+Bolivia_2002,Bolivia,2002,test
+Bolivia_2007,Bolivia,2007,test
+Bosnia_and_Herzegovina_1952,Bosnia and Herzegovina,1952,fit
+Bosnia_and_Herzegovina_1957,Bosnia and Herzegovina,1957,fit
+Bosnia_and_Herzegovina_1962,Bosnia and Herzegovina,1962,fit
+Bosnia_and_Herzegovina_1967,Bosnia and Herzegovina,1967,fit
+Bosnia_and_Herzegovina_1972,Bosnia and Herzegovina,1972,fit
+Bosnia_and_Herzegovina_1977,Bosnia and Herzegovina,1977,fit
+Bosnia_and_Herzegovina_1982,Bosnia and Herzegovina,1982,fit
+Bosnia_and_Herzegovina_1987,Bosnia and Herzegovina,1987,fit
+Bosnia_and_Herzegovina_1992,Bosnia and Herzegovina,1992,fit
+Bosnia_and_Herzegovina_1997,Bosnia and Herzegovina,1997,fit
+Bosnia_and_Herzegovina_2002,Bosnia and Herzegovina,2002,fit
+Bosnia_and_Herzegovina_2007,Bosnia and Herzegovina,2007,fit
+Brazil_1952,Brazil,1952,fit
+Brazil_1957,Brazil,1957,fit
+Brazil_1962,Brazil,1962,fit
+Brazil_1967,Brazil,1967,fit
+Brazil_1972,Brazil,1972,fit
+Brazil_1977,Brazil,1977,fit
+Brazil_1982,Brazil,1982,fit
+Brazil_1987,Brazil,1987,fit
+Brazil_1992,Brazil,1992,fit
+Brazil_1997,Brazil,1997,fit
+Brazil_2002,Brazil,2002,fit
+Brazil_2007,Brazil,2007,fit
+Bulgaria_1952,Bulgaria,1952,test
+Bulgaria_1957,Bulgaria,1957,test
+Bulgaria_1962,Bulgaria,1962,test
+Bulgaria_1967,Bulgaria,1967,test
+Bulgaria_1972,Bulgaria,1972,test
+Bulgaria_1977,Bulgaria,1977,test
+Bulgaria_1982,Bulgaria,1982,test
+Bulgaria_1987,Bulgaria,1987,test
+Bulgaria_1992,Bulgaria,1992,test
+Bulgaria_1997,Bulgaria,1997,test
+Bulgaria_2002,Bulgaria,2002,test
+Bulgaria_2007,Bulgaria,2007,test
+Canada_1952,Canada,1952,validation
+Canada_1957,Canada,1957,validation
+Canada_1962,Canada,1962,validation
+Canada_1967,Canada,1967,validation
+Canada_1972,Canada,1972,validation
+Canada_1977,Canada,1977,validation
+Canada_1982,Canada,1982,validation
+Canada_1987,Canada,1987,validation
+Canada_1992,Canada,1992,validation
+Canada_1997,Canada,1997,validation
+Canada_2002,Canada,2002,validation
+Canada_2007,Canada,2007,validation
+Chile_1952,Chile,1952,fit
+Chile_1957,Chile,1957,fit
+Chile_1962,Chile,1962,fit
+Chile_1967,Chile,1967,fit
+Chile_1972,Chile,1972,fit
+Chile_1977,Chile,1977,fit
+Chile_1982,Chile,1982,fit
+Chile_1987,Chile,1987,fit
+Chile_1992,Chile,1992,fit
+Chile_1997,Chile,1997,fit
+Chile_2002,Chile,2002,fit
+Chile_2007,Chile,2007,fit
+Colombia_1952,Colombia,1952,fit
+Colombia_1957,Colombia,1957,fit
+Colombia_1962,Colombia,1962,fit
+Colombia_1967,Colombia,1967,fit
+Colombia_1972,Colombia,1972,fit
+Colombia_1977,Colombia,1977,fit
+Colombia_1982,Colombia,1982,fit
+Colombia_1987,Colombia,1987,fit
+Colombia_1992,Colombia,1992,fit
+Colombia_1997,Colombia,1997,fit
+Colombia_2002,Colombia,2002,fit
+Colombia_2007,Colombia,2007,fit
+Costa_Rica_1952,Costa Rica,1952,test
+Costa_Rica_1957,Costa Rica,1957,test
+Costa_Rica_1962,Costa Rica,1962,test
+Costa_Rica_1967,Costa Rica,1967,test
+Costa_Rica_1972,Costa Rica,1972,test
+Costa_Rica_1977,Costa Rica,1977,test
+Costa_Rica_1982,Costa Rica,1982,test
+Costa_Rica_1987,Costa Rica,1987,test
+Costa_Rica_1992,Costa Rica,1992,test
+Costa_Rica_1997,Costa Rica,1997,test
+Costa_Rica_2002,Costa Rica,2002,test
+Costa_Rica_2007,Costa Rica,2007,test
+Croatia_1952,Croatia,1952,fit
+Croatia_1957,Croatia,1957,fit
+Croatia_1962,Croatia,1962,fit
+Croatia_1967,Croatia,1967,fit
+Croatia_1972,Croatia,1972,fit
+Croatia_1977,Croatia,1977,fit
+Croatia_1982,Croatia,1982,fit
+Croatia_1987,Croatia,1987,fit
+Croatia_1992,Croatia,1992,fit
+Croatia_1997,Croatia,1997,fit
+Croatia_2002,Croatia,2002,fit
+Croatia_2007,Croatia,2007,fit
+Cuba_1952,Cuba,1952,fit
+Cuba_1957,Cuba,1957,fit
+Cuba_1962,Cuba,1962,fit
+Cuba_1967,Cuba,1967,fit
+Cuba_1972,Cuba,1972,fit
+Cuba_1977,Cuba,1977,fit
+Cuba_1982,Cuba,1982,fit
+Cuba_1987,Cuba,1987,fit
+Cuba_1992,Cuba,1992,fit
+Cuba_1997,Cuba,1997,fit
+Cuba_2002,Cuba,2002,fit
+Cuba_2007,Cuba,2007,fit
+Czech_Republic_1952,Czech Republic,1952,test
+Czech_Republic_1957,Czech Republic,1957,test
+Czech_Republic_1962,Czech Republic,1962,test
+Czech_Republic_1967,Czech Republic,1967,test
+Czech_Republic_1972,Czech Republic,1972,test
+Czech_Republic_1977,Czech Republic,1977,test
+Czech_Republic_1982,Czech Republic,1982,test
+Czech_Republic_1987,Czech Republic,1987,test
+Czech_Republic_1992,Czech Republic,1992,test
+Czech_Republic_1997,Czech Republic,1997,test
+Czech_Republic_2002,Czech Republic,2002,test
+Czech_Republic_2007,Czech Republic,2007,test
+Denmark_1952,Denmark,1952,fit
+Denmark_1957,Denmark,1957,fit
+Denmark_1962,Denmark,1962,fit
+Denmark_1967,Denmark,1967,fit
+Denmark_1972,Denmark,1972,fit
+Denmark_1977,Denmark,1977,fit
+Denmark_1982,Denmark,1982,fit
+Denmark_1987,Denmark,1987,fit
+Denmark_1992,Denmark,1992,fit
+Denmark_1997,Denmark,1997,fit
+Denmark_2002,Denmark,2002,fit
+Denmark_2007,Denmark,2007,fit
+Dominican_Republic_1952,Dominican Republic,1952,fit
+Dominican_Republic_1957,Dominican Republic,1957,fit
+Dominican_Republic_1962,Dominican Republic,1962,fit
+Dominican_Republic_1967,Dominican Republic,1967,fit
+Dominican_Republic_1972,Dominican Republic,1972,fit
+Dominican_Republic_1977,Dominican Republic,1977,fit
+Dominican_Republic_1982,Dominican Republic,1982,fit
+Dominican_Republic_1987,Dominican Republic,1987,fit
+Dominican_Republic_1992,Dominican Republic,1992,fit
+Dominican_Republic_1997,Dominican Republic,1997,fit
+Dominican_Republic_2002,Dominican Republic,2002,fit
+Dominican_Republic_2007,Dominican Republic,2007,fit
+Ecuador_1952,Ecuador,1952,validation
+Ecuador_1957,Ecuador,1957,validation
+Ecuador_1962,Ecuador,1962,validation
+Ecuador_1967,Ecuador,1967,validation
+Ecuador_1972,Ecuador,1972,validation
+Ecuador_1977,Ecuador,1977,validation
+Ecuador_1982,Ecuador,1982,validation
+Ecuador_1987,Ecuador,1987,validation
+Ecuador_1992,Ecuador,1992,validation
+Ecuador_1997,Ecuador,1997,validation
+Ecuador_2002,Ecuador,2002,validation
+Ecuador_2007,Ecuador,2007,validation
+El_Salvador_1952,El Salvador,1952,validation
+El_Salvador_1957,El Salvador,1957,validation
+El_Salvador_1962,El Salvador,1962,validation
+El_Salvador_1967,El Salvador,1967,validation
+El_Salvador_1972,El Salvador,1972,validation
+El_Salvador_1977,El Salvador,1977,validation
+El_Salvador_1982,El Salvador,1982,validation
+El_Salvador_1987,El Salvador,1987,validation
+El_Salvador_1992,El Salvador,1992,validation
+El_Salvador_1997,El Salvador,1997,validation
+El_Salvador_2002,El Salvador,2002,validation
+El_Salvador_2007,El Salvador,2007,validation
+Finland_1952,Finland,1952,test
+Finland_1957,Finland,1957,test
+Finland_1962,Finland,1962,test
+Finland_1967,Finland,1967,test
+Finland_1972,Finland,1972,test
+Finland_1977,Finland,1977,test
+Finland_1982,Finland,1982,test
+Finland_1987,Finland,1987,test
+Finland_1992,Finland,1992,test
+Finland_1997,Finland,1997,test
+Finland_2002,Finland,2002,test
+Finland_2007,Finland,2007,test
+France_1952,France,1952,test
+France_1957,France,1957,test
+France_1962,France,1962,test
+France_1967,France,1967,test
+France_1972,France,1972,test
+France_1977,France,1977,test
+France_1982,France,1982,test
+France_1987,France,1987,test
+France_1992,France,1992,test
+France_1997,France,1997,test
+France_2002,France,2002,test
+France_2007,France,2007,test
+Germany_1952,Germany,1952,fit
+Germany_1957,Germany,1957,fit
+Germany_1962,Germany,1962,fit
+Germany_1967,Germany,1967,fit
+Germany_1972,Germany,1972,fit
+Germany_1977,Germany,1977,fit
+Germany_1982,Germany,1982,fit
+Germany_1987,Germany,1987,fit
+Germany_1992,Germany,1992,fit
+Germany_1997,Germany,1997,fit
+Germany_2002,Germany,2002,fit
+Germany_2007,Germany,2007,fit
+Greece_1952,Greece,1952,fit
+Greece_1957,Greece,1957,fit
+Greece_1962,Greece,1962,fit
+Greece_1967,Greece,1967,fit
+Greece_1972,Greece,1972,fit
+Greece_1977,Greece,1977,fit
+Greece_1982,Greece,1982,fit
+Greece_1987,Greece,1987,fit
+Greece_1992,Greece,1992,fit
+Greece_1997,Greece,1997,fit
+Greece_2002,Greece,2002,fit
+Greece_2007,Greece,2007,fit
+Guatemala_1952,Guatemala,1952,fit
+Guatemala_1957,Guatemala,1957,fit
+Guatemala_1962,Guatemala,1962,fit
+Guatemala_1967,Guatemala,1967,fit
+Guatemala_1972,Guatemala,1972,fit
+Guatemala_1977,Guatemala,1977,fit
+Guatemala_1982,Guatemala,1982,fit
+Guatemala_1987,Guatemala,1987,fit
+Guatemala_1992,Guatemala,1992,fit
+Guatemala_1997,Guatemala,1997,fit
+Guatemala_2002,Guatemala,2002,fit
+Guatemala_2007,Guatemala,2007,fit
+Haiti_1952,Haiti,1952,fit
+Haiti_1957,Haiti,1957,fit
+Haiti_1962,Haiti,1962,fit
+Haiti_1967,Haiti,1967,fit
+Haiti_1972,Haiti,1972,fit
+Haiti_1977,Haiti,1977,fit
+Haiti_1982,Haiti,1982,fit
+Haiti_1987,Haiti,1987,fit
+Haiti_1992,Haiti,1992,fit
+Haiti_1997,Haiti,1997,fit
+Haiti_2002,Haiti,2002,fit
+Haiti_2007,Haiti,2007,fit
+Honduras_1952,Honduras,1952,validation
+Honduras_1957,Honduras,1957,validation
+Honduras_1962,Honduras,1962,validation
+Honduras_1967,Honduras,1967,validation
+Honduras_1972,Honduras,1972,validation
+Honduras_1977,Honduras,1977,validation
+Honduras_1982,Honduras,1982,validation
+Honduras_1987,Honduras,1987,validation
+Honduras_1992,Honduras,1992,validation
+Honduras_1997,Honduras,1997,validation
+Honduras_2002,Honduras,2002,validation
+Honduras_2007,Honduras,2007,validation
+Hungary_1952,Hungary,1952,fit
+Hungary_1957,Hungary,1957,fit
+Hungary_1962,Hungary,1962,fit
+Hungary_1967,Hungary,1967,fit
+Hungary_1972,Hungary,1972,fit
+Hungary_1977,Hungary,1977,fit
+Hungary_1982,Hungary,1982,fit
+Hungary_1987,Hungary,1987,fit
+Hungary_1992,Hungary,1992,fit
+Hungary_1997,Hungary,1997,fit
+Hungary_2002,Hungary,2002,fit
+Hungary_2007,Hungary,2007,fit
+Iceland_1952,Iceland,1952,fit
+Iceland_1957,Iceland,1957,fit
+Iceland_1962,Iceland,1962,fit
+Iceland_1967,Iceland,1967,fit
+Iceland_1972,Iceland,1972,fit
+Iceland_1977,Iceland,1977,fit
+Iceland_1982,Iceland,1982,fit
+Iceland_1987,Iceland,1987,fit
+Iceland_1992,Iceland,1992,fit
+Iceland_1997,Iceland,1997,fit
+Iceland_2002,Iceland,2002,fit
+Iceland_2007,Iceland,2007,fit
+Ireland_1952,Ireland,1952,fit
+Ireland_1957,Ireland,1957,fit
+Ireland_1962,Ireland,1962,fit
+Ireland_1967,Ireland,1967,fit
+Ireland_1972,Ireland,1972,fit
+Ireland_1977,Ireland,1977,fit
+Ireland_1982,Ireland,1982,fit
+Ireland_1987,Ireland,1987,fit
+Ireland_1992,Ireland,1992,fit
+Ireland_1997,Ireland,1997,fit
+Ireland_2002,Ireland,2002,fit
+Ireland_2007,Ireland,2007,fit
+Italy_1952,Italy,1952,fit
+Italy_1957,Italy,1957,fit
+Italy_1962,Italy,1962,fit
+Italy_1967,Italy,1967,fit
+Italy_1972,Italy,1972,fit
+Italy_1977,Italy,1977,fit
+Italy_1982,Italy,1982,fit
+Italy_1987,Italy,1987,fit
+Italy_1992,Italy,1992,fit
+Italy_1997,Italy,1997,fit
+Italy_2002,Italy,2002,fit
+Italy_2007,Italy,2007,fit
+Jamaica_1952,Jamaica,1952,test
+Jamaica_1957,Jamaica,1957,test
+Jamaica_1962,Jamaica,1962,test
+Jamaica_1967,Jamaica,1967,test
+Jamaica_1972,Jamaica,1972,test
+Jamaica_1977,Jamaica,1977,test
+Jamaica_1982,Jamaica,1982,test
+Jamaica_1987,Jamaica,1987,test
+Jamaica_1992,Jamaica,1992,test
+Jamaica_1997,Jamaica,1997,test
+Jamaica_2002,Jamaica,2002,test
+Jamaica_2007,Jamaica,2007,test
+Mexico_1952,Mexico,1952,fit
+Mexico_1957,Mexico,1957,fit
+Mexico_1962,Mexico,1962,fit
+Mexico_1967,Mexico,1967,fit
+Mexico_1972,Mexico,1972,fit
+Mexico_1977,Mexico,1977,fit
+Mexico_1982,Mexico,1982,fit
+Mexico_1987,Mexico,1987,fit
+Mexico_1992,Mexico,1992,fit
+Mexico_1997,Mexico,1997,fit
+Mexico_2002,Mexico,2002,fit
+Mexico_2007,Mexico,2007,fit
+Montenegro_1952,Montenegro,1952,validation
+Montenegro_1957,Montenegro,1957,validation
+Montenegro_1962,Montenegro,1962,validation
+Montenegro_1967,Montenegro,1967,validation
+Montenegro_1972,Montenegro,1972,validation
+Montenegro_1977,Montenegro,1977,validation
+Montenegro_1982,Montenegro,1982,validation
+Montenegro_1987,Montenegro,1987,validation
+Montenegro_1992,Montenegro,1992,validation
+Montenegro_1997,Montenegro,1997,validation
+Montenegro_2002,Montenegro,2002,validation
+Montenegro_2007,Montenegro,2007,validation
+Netherlands_1952,Netherlands,1952,fit
+Netherlands_1957,Netherlands,1957,fit
+Netherlands_1962,Netherlands,1962,fit
+Netherlands_1967,Netherlands,1967,fit
+Netherlands_1972,Netherlands,1972,fit
+Netherlands_1977,Netherlands,1977,fit
+Netherlands_1982,Netherlands,1982,fit
+Netherlands_1987,Netherlands,1987,fit
+Netherlands_1992,Netherlands,1992,fit
+Netherlands_1997,Netherlands,1997,fit
+Netherlands_2002,Netherlands,2002,fit
+Netherlands_2007,Netherlands,2007,fit
+New_Zealand_1952,New Zealand,1952,fit
+New_Zealand_1957,New Zealand,1957,fit
+New_Zealand_1962,New Zealand,1962,fit
+New_Zealand_1967,New Zealand,1967,fit
+New_Zealand_1972,New Zealand,1972,fit
+New_Zealand_1977,New Zealand,1977,fit
+New_Zealand_1982,New Zealand,1982,fit
+New_Zealand_1987,New Zealand,1987,fit
+New_Zealand_1992,New Zealand,1992,fit
+New_Zealand_1997,New Zealand,1997,fit
+New_Zealand_2002,New Zealand,2002,fit
+New_Zealand_2007,New Zealand,2007,fit
+Nicaragua_1952,Nicaragua,1952,validation
+Nicaragua_1957,Nicaragua,1957,validation
+Nicaragua_1962,Nicaragua,1962,validation
+Nicaragua_1967,Nicaragua,1967,validation
+Nicaragua_1972,Nicaragua,1972,validation
+Nicaragua_1977,Nicaragua,1977,validation
+Nicaragua_1982,Nicaragua,1982,validation
+Nicaragua_1987,Nicaragua,1987,validation
+Nicaragua_1992,Nicaragua,1992,validation
+Nicaragua_1997,Nicaragua,1997,validation
+Nicaragua_2002,Nicaragua,2002,validation
+Nicaragua_2007,Nicaragua,2007,validation
+Norway_1952,Norway,1952,fit
+Norway_1957,Norway,1957,fit
+Norway_1962,Norway,1962,fit
+Norway_1967,Norway,1967,fit
+Norway_1972,Norway,1972,fit
+Norway_1977,Norway,1977,fit
+Norway_1982,Norway,1982,fit
+Norway_1987,Norway,1987,fit
+Norway_1992,Norway,1992,fit
+Norway_1997,Norway,1997,fit
+Norway_2002,Norway,2002,fit
+Norway_2007,Norway,2007,fit
+Panama_1952,Panama,1952,fit
+Panama_1957,Panama,1957,fit
+Panama_1962,Panama,1962,fit
+Panama_1967,Panama,1967,fit
+Panama_1972,Panama,1972,fit
+Panama_1977,Panama,1977,fit
+Panama_1982,Panama,1982,fit
+Panama_1987,Panama,1987,fit
+Panama_1992,Panama,1992,fit
+Panama_1997,Panama,1997,fit
+Panama_2002,Panama,2002,fit
+Panama_2007,Panama,2007,fit
+Paraguay_1952,Paraguay,1952,fit
+Paraguay_1957,Paraguay,1957,fit
+Paraguay_1962,Paraguay,1962,fit
+Paraguay_1967,Paraguay,1967,fit
+Paraguay_1972,Paraguay,1972,fit
+Paraguay_1977,Paraguay,1977,fit
+Paraguay_1982,Paraguay,1982,fit
+Paraguay_1987,Paraguay,1987,fit
+Paraguay_1992,Paraguay,1992,fit
+Paraguay_1997,Paraguay,1997,fit
+Paraguay_2002,Paraguay,2002,fit
+Paraguay_2007,Paraguay,2007,fit
+Peru_1952,Peru,1952,test
+Peru_1957,Peru,1957,test
+Peru_1962,Peru,1962,test
+Peru_1967,Peru,1967,test
+Peru_1972,Peru,1972,test
+Peru_1977,Peru,1977,test
+Peru_1982,Peru,1982,test
+Peru_1987,Peru,1987,test
+Peru_1992,Peru,1992,test
+Peru_1997,Peru,1997,test
+Peru_2002,Peru,2002,test
+Peru_2007,Peru,2007,test
+Poland_1952,Poland,1952,fit
+Poland_1957,Poland,1957,fit
+Poland_1962,Poland,1962,fit
+Poland_1967,Poland,1967,fit
+Poland_1972,Poland,1972,fit
+Poland_1977,Poland,1977,fit
+Poland_1982,Poland,1982,fit
+Poland_1987,Poland,1987,fit
+Poland_1992,Poland,1992,fit
+Poland_1997,Poland,1997,fit
+Poland_2002,Poland,2002,fit
+Poland_2007,Poland,2007,fit
+Portugal_1952,Portugal,1952,fit
+Portugal_1957,Portugal,1957,fit
+Portugal_1962,Portugal,1962,fit
+Portugal_1967,Portugal,1967,fit
+Portugal_1972,Portugal,1972,fit
+Portugal_1977,Portugal,1977,fit
+Portugal_1982,Portugal,1982,fit
+Portugal_1987,Portugal,1987,fit
+Portugal_1992,Portugal,1992,fit
+Portugal_1997,Portugal,1997,fit
+Portugal_2002,Portugal,2002,fit
+Portugal_2007,Portugal,2007,fit
+Puerto_Rico_1952,Puerto Rico,1952,test
+Puerto_Rico_1957,Puerto Rico,1957,test
+Puerto_Rico_1962,Puerto Rico,1962,test
+Puerto_Rico_1967,Puerto Rico,1967,test
+Puerto_Rico_1972,Puerto Rico,1972,test
+Puerto_Rico_1977,Puerto Rico,1977,test
+Puerto_Rico_1982,Puerto Rico,1982,test
+Puerto_Rico_1987,Puerto Rico,1987,test
+Puerto_Rico_1992,Puerto Rico,1992,test
+Puerto_Rico_1997,Puerto Rico,1997,test
+Puerto_Rico_2002,Puerto Rico,2002,test
+Puerto_Rico_2007,Puerto Rico,2007,test
+Romania_1952,Romania,1952,validation
+Romania_1957,Romania,1957,validation
+Romania_1962,Romania,1962,validation
+Romania_1967,Romania,1967,validation
+Romania_1972,Romania,1972,validation
+Romania_1977,Romania,1977,validation
+Romania_1982,Romania,1982,validation
+Romania_1987,Romania,1987,validation
+Romania_1992,Romania,1992,validation
+Romania_1997,Romania,1997,validation
+Romania_2002,Romania,2002,validation
+Romania_2007,Romania,2007,validation
+Serbia_1952,Serbia,1952,fit
+Serbia_1957,Serbia,1957,fit
+Serbia_1962,Serbia,1962,fit
+Serbia_1967,Serbia,1967,fit
+Serbia_1972,Serbia,1972,fit
+Serbia_1977,Serbia,1977,fit
+Serbia_1982,Serbia,1982,fit
+Serbia_1987,Serbia,1987,fit
+Serbia_1992,Serbia,1992,fit
+Serbia_1997,Serbia,1997,fit
+Serbia_2002,Serbia,2002,fit
+Serbia_2007,Serbia,2007,fit
+Slovak_Republic_1952,Slovak Republic,1952,fit
+Slovak_Republic_1957,Slovak Republic,1957,fit
+Slovak_Republic_1962,Slovak Republic,1962,fit
+Slovak_Republic_1967,Slovak Republic,1967,fit
+Slovak_Republic_1972,Slovak Republic,1972,fit
+Slovak_Republic_1977,Slovak Republic,1977,fit
+Slovak_Republic_1982,Slovak Republic,1982,fit
+Slovak_Republic_1987,Slovak Republic,1987,fit
+Slovak_Republic_1992,Slovak Republic,1992,fit
+Slovak_Republic_1997,Slovak Republic,1997,fit
+Slovak_Republic_2002,Slovak Republic,2002,fit
+Slovak_Republic_2007,Slovak Republic,2007,fit
+Slovenia_1952,Slovenia,1952,fit
+Slovenia_1957,Slovenia,1957,fit
+Slovenia_1962,Slovenia,1962,fit
+Slovenia_1967,Slovenia,1967,fit
+Slovenia_1972,Slovenia,1972,fit
+Slovenia_1977,Slovenia,1977,fit
+Slovenia_1982,Slovenia,1982,fit
+Slovenia_1987,Slovenia,1987,fit
+Slovenia_1992,Slovenia,1992,fit
+Slovenia_1997,Slovenia,1997,fit
+Slovenia_2002,Slovenia,2002,fit
+Slovenia_2007,Slovenia,2007,fit
+Spain_1952,Spain,1952,fit
+Spain_1957,Spain,1957,fit
+Spain_1962,Spain,1962,fit
+Spain_1967,Spain,1967,fit
+Spain_1972,Spain,1972,fit
+Spain_1977,Spain,1977,fit
+Spain_1982,Spain,1982,fit
+Spain_1987,Spain,1987,fit
+Spain_1992,Spain,1992,fit
+Spain_1997,Spain,1997,fit
+Spain_2002,Spain,2002,fit
+Spain_2007,Spain,2007,fit
+Sweden_1952,Sweden,1952,test
+Sweden_1957,Sweden,1957,test
+Sweden_1962,Sweden,1962,test
+Sweden_1967,Sweden,1967,test
+Sweden_1972,Sweden,1972,test
+Sweden_1977,Sweden,1977,test
+Sweden_1982,Sweden,1982,test
+Sweden_1987,Sweden,1987,test
+Sweden_1992,Sweden,1992,test
+Sweden_1997,Sweden,1997,test
+Sweden_2002,Sweden,2002,test
+Sweden_2007,Sweden,2007,test
+Switzerland_1952,Switzerland,1952,fit
+Switzerland_1957,Switzerland,1957,fit
+Switzerland_1962,Switzerland,1962,fit
+Switzerland_1967,Switzerland,1967,fit
+Switzerland_1972,Switzerland,1972,fit
+Switzerland_1977,Switzerland,1977,fit
+Switzerland_1982,Switzerland,1982,fit
+Switzerland_1987,Switzerland,1987,fit
+Switzerland_1992,Switzerland,1992,fit
+Switzerland_1997,Switzerland,1997,fit
+Switzerland_2002,Switzerland,2002,fit
+Switzerland_2007,Switzerland,2007,fit
+Trinidad_and_Tobago_1952,Trinidad and Tobago,1952,fit
+Trinidad_and_Tobago_1957,Trinidad and Tobago,1957,fit
+Trinidad_and_Tobago_1962,Trinidad and Tobago,1962,fit
+Trinidad_and_Tobago_1967,Trinidad and Tobago,1967,fit
+Trinidad_and_Tobago_1972,Trinidad and Tobago,1972,fit
+Trinidad_and_Tobago_1977,Trinidad and Tobago,1977,fit
+Trinidad_and_Tobago_1982,Trinidad and Tobago,1982,fit
+Trinidad_and_Tobago_1987,Trinidad and Tobago,1987,fit
+Trinidad_and_Tobago_1992,Trinidad and Tobago,1992,fit
+Trinidad_and_Tobago_1997,Trinidad and Tobago,1997,fit
+Trinidad_and_Tobago_2002,Trinidad and Tobago,2002,fit
+Trinidad_and_Tobago_2007,Trinidad and Tobago,2007,fit
+Turkey_1952,Turkey,1952,fit
+Turkey_1957,Turkey,1957,fit
+Turkey_1962,Turkey,1962,fit
+Turkey_1967,Turkey,1967,fit
+Turkey_1972,Turkey,1972,fit
+Turkey_1977,Turkey,1977,fit
+Turkey_1982,Turkey,1982,fit
+Turkey_1987,Turkey,1987,fit
+Turkey_1992,Turkey,1992,fit
+Turkey_1997,Turkey,1997,fit
+Turkey_2002,Turkey,2002,fit
+Turkey_2007,Turkey,2007,fit
+United_Kingdom_1952,United Kingdom,1952,fit
+United_Kingdom_1957,United Kingdom,1957,fit
+United_Kingdom_1962,United Kingdom,1962,fit
+United_Kingdom_1967,United Kingdom,1967,fit
+United_Kingdom_1972,United Kingdom,1972,fit
+United_Kingdom_1977,United Kingdom,1977,fit
+United_Kingdom_1982,United Kingdom,1982,fit
+United_Kingdom_1987,United Kingdom,1987,fit
+United_Kingdom_1992,United Kingdom,1992,fit
+United_Kingdom_1997,United Kingdom,1997,fit
+United_Kingdom_2002,United Kingdom,2002,fit
+United_Kingdom_2007,United Kingdom,2007,fit
+United_States_1952,United States,1952,fit
+United_States_1957,United States,1957,fit
+United_States_1962,United States,1962,fit
+United_States_1967,United States,1967,fit
+United_States_1972,United States,1972,fit
+United_States_1977,United States,1977,fit
+United_States_1982,United States,1982,fit
+United_States_1987,United States,1987,fit
+United_States_1992,United States,1992,fit
+United_States_1997,United States,1997,fit
+United_States_2002,United States,2002,fit
+United_States_2007,United States,2007,fit
+Uruguay_1952,Uruguay,1952,fit
+Uruguay_1957,Uruguay,1957,fit
+Uruguay_1962,Uruguay,1962,fit
+Uruguay_1967,Uruguay,1967,fit
+Uruguay_1972,Uruguay,1972,fit
+Uruguay_1977,Uruguay,1977,fit
+Uruguay_1982,Uruguay,1982,fit
+Uruguay_1987,Uruguay,1987,fit
+Uruguay_1992,Uruguay,1992,fit
+Uruguay_1997,Uruguay,1997,fit
+Uruguay_2002,Uruguay,2002,fit
+Uruguay_2007,Uruguay,2007,fit
+Venezuela_1952,Venezuela,1952,fit
+Venezuela_1957,Venezuela,1957,fit
+Venezuela_1962,Venezuela,1962,fit
+Venezuela_1967,Venezuela,1967,fit
+Venezuela_1972,Venezuela,1972,fit
+Venezuela_1977,Venezuela,1977,fit
+Venezuela_1982,Venezuela,1982,fit
+Venezuela_1987,Venezuela,1987,fit
+Venezuela_1992,Venezuela,1992,fit
+Venezuela_1997,Venezuela,1997,fit
+Venezuela_2002,Venezuela,2002,fit
+Venezuela_2007,Venezuela,2007,fit

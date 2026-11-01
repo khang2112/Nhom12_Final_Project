@@ -1,0 +1,5 @@
+algorithm,task,score
+LinearRegression,regression,6.261729894989902
+DecisionTreeRegressor,regression,7.406341192345002
+LogisticRegression,classification,0.8838383838383839
+DecisionTreeClassifier,classification,0.8341645136093252

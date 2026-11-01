@@ -1,3 +1,5 @@
+# SOURCES: https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN
+# https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv
 
 from pathlib import Path
 import pandas as pd
@@ -48,8 +50,8 @@ mask = (
     & df["life_expectancy"].isna()
 )
 
-assert missing_before == 6
-assert int(mask.sum()) == 6
+assert missing_before == int(mask.sum())
+
 assert df.loc[
     mask, "gapminder_reference_life_expectancy"
 ].notna().all()
@@ -91,7 +93,7 @@ df = df.drop(
 
 assert len(df) == 3104
 assert df["life_expectancy"].notna().all()
-assert int(df["life_expectancy_imputed"].sum()) == 6
+assert int(df["life_expectancy_imputed"].sum()) == missing_before
 
 output = DATA / "multisource_lifeexp_filled.csv"
 df.to_csv(output, index=False)

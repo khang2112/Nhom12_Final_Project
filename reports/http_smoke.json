@@ -1,0 +1,6 @@
+{
+  "ui_http": true,
+  "inference": true,
+  "vector_rows": 5,
+  "chroma_http_configured": true
+}

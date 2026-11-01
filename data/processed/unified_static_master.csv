@@ -27,7 +27,7 @@ Africa,Angola,Feed_A_Africa_Asia,3520.610273,AGO,24,30.015,4232095.0,1952,Angola
 Africa,Angola,Feed_A_Africa_Asia,3827.940465,AGO,24,31.999,4561361.0,1957,Angola_1957
 Africa,Angola,Feed_A_Africa_Asia,4269.276742,AGO,24,34.0,4826015.0,1962,Angola_1962
 Africa,Angola,Feed_A_Africa_Asia,5522.776375,AGO,24,35.985,5247469.0,1967,Angola_1967
-Africa,Angola,Feed_A_Africa_Asia,5473.288004999999,AGO,24,37.928,5894858.0,1972,Angola_1972
+Africa,Angola,Feed_A_Africa_Asia,5473.2880049999985,AGO,24,37.928,5894858.0,1972,Angola_1972
 Africa,Angola,Feed_A_Africa_Asia,3008.647355,AGO,24,39.483,6162675.0,1977,Angola_1977
 Africa,Angola,Feed_A_Africa_Asia,2756.953672,AGO,24,39.942,7016384.0,1982,Angola_1982
 Africa,Angola,Feed_A_Africa_Asia,2430.208311,AGO,24,39.906,7874230.0,1987,Angola_1987
@@ -96,7 +96,7 @@ Africa,Burkina Faso,Feed_A_Africa_Asia,946.2949618,BFA,854,50.324,10352843.0,199
 Africa,Burkina Faso,Feed_A_Africa_Asia,1037.645221,BFA,854,50.65,12251209.0,2002,Burkina_Faso_2002
 Africa,Burkina Faso,Feed_A_Africa_Asia,1217.032994,BFA,854,52.295,14326203.0,2007,Burkina_Faso_2007
 Africa,Burundi,Feed_A_Africa_Asia,339.2964587,BDI,108,39.031,2445618.0,1952,Burundi_1952
-Africa,Burundi,Feed_A_Africa_Asia,379.5646281000001,BDI,108,40.533,2667518.0,1957,Burundi_1957
+Africa,Burundi,Feed_A_Africa_Asia,379.56462810000005,BDI,108,40.533,2667518.0,1957,Burundi_1957
 Africa,Burundi,Feed_A_Africa_Asia,355.2032273,BDI,108,42.045,2961915.0,1962,Burundi_1962
 Africa,Burundi,Feed_A_Africa_Asia,412.97751360000007,BDI,108,43.548,3330989.0,1967,Burundi_1967
 Africa,Burundi,Feed_A_Africa_Asia,464.0995039,BDI,108,44.057,3529983.0,1972,Burundi_1972
@@ -337,7 +337,7 @@ Africa,Guinea-Bissau,Feed_A_Africa_Asia,575.7047176,GNB,624,45.504,1332459.0,200
 Africa,Guinea-Bissau,Feed_A_Africa_Asia,579.2317429999998,GNB,624,46.38800000000001,1472041.0,2007,Guinea_Bissau_2007
 Asia,"Hong Kong, China",Feed_A_Africa_Asia,3054.421209,HKG,344,60.96,2125900.0,1952,Hong_Kong_China_1952
 Asia,"Hong Kong, China",Feed_A_Africa_Asia,3629.076457,HKG,344,64.75,2736300.0,1957,Hong_Kong_China_1957
-Asia,"Hong Kong, China",Feed_A_Africa_Asia,4692.648271999999,HKG,344,67.65,3305200.0,1962,Hong_Kong_China_1962
+Asia,"Hong Kong, China",Feed_A_Africa_Asia,4692.6482719999985,HKG,344,67.65,3305200.0,1962,Hong_Kong_China_1962
 Asia,"Hong Kong, China",Feed_A_Africa_Asia,6197.962814,HKG,344,70.0,3722800.0,1967,Hong_Kong_China_1967
 Asia,"Hong Kong, China",Feed_A_Africa_Asia,8315.928145,HKG,344,72.0,4115700.0,1972,Hong_Kong_China_1972
 Asia,"Hong Kong, China",Feed_A_Africa_Asia,11186.14125,HKG,344,73.6,4583700.0,1977,Hong_Kong_China_1977
@@ -374,7 +374,7 @@ Asia,Indonesia,Feed_A_Africa_Asia,3540.651564,IDN,360,70.65,223547000.0,2007,Ind
 Asia,Iran,Feed_A_Africa_Asia,3035.326002,IRN,364,44.869,17272000.0,1952,Iran_1952
 Asia,Iran,Feed_A_Africa_Asia,3290.257643,IRN,364,47.181,19792000.0,1957,Iran_1957
 Asia,Iran,Feed_A_Africa_Asia,4187.329802,IRN,364,49.325,22874000.0,1962,Iran_1962
-Asia,Iran,Feed_A_Africa_Asia,5906.731804999999,IRN,364,52.469,26538000.0,1967,Iran_1967
+Asia,Iran,Feed_A_Africa_Asia,5906.7318049999985,IRN,364,52.469,26538000.0,1967,Iran_1967
 Asia,Iran,Feed_A_Africa_Asia,9613.818607,IRN,364,55.234,30614000.0,1972,Iran_1972
 Asia,Iran,Feed_A_Africa_Asia,11888.59508,IRN,364,57.702,35480679.0,1977,Iran_1977
 Asia,Iran,Feed_A_Africa_Asia,7608.334602,IRN,364,59.62,43072751.0,1982,Iran_1982
@@ -1297,7 +1297,7 @@ Europe,Germany,Feed_B_Other_Regions,30035.80198,DEU,276,78.67,82350671.0,2002,Ge
 Europe,Germany,Feed_B_Other_Regions,32170.37442,DEU,276,79.406,82400996.0,2007,Germany_2007
 Europe,Greece,Feed_B_Other_Regions,3530.690067,GRC,300,65.86,7733250.0,1952,Greece_1952
 Europe,Greece,Feed_B_Other_Regions,4916.299889,GRC,300,67.86,8096218.0,1957,Greece_1957
-Europe,Greece,Feed_B_Other_Regions,6017.190732999999,GRC,300,69.51,8448233.0,1962,Greece_1962
+Europe,Greece,Feed_B_Other_Regions,6017.1907329999985,GRC,300,69.51,8448233.0,1962,Greece_1962
 Europe,Greece,Feed_B_Other_Regions,8513.097016,GRC,300,71.0,8716441.0,1967,Greece_1967
 Europe,Greece,Feed_B_Other_Regions,12724.82957,GRC,300,72.34,8888628.0,1972,Greece_1972
 Europe,Greece,Feed_B_Other_Regions,14195.52428,GRC,300,73.68,9308479.0,1977,Greece_1977
@@ -1394,7 +1394,7 @@ Europe,Italy,Feed_B_Other_Regions,28569.7197,ITA,380,80.546,58147733.0,2007,Ital
 Americas,Jamaica,Feed_B_Other_Regions,2898.530881,JAM,388,58.53,1426095.0,1952,Jamaica_1952
 Americas,Jamaica,Feed_B_Other_Regions,4756.525781,JAM,388,62.61,1535090.0,1957,Jamaica_1957
 Americas,Jamaica,Feed_B_Other_Regions,5246.107524,JAM,388,65.61,1665128.0,1962,Jamaica_1962
-Americas,Jamaica,Feed_B_Other_Regions,6124.703450999999,JAM,388,67.51,1861096.0,1967,Jamaica_1967
+Americas,Jamaica,Feed_B_Other_Regions,6124.7034509999985,JAM,388,67.51,1861096.0,1967,Jamaica_1967
 Americas,Jamaica,Feed_B_Other_Regions,7433.889293000001,JAM,388,69.0,1997616.0,1972,Jamaica_1972
 Americas,Jamaica,Feed_B_Other_Regions,6650.195573,JAM,388,70.11,2156814.0,1977,Jamaica_1977
 Americas,Jamaica,Feed_B_Other_Regions,6068.05135,JAM,388,71.21,2298309.0,1982,Jamaica_1982
@@ -1635,7 +1635,7 @@ Americas,Trinidad and Tobago,Feed_B_Other_Regions,3023.271928,TTO,780,59.1,66285
 Americas,Trinidad and Tobago,Feed_B_Other_Regions,4100.3934,TTO,780,61.8,764900.0,1957,Trinidad_and_Tobago_1957
 Americas,Trinidad and Tobago,Feed_B_Other_Regions,4997.523971000001,TTO,780,64.9,887498.0,1962,Trinidad_and_Tobago_1962
 Americas,Trinidad and Tobago,Feed_B_Other_Regions,5621.368472,TTO,780,65.4,960155.0,1967,Trinidad_and_Tobago_1967
-Americas,Trinidad and Tobago,Feed_B_Other_Regions,6619.551418999999,TTO,780,65.9,975199.0,1972,Trinidad_and_Tobago_1972
+Americas,Trinidad and Tobago,Feed_B_Other_Regions,6619.5514189999985,TTO,780,65.9,975199.0,1972,Trinidad_and_Tobago_1972
 Americas,Trinidad and Tobago,Feed_B_Other_Regions,7899.554209000001,TTO,780,68.3,1039009.0,1977,Trinidad_and_Tobago_1977
 Americas,Trinidad and Tobago,Feed_B_Other_Regions,9119.528607,TTO,780,68.832,1116479.0,1982,Trinidad_and_Tobago_1982
 Americas,Trinidad and Tobago,Feed_B_Other_Regions,7388.597823,TTO,780,69.582,1191336.0,1987,Trinidad_and_Tobago_1987

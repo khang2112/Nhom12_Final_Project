@@ -12,6 +12,7 @@ from pathlib import Path
 import joblib
 import numpy as np
 import pandas as pd
+from vector_store import client as db_client, read_frame
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,9 +48,9 @@ def main():
     matrix = artifacts["pca"].transform(original)
     vectors = np.asarray(matrix, dtype="float32")
 
-    client = chromadb.PersistentClient(path=str(ROOT / "databases/chroma_db"))
+    client = db_client()
     collection = client.get_or_create_collection(
-        "country_year_embeddings", metadata={"hnsw:space": "l2"}
+        "country_year_embeddings", metadata={"hnsw:space": "l2"}, embedding_function=None
     )
 
     documents = []
@@ -80,13 +81,23 @@ def main():
             documents=documents[start:stop],
         )
 
+    # Remove stale IDs if the source snapshot changes.
+    old_ids = set(collection.get(include=[])['ids']) - set(ids)
+    if old_ids:
+        collection.delete(ids=list(old_ids))
     assert collection.count() == len(df)
+    reloaded = read_frame(collection)
+    pc_cols = [f'pc_{i+1}' for i in range(vectors.shape[1])]
+    aligned = reloaded.set_index('record_id').loc[ids, pc_cols].to_numpy()
+    np.testing.assert_allclose(aligned, vectors, atol=1e-6)
+    reloaded.to_csv(ROOT/'reports/chroma_roundtrip.csv', index=False)
     nearest = collection.query(query_embeddings=[vectors[0].tolist()], n_results=3)
     assert nearest["ids"] and ids[0] in nearest["ids"][0]
 
     status = {
         "ingested": True,
-        "backend": "ChromaDB PersistentClient",
+        "backend": type(client).__name__,
+        "roundtrip_dataframe": True,
         "collection": collection.name,
         "count": collection.count(),
         "dimensions": vectors.shape[1],

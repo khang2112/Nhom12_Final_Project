@@ -1,0 +1,17 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+Dockerfile text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.ipynb text eol=lf
+*.pdf binary
+*.png binary
+*.joblib binary
+*.sqlite binary
+*.sqlite3 binary
+*.bin binary
+*.pickle binary
+*.pptx binary
+*.docx binary

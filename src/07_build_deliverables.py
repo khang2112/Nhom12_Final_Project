@@ -1,356 +1,160 @@
-"""Generate detailed Vietnamese DOCX report + presentation; convert DOCX -> PDF separately with LibreOffice.
-This file intentionally uses verified pipeline metrics; no invented model scores or UI screenshots.
-"""
+"""Build concise PDF report/slides and a read-only notebook from current artifacts."""
 from pathlib import Path
-import json,datetime
+import json
+from html import escape
 import pandas as pd
-from docx import Document
-from docx.shared import Inches,Pt,RGBColor
-from docx.enum.text import WD_ALIGN_PARAGRAPH
-from docx.enum.table import WD_TABLE_ALIGNMENT,WD_CELL_VERTICAL_ALIGNMENT
-from docx.enum.style import WD_STYLE_TYPE
-from docx.enum.text import WD_BREAK
-from docx.oxml import OxmlElement
-from docx.oxml.ns import qn
-from pptx import Presentation
-from pptx.util import Inches as PInches,Pt as PPt
-from pptx.dml.color import RGBColor as PRGB
-from pptx.enum.text import PP_ALIGN,MSO_AUTO_SIZE
-from pptx.enum.shapes import MSO_SHAPE
+import matplotlib
+from reportlab.lib import colors
+from reportlab.lib.styles import ParagraphStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle, Image, PageBreak, Spacer
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from PIL import Image as PILImage
 
 ROOT=Path(__file__).resolve().parents[1]
-REP=ROOT/'reports';CH=ROOT/'charts';SL=ROOT/'slides';SL.mkdir(parents=True,exist_ok=True)
-STATUS=json.loads((REP/'chroma_status.json').read_text(encoding='utf-8'))
-assert STATUS.get('ingested') is True and STATUS.get('count') == 1704, 'Kiểm tra ChromaDB trước khi tạo tài liệu'
-MS=pd.read_csv(ROOT/'data/processed/multisource_clean.csv')
-assert len(MS)==3104 and MS.record_id.nunique()==1704
-R=json.loads((REP/'model_results.json').read_text());S=json.loads((REP/'eda_summary.json').read_text())
-REG=pd.read_csv(REP/'regression_benchmark.csv');CLF=pd.read_csv(REP/'classification_benchmark.csv')
-CLUSTER=pd.read_csv(REP/'cluster_summary.csv');OUT=pd.read_csv(REP/'iqr_outliers.csv')
-D=pd.read_csv(ROOT/'data/processed/master_with_clusters.csv')
-REGPRED=pd.read_csv(REP/'test_set_predictions.csv')
-TEAL=RGBColor(8,92,104); DARK=RGBColor(9,46,58);MUTED=RGBColor(94,112,122)
-FONT='Aptos'
+R=json.loads((ROOT/'reports/model_results.json').read_text())
+C=json.loads((ROOT/'reports/crawl_audit.json').read_text())
+REG=pd.read_csv(ROOT/'reports/regression_benchmark.csv')
+CLF=pd.read_csv(ROOT/'reports/classification_benchmark.csv')
+TEAL=colors.HexColor('#087C80'); INK=colors.HexColor('#173942')
+fonts=Path(matplotlib.get_data_path())/'fonts/ttf'
+for n,f in [('DV','DejaVuSans.ttf'),('DVB','DejaVuSans-Bold.ttf')]:pdfmetrics.registerFont(TTFont(n,str(fonts/f)))
+pdfmetrics.registerFontFamily('DV',normal='DV',bold='DVB')
+styles={n:ParagraphStyle(n,fontName='DVB' if n in ('title','head') else 'DV',fontSize=z,leading=z*1.45,textColor=INK,spaceAfter=9) for n,z in [('title',22),('head',13),('body',11),('small',9)]}
 
-def add_page_number(footer):
-    p=footer.paragraphs[0];p.alignment=WD_ALIGN_PARAGRAPH.RIGHT
-    run=p.add_run('ATLAS INSIGHT  •  Data Analyst AI     |     Trang ')
-    run.font.size=Pt(8)
-    fld=OxmlElement('w:fldSimple');fld.set(qn('w:instr'),'PAGE');p._p.append(fld)
 
-def p(doc,text='',boldprefix=None,style=None):
-    q=doc.add_paragraph(style=style)
-    if boldprefix and text.startswith(boldprefix):
-        q.add_run(boldprefix).bold=True;q.add_run(text[len(boldprefix):])
-    else:q.add_run(text)
-    return q
-
-def heading(doc,title,level=1):return doc.add_heading(title,level)
-
-def table(doc,headers,rows,widths=None):
-    t=doc.add_table(rows=1,cols=len(headers));t.style='Light Shading Accent 1'
-    t.alignment=WD_TABLE_ALIGNMENT.CENTER
-    for i,v in enumerate(headers):t.rows[0].cells[i].text=str(v)
-    for row in rows:
-        cells=t.add_row().cells
-        for i,val in enumerate(row):cells[i].text=str(val)
-    for row in t.rows:
-        for c in row.cells:
-            c.vertical_alignment=WD_CELL_VERTICAL_ALIGNMENT.CENTER
-            for para in c.paragraphs:
-                for rr in para.runs:rr.font.size=Pt(8.5)
-    doc.add_paragraph()
+def para(s,style='body'):return Paragraph(s,styles[style])
+def table(headers,rows,width=495):
+    t=Table([[para(str(x),'small') for x in row] for row in [headers]+rows],colWidths=[width/len(headers)]*len(headers),repeatRows=1)
+    t.setStyle(TableStyle([('BACKGROUND',(0,0),(-1,0),colors.HexColor('#E8F3F3')),('VALIGN',(0,0),(-1,-1),'TOP'),('LINEBELOW',(0,0),(-1,-1),.4,colors.HexColor('#C5D9DD')),('TOPPADDING',(0,0),(-1,-1),7),('BOTTOMPADDING',(0,0),(-1,-1),7)]))
     return t
 
-def picture(doc,name,caption,insight,width=5.8):
-    f=CH/name
-    assert f.exists(),f
-    para=doc.add_paragraph();para.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    para.add_run().add_picture(str(f),width=Inches(width))
-    cap=doc.add_paragraph(caption)
-    cap.alignment=WD_ALIGN_PARAGRAPH.CENTER;cap.style='Caption'
-    q=doc.add_paragraph();r=q.add_run('SO WHAT? – ');r.bold=True;r.font.color.rgb=TEAL;q.add_run(insight)
+def chart(n,maxheight=245,width=480):
+    path=next((ROOT/'charts').glob(f'{n:02d}_*.png'));w,h=PILImage.open(path).size;scale=min(width/w,maxheight/h)
+    return Image(str(path),width=w*scale,height=h*scale)
 
-def mk_doc():
-    doc=Document();sec=doc.sections[0]
-    sec.top_margin=Inches(.75);sec.bottom_margin=Inches(.72);sec.left_margin=Inches(.9);sec.right_margin=Inches(.8)
-    normal=doc.styles['Normal'];normal.font.name=FONT;normal.font.size=Pt(9.5);normal.font.color.rgb=DARK
-    normal.paragraph_format.space_after=Pt(5)
-    for nm,sz in [('Title',26),('Heading 1',15),('Heading 2',11.5),('Heading 3',10)]:
-        st=doc.styles[nm];st.font.name=FONT;st.font.size=Pt(sz);st.font.color.rgb=TEAL;st.font.bold=True
-    doc.styles['Caption'].font.name=FONT;doc.styles['Caption'].font.size=Pt(8);doc.styles['Caption'].font.italic=True
-    head=sec.header.paragraphs[0];head.alignment=WD_ALIGN_PARAGRAPH.RIGHT
-    rr=head.add_run('DATA ANALYST AI  /  STAGE 1 + STAGE 2');rr.font.bold=True;rr.font.size=Pt(8);rr.font.color.rgb=TEAL
-    add_page_number(sec.footer)
-    doc.add_paragraph('\n\n')
-    t=doc.add_paragraph(style='Title');t.alignment=WD_ALIGN_PARAGRAPH.CENTER;t.add_run('ATLAS INSIGHT')
-    subtitle=doc.add_paragraph();subtitle.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    s=subtitle.add_run('PHÂN TÍCH VÀ DỰ ĐOÁN CHỈ SỐ PHÁT TRIỂN QUỐC GIA BẰNG AI');s.bold=True;s.font.size=Pt(15);s.font.color.rgb=DARK
-    doc.add_paragraph('\n')
-    center=doc.add_paragraph();center.alignment=WD_ALIGN_PARAGRAPH.CENTER
-    center.add_run('BÁO CÁO ĐỒ ÁN NHÓM – GIAI ĐOẠN 1 & 2').bold=True
-    doc.add_paragraph('\n')
-    table(doc,['Thông tin','Nội dung'],[
-        ('Môn học','Data Analyst AI'),('Tên nhóm','[BỔ SUNG TÊN NHÓM]'),
-        ('Thành viên / MSSV','[BỔ SUNG HỌ TÊN – MSSV – PHÂN CÔNG]'),
-        ('Hạn nộp','Thứ Hai, 12/10/2026 (theo thời điểm trao đổi)'),
-        ('Nguồn dữ liệu','Gapminder 1952–2007; World Bank để đối chiếu hai nguồn'),
-        ('Ngôn ngữ / hệ công cụ','Python · pandas · scikit-learn · SQLite · Gradio · ChromaDB (đã kiểm chứng)')])
-    p(doc,'GHI CHÚ PHẠM VI: Gapminder cung cấp 1.704 quốc gia-năm để huấn luyện AI; dữ liệu World Bank bổ sung 1.400 dòng đối chiếu, tổng bảng theo nguồn là 3.104 dòng với 1.704 khóa quốc gia-năm duy nhất. Các trường sim_* là mô phỏng. SQLite, ChromaDB 1.704 vector và ảnh giao diện Gradio đã được kiểm chứng trên máy nhóm; bảng hai nguồn không dùng trực tiếp huấn luyện AI.')
-    doc.add_page_break()
-    heading(doc,'TÓM TẮT ĐIỀU HÀNH',1)
-    p(doc,f'Dự án triển khai chuỗi xử lý từ nguồn dữ liệu Gapminder thực gồm {S["n_records"]:,} quan sát, {S["countries"]} quốc gia và 12 mốc thời gian từ {S["year_min"]} đến {S["year_max"]}. Nguồn có 8 thuộc tính nền. Nhóm trích dữ liệu thành hai feed địa lý ({1020} và {684} bản ghi), chuẩn hóa bằng pandas.concat, sinh dữ liệu động giả lập theo quốc gia–năm, sau đó nối ngang bằng left join để không mất dữ liệu thực.')
-    p(doc,f'Ở bước làm sạch, hệ thống phát hiện {S["raw_missing_count"]} ô thiếu được chủ động tạo trong phần mô phỏng, xử lý bằng median theo châu lục, nhãn Unknown và ffill/bfill trong chuỗi thời gian theo từng quốc gia. Sau làm sạch có {S["clean_missing_count"]} ô thiếu. Dữ liệu qua cơ sở dữ liệu SQLite rồi đọc trở lại Python, đối chiếu số bản ghi và khóa chính.')
-    p(doc,f'Giai đoạn 2: PCA chọn {R["pca_components"]} thành phần giữ {R["explained_variance"]:.2%} phương sai. K-Means tối ưu K={R["chosen_k"]} theo silhouette đạt {R["winning_silhouette"]:.3f}, cao hơn biểu diễn gốc {R["original_same_k_silhouette"]:.3f} cùng K. Hồi quy tốt nhất: {R["winning_regression"]} (RMSE={R["best_regression"]["RMSE"]:.2f} năm; R²={R["best_regression"]["R2"]:.3f}); phân loại tốt nhất: {R["winning_classification"]} (F1 macro={R["best_classification"]["F1_macro"]:.3f}; Accuracy={R["best_classification"]["Accuracy"]:.3f}).')
-    heading(doc,'PHẠM VI VÀ QUY ƯỚC',1)
-    table(doc,['Loại','Ý nghĩa / mục đích'],[
-      ('Dữ liệu THỰC','country, continent, year, population, gdp_per_capita, life_expectancy, iso_alpha, iso_num'),
-      ('Dữ liệu MÔ PHỎNG','sim_health_index, sim_education_index, sim_trend_index, sim_policy_group; không phải dữ liệu quan trắc'),
-      ('Đơn vị quan sát','1 dòng = một quốc gia trong một năm lịch sử; KHÔNG phải 1 người hay 1 khách hàng'),
-      ('Target hồi quy','life_expectancy, đơn vị năm'),
-      ('Target phân loại','target_high_life_expectancy: 1 khi tuổi thọ >=70 năm, 0 khi dưới 70 năm'),
-      ('Đối tượng K-Means','Phân cụm hồ sơ quốc gia-năm; không tuyên bố phân khúc khách hàng')])
-    heading(doc,'1. GIAI ĐOẠN 1 – DATA PREPARATION',1)
-    heading(doc,'1.1. Thu thập dữ liệu tĩnh và truy xuất nguồn',2)
-    p(doc,'Dữ liệu Gapminder phiên bản Plotly (dữ liệu lịch sử) được đóng gói trong thư viện plotly.express.data.gapminder(), giúp thực thi offline mà không cần giả lập bản ghi gốc. Nguồn tham chiếu kiểm tra được: https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv và https://www.gapminder.org/data/. URL trực tiếp nằm ở dòng chú thích đầu các tập lệnh nguồn.')
-    p(doc,'Dữ liệu gốc gồm 1.704 dòng và 8 trường sau khi bổ sung ISO country codes từ bản Plotly đóng gói. Các bản ghi chia thành Feed A: Africa + Asia (1.020 dòng) và Feed B: Americas + Europe + Oceania (684 dòng). Tệp đã xuất: source_gapminder_original.csv, Feed_A_Africa_Asia.csv, Feed_B_Other_Regions.csv. Mỗi nguồn trích xuất vượt 300 bản ghi.')
-    p(doc,'Lưu ý đáp ứng rubric: hai feed là hai DANH MỤC địa lý từ một nhà phát hành, tương tự ví dụ tách danh mục sản phẩm trong đề. Nếu giảng viên yêu cầu nghiêm ngặt hai nhà phát hành độc lập, nhóm phải bổ sung nguồn thứ hai trước khi khẳng định hoàn thành tiêu chí này.')
-    heading(doc,'1.2. Dữ liệu động và biến mô phỏng',2)
-    p(doc,'src/01_prepare_data.py dùng numpy.random.default_rng(seed=20261010) tạo chỉ số giả lập theo từng record_id: mức đầu tư y tế (sim_health_index), giáo dục (sim_education_index), chỉ số xu hướng (sim_trend_index) và nhóm chính sách (sim_policy_group). Công thức là hàm log(1+GDP/người), năm và nhiễu ngẫu nhiên có kiểm soát; không dùng life_expectancy hay nhãn để sinh đặc trưng, giảm nguy cơ rò rỉ nhãn.')
-    p(doc,'Đây là bằng chứng kỹ thuật về tạo dữ liệu động, KHÔNG phải phép đo sức khỏe/giáo dục thực tế. Tỷ lệ giá trị thiếu được cố ý đưa vào các cột giả lập để tạo ca kiểm thử cho pipeline gán giá trị thiếu. Sinh văn bản qua Ollama là bài cộng điểm tách biệt; có mã trong src/06_bonus_ollama_text.py nhưng chưa chạy và không có tệp văn bản giả mạo.')
-    heading(doc,'1.3. Data integration: concat & merge',2)
-    table(doc,['Tác vụ','Quy trình / lý do'],[
-      ('pd.concat','Kiểm tra cùng tên cột; chuẩn hóa chữ thường, kiểu dữ liệu year=int và các biến số=float; ghép dọc 2 feed thành 1.704 dòng.'),
-      ('Khóa record_id','slug(country) + year, đảm bảo duy nhất. Không chỉ dùng iso_alpha+year: dữ liệu Plotly có ISO KOR dùng cho hai nước Triều Tiên.'),
-      ('pd.merge','Left join từ bảng THỰC sang bảng ĐỘNG trên record_id; validate=one_to_one, indicator=both.'),
-      ('Giải thích LEFT JOIN','Bảng gốc là đối tượng chính: bảo toàn 100% quan sát thực ngay cả khi một số chỉ số mô phỏng bị thiếu; inner join có thể loại bỏ hồ sơ.')])
-    heading(doc,'1.3b. Đối chiếu dữ liệu đa nguồn World Bank + Gapminder',2)
-    p(doc,'World Bank SP.DYN.LE00.IN là nguồn thứ hai độc lập về nhà phát hành, cung cấp chỉ tiêu tuổi thọ. Nhóm đã chuẩn hóa mã ISO (bao gồm PRK/KOR), thời gian, tên cột và nguồn, nối dọc 1.704 bản ghi Gapminder với 1.400 bản ghi World Bank tạo 3.104 dòng theo nguồn, tương ứng 1.704 cặp quốc gia-năm duy nhất. Dùng left merge với thông tin GDP, dân số từ Gapminder và các biến động sim_*; giá trị giả lập được đánh dấu, không coi là phép đo World Bank.')
-    p(doc,'Bảng hai nguồn có 6 tuổi thọ thiếu ở West Bank and Gaza được điền bằng số Gapminder tương ứng và ghi nhãn Gapminder fallback; 690 ô mô phỏng thiếu được điền. Kết quả: 3.104 dòng, 0 giá trị thiếu, 0 trùng khóa (data_source,iso_alpha,year), 0 bất đồng biến sim_* trên cùng record_id. Bảng này dùng cho so sánh/kiểm toán dữ liệu, KHÔNG dùng trực tiếp huấn luyện Stage 2.')
-    table(doc,['Nguồn','Số dòng','Chú thích'],[['Gapminder',1704,'Dữ liệu GDP, dân số và tuổi thọ'],['World Bank',1400,'Tuổi thọ, cùng mốc lịch sử; có thể trùng quốc gia-năm'],['Bảng đối chiếu',3104,'1704 khóa quốc gia-năm duy nhất']])
-    heading(doc,'1.4. Lưu trữ 2 loại cơ sở dữ liệu',2)
-    p(doc,'Cơ sở dữ liệu 1 – SQLite: src/02_storage_clean_eda.py ghi bảng master_sparse và master_clean; src/03_model_stage2.py ghi master_with_clusters. Mỗi bước kiểm tra lại số dòng/khóa khi đọc từ SQLite. Tệp thật: databases/gapminder_project.sqlite.')
-    p(doc,'Cơ sở dữ liệu 2 – ChromaDB: src/04_chromadb_vector.py đã tạo PersistentClient, nạp 1.704 vector PCA 7 chiều vào collection country_year_embeddings, chạy truy vấn tương đồng và ghi reports/chroma_status.json: ingested=true. Bằng chứng gồm databases/chroma_db và screenshots/05_Stage1_ChromaDB_Success.png.')
-    heading(doc,'2. GIAI ĐOẠN 1 – CLEANING & EDA',1)
-    heading(doc,'2.1. Missingness assessment và imputation',2)
-    p(doc,'Mỗi trường được tính missing_count và missing_percent trước/sau. Không xóa hàng. sim_health_index và sim_education_index được gán median theo continent; sim_policy_group bằng Unknown; sim_trend_index theo thời gian trong từng country bằng ffill/bfill và median toàn cục dự phòng. Các trường thực và target được bảo toàn, không tự ý chỉnh.')
-    changes=pd.read_csv(REP/'imputation_impact.csv')
-    table(doc,['Cột mô phỏng','TB trước','TB sau','Thay đổi TB'],[[r['column'],f'{r["mean_before"]:.2f}',f'{r["mean_after"]:.2f}',f'{r["mean_change_percent"]:+.3f}%'] for _,r in changes.iterrows()])
-    p(doc,'Sau gán thiếu, không còn NaN. So sánh trung bình và độ lệch chuẩn trước/sau cho thấy trung bình các chỉ số mô phỏng thay đổi nhỏ dưới 0,2%, nhưng vẫn có sự co hẹp phân phối; không thể suy ra phép gán là không thiên lệch trong mọi trường hợp.')
-    observations=[
-      ('01_missingness.png','Hình 1. Missingness audit',f'Có {S["raw_missing_count"]} ô thiếu trong các cột sim_* chứ không phải trong dữ liệu nguồn thực. Do đó phải xử lý thiếu có phân nhóm, không được xóa bỏ quan sát quốc gia-năm.'),
-      ('02_imputation_distribution.png','Hình 2. Phân phối trước/sau gán thiếu','Việc điền median theo châu lục duy trì trung bình khá ổn định nhưng làm dày khu vực quanh giá trị trung tâm. Khi mô hình hoá, cần chú thích khả năng giảm độ phân tán.'),
-      ('03_life_expectancy_hist_kde.png','Hình 3. Histogram + KDE tuổi thọ',f'Tuổi thọ trung bình toàn bộ {S["mean_life_expectancy"]:.2f} năm nhưng phân bố trải rộng và gộp nhiều thời kỳ, vùng địa lý. Đưa continent/year vào bộ đặc trưng để tránh giả thiết đồng nhất một phân phối.'),
-      ('04_life_expectancy_box_iqr.png','Hình 4. Boxplot và IQR','Theo IQR, số quan sát tuổi thọ bị gắn ngoại lai bằng 0; vẫn có ngoại lai mạnh ở GDP/người và dân số. Không cắt bớt điểm chỉ vì hiếm: chuyển GDP và dân số sang log1p để mô hình ổn định hơn.'),
-      ('05_continent_bar.png','Hình 5. Tần suất biến phân loại continent','Africa có 624 quan sát, Oceania chỉ 24. Việc so sánh trung bình theo vùng cần nêu rõ cỡ mẫu; chia tập train/test theo quốc gia và phân tầng theo châu lục để bớt mất cân đối.'),
-      ('06_correlation_heatmap.png','Hình 6. Heatmap Spearman',f'Tuổi thọ và GDP/người có tương quan hạng {S["gdp_lifeexp_spearman"]:.3f}. Tương quan KHÔNG khẳng định tác động nhân quả; log(GDP) và năm là biến giải thích có ý nghĩa thực nghiệm.'),
-      ('07_gdp_lifeexp_scatter.png','Hình 7. Scatter tuổi thọ vs GDP',f'Quan hệ có xu hướng đồng biến nhưng có dấu hiệu bão hòa tại GDP/người cao. Đây là động lực để so sánh LinearRegression và DecisionTreeRegressor, đồng thời không ngoại suy ra ngoài dữ liệu 2007.'),
-      ('08_continent_lifeexp_grouped_box.png','Hình 8. Grouped box theo châu lục','Trung bình quan sát: Africa 48,86 năm, Europe 71,90 năm, Oceania 74,33 năm (Oceania chỉ 24 quan sát). Continent cần được mã hóa One-Hot; không suy ra tất cả nước trong một châu lục giống nhau.'),
-      ('09_continent_lifeexp_stacked_bar.png','Hình 9. Stacked bar theo class tuổi thọ','Tỷ trọng lớp ≥70 năm khác nhau giữa các vùng (Africa ≈3,0%; Europe ≈71,4%). Nhãn tạo từ life_expectancy nhưng biến này bị loại khỏi đặc trưng của classifier để ngăn rò rỉ target.'),
-      ('10_historical_trend.png','Hình 10. Xu hướng theo thời gian','Tuổi thọ trung bình nhìn chung tăng trong giai đoạn 1952–2007 nhưng xu hướng khác biệt theo châu lục. Không dùng split ngẫu nhiên từng hàng bởi một quốc gia xuất hiện lặp 12 năm; chia theo country để đo khả năng khái quát hóa quốc gia chưa thấy.')]
-    heading(doc,'2.2. EDA theo biểu đồ – kết quả và “SO WHAT?”',2)
-    for filename,cap,ins in observations:picture(doc,filename,cap,ins)
-    heading(doc,'2.3. Univariate và multivariate outputs đầy đủ',2)
-    p(doc,'Thống kê mô tả mean, median, std, skew, kurtosis: reports/univariate_statistics.csv. Ngoại lai IQR: reports/iqr_outliers.csv. Tần suất và tỷ lệ từng danh mục: reports/categorical_*.csv. Bảng tương liên: reports/crosstab_continent_policy.csv. Ma trận tương quan Spearman: reports/correlations_spearman.csv. Biểu đồ 01–10 có Title, nhãn trục, legend khi có nhiều nhóm.')
-    heading(doc,'3. GIAI ĐOẠN 2 – MÔ HÌNH AI',1)
-    heading(doc,'3.1. Thiết kế đặc trưng và bảo vệ chống leakage',2)
-    p(doc,'6 biến số được chuẩn hóa bằng StandardScaler: year, log_population, log_gdp, sim_health_index, sim_education_index, sim_trend_index. Hai biến phân loại continent và sim_policy_group mã hóa OneHotEncoder(handle_unknown=ignore). Các đặc trưng giả lập đã đánh dấu nguồn gốc và không được hiểu là phép đo thực. life_expectancy không được dùng để huấn luyện classifier, PCA hay K-Means; target nhị phân chỉ để đo hiệu quả.')
-    p(doc,f'Supervised split: train_test_split trên DANH SÁCH QUỐC GIA duy nhất, phân tầng continent; {R["train_countries"]} quốc gia train/{R["test_countries"]} quốc gia test, tương ứng {R["train_rows"]} / {R["test_rows"]} quan sát. Tiền xử lý được fit chỉ ở train khi huấn luyện supervised; tránh fit scaler trên test.')
-    heading(doc,'3.2. PCA – Giảm chiều',2)
-    picture(doc,'11_pca_cumulative_variance.png','Hình 11. Cumulative explained variance',f'PCA giảm chiều từ ma trận đã được chuẩn hóa; {R["pca_components"]} PCs giữ {R["explained_variance"]:.2%} phương sai, nằm trong khoảng 85–95% đề yêu cầu. Chọn số ít nhất đạt ngưỡng 90% để tiết kiệm độ phức tạp mà vẫn giữ thông tin.')
-    heading(doc,'3.3. K-Means – Phân cụm',2)
-    p(doc,'Thử K từ 2 đến 8 bằng WCSS (Elbow) và Silhouette. Với mỗi K, so sánh trên ma trận chuẩn hóa gốc và ma trận PCA. Chọn tổ hợp có Silhouette cao nhất, có xét đường cong WCSS. Tên Cluster_Label là nhãn học không giám sát, KHÔNG mang thứ bậc đạo đức hoặc đánh giá quốc gia.')
-    picture(doc,'12_kmeans_elbow_silhouette.png','Hình 12. Elbow / Silhouette',f'K={R["chosen_k"]} trên {R["cluster_representation"]} có Silhouette {R["winning_silhouette"]:.3f}; cùng K trên đặc trưng gốc = {R["original_same_k_silhouette"]:.3f}. Chênh lệch tương đối nhỏ và điểm silhouette không cao: chỉ có cấu trúc nhóm ở mức vừa, không được diễn giải như ranh giới tự nhiên chắc chắn.')
-    picture(doc,'13_kmeans_2d_clusters.png','Hình 13. Cluster scatter trên không gian PCA 2D','Biểu đồ 2D chỉ để quan sát, không phải không gian đầy đủ dùng để gán cụm; màu được ánh xạ qua mã Cluster_Label trở lại master_with_clusters.csv và bảng SQLite tương ứng.')
-    table(doc,['Cluster','Số quan sát','Tuổi thọ TB','GDP median','Tỷ trọng ≥70'],[[int(r.Cluster_Label),int(r.n),f'{r.life_expectancy_mean:.2f}',f'{r.median_gdp:.2f}',f'{r.share_high_life:.1%}'] for r in CLUSTER.itertuples(index=False)])
-    heading(doc,'3.4. Regression – Benchmark',2)
-    p(doc,'Đặt target=life_expectancy (giá trị liên tục). So sánh LinearRegression() và DecisionTreeRegressor(max_depth=6, min_samples_leaf=12, random_state=42) trên cùng tập train/test. Metric: MSE, RMSE và R²; chọn RMSE nhỏ hơn.')
-    table(doc,['Thuật toán','MSE','RMSE (năm)','R²'],[[r.algorithm,f'{r.MSE:.3f}',f'{r.RMSE:.3f}',f'{r.R2:.3f}'] for r in REG.itertuples(index=False)])
-    picture(doc,'14_regression_actual_vs_predicted.png','Hình 14. Actual vs. Predicted',f'{R["winning_regression"]} có RMSE {R["best_regression"]["RMSE"]:.2f} năm và R² {R["best_regression"]["R2"]:.3f} trên các quốc gia chưa có trong train. Sai số là đáng kể; hệ thống chưa thích hợp dùng làm ước tính quốc gia thực tế.')
-    picture(doc,'15_regression_residual_plot.png','Hình 15. Residual diagnostics','Biểu đồ phần dư cho phép kiểm tra sai số theo mức dự đoán, phát hiện phương sai thay đổi hoặc xu hướng thiên lệch; khuyến nghị kiểm tra MAE theo châu lục, thời kỳ và thử các biến thực không bị mô phỏng nếu triển khai nghiên cứu nghiêm túc.')
-    heading(doc,'3.5. Classification – Benchmark',2)
-    p(doc,'target_high_life_expectancy = 1 khi life_expectancy ≥70, ngược lại 0. So sánh LogisticRegression với DecisionTreeClassifier; kiểm tra tỷ lệ lớp 0/1 trong train và dùng class_weight=balanced vì tỉ lệ ≈70,7%/29,3%. Metric: Accuracy, Precision/Recall/F1 macro, F1 lớp dương; chọn mô hình theo F1 macro do mất cân bằng.')
-    table(doc,['Thuật toán','Accuracy','Precision macro','Recall macro','F1 macro'],[[r.algorithm,f'{r.Accuracy:.3f}',f'{r.Precision_macro:.3f}',f'{r.Recall_macro:.3f}',f'{r.F1_macro:.3f}'] for r in CLF.itertuples(index=False)])
-    picture(doc,'16_confusion_matrix.png','Hình 16. Confusion Matrix',f'{R["winning_classification"]} đạt Accuracy {R["best_classification"]["Accuracy"]:.3f}, F1 macro {R["best_classification"]["F1_macro"]:.3f}; ma trận: 222 TN, 30 FP, 15 FN, 81 TP. Cần xem cả lỗi FP/FN chứ không chỉ accuracy, vì các lớp không cân đối.')
-    heading(doc,'3.6. Web UI (Gradio)',2)
-    p(doc,'Giao diện trong ui/app.py có 4 tab: Dự đoán AI, Trực quan hóa, Kết quả đánh giá và Nguồn dữ liệu & Giới hạn. Nhập continent, year, population, gdp_per_capita cùng 4 biến sim_*, trả về dự đoán liên tục, lớp nhị phân, xác suất lớp và Cluster_Label; mô hình được đọc từ models/*.joblib. Ứng dụng Gradio đã được khởi chạy và kiểm tra HTTP 200 cùng hàm predict trong môi trường biên soạn.')
-    p(doc,'ẢNH GIAO DIỆN THỰC: Người dùng đã chạy Gradio trên máy Windows và lưu các ảnh thật trong screenshots/ gồm Dự đoán AI, Trực quan hóa, Kết quả đánh giá và Nguồn dữ liệu & Giới hạn. Các ảnh được chèn trực tiếp vào bản báo cáo này khi có sẵn.')
+def footer(c,d):
+    c.saveState();c.setFont('DV',8);c.setFillColor(TEAL);c.drawString(45,24,'NHÓM 12 / ATLAS INSIGHT / BẢN ĐÃ SỬA');c.drawRightString(d.pagesize[0]-45,24,str(d.page));c.restoreState()
 
-    shots=ROOT/'screenshots'
-    for nm in ['01_UI_Du_doan_Asia.png','02_UI_Truc_quan_hoa.png','03_UI_Ket_qua_danh_gia.png','04_UI_Nguon_du_lieu.png']:
-        if (shots/nm).exists():
-            q=doc.add_paragraph();q.alignment=WD_ALIGN_PARAGRAPH.CENTER
-            q.add_run().add_picture(str(shots/nm),width=Inches(5.65))
-            cap=doc.add_paragraph('Minh chứng giao diện: '+nm,style='Caption');cap.alignment=WD_ALIGN_PARAGRAPH.CENTER
 
-    heading(doc,'4. ĐỀ XUẤT DỰA TRÊN KẾT QUẢ',1)
-    p(doc,'Khuyến nghị 1 – Hỗ trợ phân tích theo nhóm đặc trưng kinh tế: Cluster 0 có tuổi thọ trung bình khoảng 50,86 năm và GDP/người trung vị khoảng 1.368 USD (giá lịch sử); Cluster 1 tương ứng 69,85 năm và 9.867 USD. Nhóm chính sách giả định nên ưu tiên kiểm chứng dữ liệu thật của các hồ sơ có GDP/người thấp, thay vì gán nguyên nhân hay đề xuất can thiệp chính sách trực tiếp từ kết quả mô phỏng.')
-    p(doc,'Khuyến nghị 2 – Dùng mô hình tuyến tính làm baseline có thể giải thích: LinearRegression thắng cây quyết định theo RMSE (6,17 so với 6,73 năm). Khi mở rộng, nên thử dữ liệu thực về học vấn, chăm sóc sức khỏe và hệ quy chiếu thời gian, đồng thời đánh giá sai số theo vùng trước khi công bố dự đoán.')
-    p(doc,'Khuyến nghị 3 – Trình bày rủi ro phân loại dưới dạng xác suất và F1 macro thay vì kết luận tuyệt đối: LogisticRegression thắng DecisionTreeClassifier (F1 macro 0,845 so với 0,820). Ngưỡng 70 năm chỉ là tiêu chí giảng dạy; nên hiệu chuẩn xác suất theo giai đoạn và cân bằng lớp nếu dataset được thay mới.')
-    heading(doc,'5. GIỚI HẠN, TRUNG THỰC HỌC THUẬT & VIỆC CẦN HOÀN TẤT',1)
-    table(doc,['Hạng mục','Tình trạng thực tế','Cần làm nếu giảng viên yêu cầu đầy đủ'],[
-      ('Thu thập ≥300 bản ghi','Hoàn thành: 1.704 dữ liệu lịch sử','Nêu rõ nguồn và năm dữ liệu'),
-      ('Hai nguồn độc lập','Mới có hai feed vùng từ một nguồn','Bổ sung dataset độc lập có thể chuẩn hóa chung hoặc xin chấp thuận cách chia danh mục'),
-      ('SQLite','Đã ghi và truy vấn ngược','Chạy thử trong buổi demo'),
-      ('Cơ sở dữ liệu thứ hai ChromaDB','Đã nạp thành công 1.704 vector PCA 7 chiều','Bằng chứng: chroma_status.json và ảnh Terminal'),
-      ('Gradio UI','Đã chạy và có ảnh browser thật','Ảnh trong screenshots/ đã được kiểm chứng'),
-      ('Web crawl (+)','Có mã bonus, không có dữ liệu đã crawl','Chạy khi có internet; chỉ claim nếu có >=300 dòng thật'),
-      ('Ollama text (+)','Có mã bonus, chưa chạy LLM','Cài Ollama + model, chạy, lưu CSV thực do model sinh'),
-      ('Thông tin nhóm','Chưa có trong tin nhắn','Điền tên nhóm, thành viên, lớp, MSSV')])
-    p(doc,'Phần mô hình chỉ áp dụng cho thống kê nghiên cứu lịch sử, không dự đoán 2026; quan hệ tương quan không được diễn giải là nhân quả; thêm mô phỏng làm hạn chế độ tin cậy của kết luận chính sách. Đánh giá theo quốc gia hạn chế leakage, song còn giới hạn bởi lựa chọn nhãn phân loại và tính đại diện vùng.')
-    heading(doc,'6. CẤU TRÚC BÀI NỘP / TÁI LẬP',1)
-    p(doc,'Trình tự chạy: (1) python src/01_prepare_data.py; (2) python src/02_storage_clean_eda.py; (3) python src/03_model_stage2.py; (4) pip install -r requirements.txt rồi python src/04_chromadb_vector.py; (5) python ui/app.py. Kiểm thử: python tests/test_pipeline.py. Bộ ảnh charts/ gồm 16 đồ thị PNG; reports/ gồm bảng thống kê/metric/chẩn đoán. Cần điền thông tin nhóm, kiểm tra bản nộp ngoài thư mục code.')
-    heading(doc,'7. THAM KHẢO VÀ TRUY XUẤT',1)
-    for x in [
-      'Gapminder historical dataset, Plotly mirror: https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv',
-      'Gapminder data portal: https://www.gapminder.org/data/',
-      'Pandas concat / merge documentation: https://pandas.pydata.org/docs/reference/api/pandas.concat.html ; https://pandas.pydata.org/docs/reference/api/pandas.merge.html',
-      'Scikit-learn PCA / KMeans / pipeline: https://scikit-learn.org/stable/modules/decomposition.html ; https://scikit-learn.org/stable/modules/clustering.html',
-      'ChromaDB documentation: https://docs.trychroma.com/',
-      'Gradio documentation: https://www.gradio.app/docs',
-      'Books to Scrape bonus sandbox: https://books.toscrape.com/',
-      'Ollama API: https://docs.ollama.com/api/generate']:
-        p(doc,x)
-    heading(doc,'PHỤ LỤC – CÂU HỎI BẢO VỆ DỰ ÁN',1)
-    for question,answer in [
-      ('Vì sao dùng left join?','Để giữ đủ 1.704 bản ghi thật, dù chỉ số động mô phỏng thiếu; validate one_to_one bảo vệ tính toàn vẹn.'),
-      ('Tại sao có dữ liệu thiếu?','Dữ liệu Gapminder thực không thiếu; nhóm chủ động tạo thiếu trên bốn cột mô phỏng để đánh giá khoa học chiến lược gán giá trị.'),
-      ('Vì sao chia theo quốc gia?','Cùng một quốc gia xuất hiện 12 mốc năm, chia ngẫu nhiên theo hàng gây rò rỉ hồ sơ và đánh giá lạc quan.'),
-      ('Tại sao PCA dùng 7 components?','Đây là số lượng ít nhất giải thích ít nhất 90% phương sai và đạt 91,26%; phù hợp khoảng 85–95%.'),
-      ('Tại sao chọn K=2?','So sánh K=2..8 bằng WCSS và Silhouette trong hai không gian; tổ hợp PCA K=2 có Silhouette tốt nhất 0,288.'),
-      ('Tại sao chọn LinearRegression / LogisticRegression?','Đánh giá trên quốc gia giữ lại: LinearRegression RMSE nhỏ nhất; LogisticRegression F1 macro lớn nhất.'),
-      ('Minh chứng UI và ChromaDB được lưu ở đâu?','Ảnh UI thật nằm trong screenshots/; ChromaDB có reports/chroma_status.json và ảnh Terminal. Các kết quả dự đoán chỉ mang tính minh họa.'),
-    ]:
-        q=doc.add_paragraph(); q.add_run('HỎI: '+question).bold=True
-        p(doc,'TRẢ LỜI: '+answer)
-    doc.save(REP/'Bao_cao_Project_Data_Analyst_AI.docx')
-    return REP/'Bao_cao_Project_Data_Analyst_AI.docx'
+def report():
+    story=[]
+    def page(title):
+        if story:story.append(PageBreak())
+        story.append(para(title,'title'))
+    def p(s):story.append(para(s))
+    def t(h,r):story.append(table(h,r));story.append(Spacer(1,12))
+    page('1. Tổng quan và kết quả')
+    p('Atlas Insight phân tích quốc gia theo năm và trả 3 kết quả: tuổi thọ dự đoán, nhãn tuổi thọ ≥70 năm và cụm hồ sơ. Một dòng là một quốc gia tại một năm.')
+    t(['Dữ liệu','Mô hình'],[['1.704 dòng AI, 142 nước, 1952–2007',f"PCA {R['pca_components']} PC, giữ {R['explained_variance']:.2%} phương sai"],['3.104 dòng đa nguồn; 1.704 khóa nước–năm',f"K={R['chosen_k']}; Silhouette={R['winning_silhouette']:.4f}"],['Scrapy tải 12.768 dòng, 8 thuộc tính',f"Hồi quy: {R['winning_regression']}, RMSE {R['best_regression']['RMSE']:.3f} năm"],['375 ô mô phỏng thiếu ở nhánh AI',f"Phân loại: {R['winning_classification']}, F1 macro {R['best_classification']['F1_macro']:.3f}"]])
+    p('<b>Đã sửa:</b> crawler thật, missingno, xử lý ngoại lai, imputation trong train, validation riêng, model cùng phiên bản, UI truy vấn vector thật và Docker đa container.')
+    p('<b>Đã kiểm chứng:</b> 8 test, UI/Chroma HTTP và truy vấn sau restart DB. Docker Engine chưa có trong môi trường sửa; chạy Compose hoặc chờ GitHub Actions xanh trước khi xác nhận Docker thành công.')
+    t(['Người','Báo cáo khoảng 4–5 phút'],[['1','Nguồn, Scrapy, concat và merge'],['2','Lưu trữ, làm sạch, insight EDA'],['3','Feature, chia tập, 6 thuật toán và metrics'],['4','UI, Docker, demo và kết luận']])
+    p('Giữ 5 tác giả của báo cáo gốc; nhóm tự chọn 4 người đứng báo cáo. Không cần đọc lại toàn bộ code vẽ giao diện.')
+    page('2. Thu thập và tích hợp dữ liệu')
+    p('<b>00_crawl_worldbank.py:</b> Scrapy gọi API World Bank SP.DYN.LE00.IN, phân trang, retry và tôn trọng robots.txt. Chỉ ghi dữ liệu sau khi tải đủ trang và đạt ≥300 dòng. Có timestamp, URL và SHA256 trong crawl_audit.json.')
+    t(['Thao tác','Kết quả / lý do'],[['01: chuẩn hóa Gapminder','1.704 dòng; sửa ISO Triều Tiên thành PRK; tạo record_id'],['09: lọc World Bank','1.400 dòng tương ứng nước/năm trong Gapminder'],['10: inner join','1.394 cặp đủ tuổi thọ; chênh lệch TB 1,795 năm'],['11: concat','1.704 + 1.400 = 3.104 dòng; giữ data_source'],['12: left merge, many_to_one','Bổ sung GDP/dân số và sim_*; giữ tất cả dòng nguồn'],['13–14: điền và audit','6 tuổi thọ từ Gapminder có flag; 690 ô sim_* được điền']])
+    p('<b>Khóa:</b> nhánh AI dùng record_id duy nhất; nhánh nguồn dùng (data_source, iso_alpha, year). Không đưa thẳng 3.104 dòng vào ML vì trùng đơn vị nước–năm.')
+    p('<b>sim_*:</b> sinh từ GDP, năm và nhiễu; chỉ dùng thực hành. GDP/dân số trên dòng World Bank vẫn lấy từ Gapminder, có economic_data_source để truy vết.')
+    p('<b>Khi cô hỏi:</b> concat nối hàng; merge thêm thông tin bằng khóa. Inner dùng cho đối chiếu cặp chung; left dùng khi phải bảo toàn bảng nguồn.')
+    page('3. Làm sạch và EDA')
+    p('02 xử lý dữ liệu để mô tả: median health/education theo châu lục, ffill/bfill trend trong từng nước, Unknown cho policy. Không xóa hàng. Missingno hiển thị cấu trúc thiếu; so sánh mean, median, std trước/sau.')
+    story.append(chart(17,220))
+    p('<b>ML dùng quy trình riêng:</b> 03 đọc master_sparse; FeatureCleaner chỉ học median và giới hạn IQR từ train. Transform test chỉ dùng thống kê đã học, không bfill theo các dòng test.')
+    t(['Phát hiện','Ảnh hưởng đến ML'],[['GDP/dân số có đuôi dài','log1p rồi giới hạn IQR cho 2 feature này; không cắt target tuổi thọ'],['Spearman GDP–tuổi thọ ≈0,8265','Giữ GDP làm feature; tương quan không chứng minh nhân quả'],['Lớp/vùng không cân bằng','Chia theo nước, stratify châu lục ở outer split; class_weight balanced'],['Một nước có 12 năm','Giữ nước tách biệt giữa fit, validation và test']])
+    page('4. Mô hình và đánh giá')
+    p('X gồm 6 cột số và 2 danh mục. log_population/log_gdp giảm lệch; StandardScaler chuẩn hóa số; OneHotEncoder mã hóa continent/policy. Không đưa tuổi thọ, target hay Cluster_Label vào X.')
+    p('<b>Supervised:</b> 90 nước fit, 23 validation, 29 test. Chọn winner theo RMSE/F1 macro trên validation; refit 113 nước rồi đánh giá test 348 dòng. PCA chỉ dùng cho clustering.')
+    t(['Thuật toán','MSE','RMSE','R²'],[[r.algorithm,f'{r.MSE:.3f}',f'{r.RMSE:.3f}',f'{r.R2:.3f}'] for r in REG.itertuples()])
+    t(['Thuật toán','Accuracy','F1 macro'],[[r.algorithm,f'{r.Accuracy:.2%}',f'{r.F1_macro:.3f}'] for r in CLF.itertuples()])
+    p(f"<b>PCA/K-Means:</b> {R['pca_components']} PC giữ {R['explained_variance']:.2%}; thử K=2..8 trên dữ liệu gốc và PCA. Chọn Silhouette cao nhất: K={R['chosen_k']}, {R['winning_silhouette']:.4f}. Ánh xạ nhãn về CSV/SQLite.")
+    story.append(chart(12,170))
+    p('RMSE nhỏ tốt hơn; R² không phải Accuracy. F1 macro cân bằng đóng góp 2 lớp. Silhouette còn thấp nên cụm chỉ dùng khám phá.')
+    page('5. Database và giao diện')
+    t(['Thành phần','Code / luồng'],[['SQLite','02 ghi/đọc master_sparse, master_clean; 03 ghi master_with_clusters'],['ChromaDB','04 dùng model PCA đã lưu, upsert vector 7 chiều; đọc lại DataFrame và so sánh vector'],['UI','Nạp 3 joblib; validate input; features → predict; trả tuổi thọ, nhãn/xác suất và cụm'],['Tìm tương đồng','UI gọi ChromaDB query thật; 5 hàng gần nhất kèm distance_l2'],['Docker','web và chroma tách container; Web gọi chroma:8000, dữ liệu vector lưu volume']])
+    p('start_app.py chờ DB sẵn sàng, đồng bộ vector rồi mở Gradio. UI không huấn luyện lại khi bấm nút. Không có LLM trong luồng dự đoán.')
+    p('Input không hợp lệ như NaN, dân số/GDP ≤0, năm ngoài phạm vi hoặc chỉ số ngoài 0–100 được từ chối. Nếu 2 model bất đồng ở ngưỡng 70, UI hiển thị lưu ý; không ép kết quả cho giống nhau.')
+    p('<b>Chạy:</b> docker compose up --build -d --wait<br/><b>Mở:</b> http://localhost:7860<br/><b>Test:</b> docker compose exec web python -m pytest tests -q')
+    p('GitHub Actions chạy Compose, test HTTP, restart database và chụp 4 tab UI. Ảnh Docker nằm trong artifact docker-ui-evidence sau khi workflow chạy thành công; không dùng ảnh cũ để chứng minh bản mới.')
+    page('6. Các file cần mở khi cô hỏi')
+    t(['File','Vai trò'],[['00_crawl_worldbank.py','Thu thập World Bank thật bằng Scrapy'],['01_prepare_data.py','Gapminder, mô phỏng, khóa và ghép AI'],['02_storage_clean_eda.py','SQLite, thiếu, thống kê và 11 hình EDA'],['03_model_stage2.py','6 thuật toán, validation/test, metrics và lưu model'],['transforms.py','Imputation và IQR clipping học trong train'],['04_chromadb_vector.py','Nạp vector và kiểm tra đọc ngược'],['vector_store.py','Client local/HTTP, DataFrame, nearest query'],['09–14','Chuẩn hóa, đối chiếu, concat/merge và audit đa nguồn'],['ui/app.py; start_app.py','Giao diện, inference; khởi động an toàn'],['tests/; .github/workflows/verify.yml','Test dữ liệu, mô hình, live DB, UI và Docker CI'],['run_pipeline.py; 07; 08','Tái tạo đầu ra; tạo PDF/notebook; xuất notebook copy'],['05_bonus_web_crawler.py; 06_bonus_ollama_text.py','Tham khảo ngoài luồng chính, không dùng làm bằng chứng rubric']])
+    p('notebook dùng output hiện tại và chỉ đọc artifact khi Run All; không ghi đè model. reports/ lưu bảng kiểm toán; charts/ lưu biểu đồ; models/ là artifact nhị phân, không phải source code.')
+    page('7. Phân công và kịch bản demo')
+    t(['Người','Mở file / lời chốt'],[['1','00, 11, 12: “3.104 là dòng theo nguồn; chỉ 1.704 country-year duy nhất dùng ML.”'],['2','02, 04, charts 06/07/17: “Thiếu được xử lý theo loại biến; imputation ML chỉ học train.”'],['3','03, validation_benchmark, regression/classification_benchmark: “Chọn winner trên validation, báo cáo test riêng.”'],['4','UI, Compose, smoke_http: “3 mô hình độc lập; các dòng tương tự lấy thật từ vector DB.”']])
+    p('<b>Demo 3 phút:</b><br/>1. Mở UI, giữ mặc định Asia / 2002 / dân số 25 triệu / GDP 5.000 / sim 70–65–70.<br/>2. Bấm Phân tích bằng AI; đọc 3 kết quả và bảng khoảng cách vector.<br/>3. Mở Trực quan hóa, chỉ quan hệ GDP–tuổi thọ.<br/>4. Mở Kết quả đánh giá, giải thích vì sao chọn winner.<br/>5. Chỉ test/CI và kết thúc bằng giới hạn dữ liệu lịch sử.')
+    p('<b>Khuyến nghị:</b><br/>• Dùng cụm để chọn hồ sơ cần nghiên cứu sâu, kiểm chứng bằng nguồn cập nhật.<br/>• Giữ mô hình đơn giản làm baseline; ưu tiên dữ liệu thật và sai số theo vùng.<br/>• Cảnh báo khi các mô hình bất đồng, để người dùng xem lại thay vì tự ra quyết định.')
+    p('Không đọc toàn bộ báo cáo. Mỗi người giải thích input → xử lý → output và một lý do kỹ thuật trong phần mình.')
+    page('8. Câu hỏi ngắn và checklist')
+    t(['Câu hỏi','Trả lời'],[['Tại sao PCA 7 mà hình 2D?','7 chiều để phân cụm; 2D chỉ là phép chiếu để vẽ.'],['K=2 có phải target có 2 lớp?','Không. K chọn qua Silhouette, clustering không dùng target.'],['R² 0,778 có phải đúng 77,8%?','Không. Đây là mức giải thích biến thiên theo sai số bình phương.'],['Tại sao F1 macro?','Lớp mất cân bằng; macro cho mỗi lớp trọng số ngang nhau.'],['Tại sao 2 model bất đồng?','Hồi quy và classifier học độc lập; UI đã báo bất đồng.'],['3.104 dòng có dùng train?','Không; bảng này phục vụ tích hợp và đối chiếu nguồn.'],['Đã chạy Docker chưa?','Đã viết cấu hình/CI; chỉ xác nhận chạy khi Compose hoặc workflow thành công.']])
+    p('<b>Trước khi báo cáo:</b> cài đúng requirements; chạy 8 test; mở UI; xác nhận CI Docker; tải ảnh docker-ui-evidence; thống nhất số liệu trong reports; tập nói 4 người.')
+    p('<b>Giới hạn:</b> dữ liệu lịch sử 1952–2007; sim_* giả lập; nhãn 70 do nhóm chọn; chưa chứng minh nhân quả, hiệu chuẩn xác suất hay dự báo tương lai. Silhouette khoảng 0,288 cho thấy cụm tách chưa mạnh.')
+    p('Nguồn: Grading Rubric.xlsx (6 mục, tổng 10 điểm); code và reports hiện tại; Gapminder/Plotly; World Bank SP.DYN.LE00.IN. Crawl được ghi ngày '+C['downloaded_at_utc'][:10]+'.')
+    path=ROOT/'docs/Bao_Cao_Final.pdf';path.parent.mkdir(exist_ok=True)
+    SimpleDocTemplate(str(path),pagesize=(595.28,841.89),leftMargin=50,rightMargin=50,topMargin=40,bottomMargin=43,title='Nhóm 12 báo cáo ngắn bản đã sửa').build(story,onFirstPage=footer,onLaterPages=footer)
 
-# PPTX slides -------------------------------------------------------------
-DARK_P=PRGB(9,46,58);TEAL_P=PRGB(9,127,133);WHITE=PRGB(255,255,255)
-ORANGE=PRGB(238,148,72);LIGHT=PRGB(237,247,246);GRAY=PRGB(81,102,114)
 
-def text(slide,x,y,w,h,s,size=15,color=None,bold=False,align=None):
-    tb=slide.shapes.add_textbox(PInches(x),PInches(y),PInches(w),PInches(h));tf=tb.text_frame
-    tf.word_wrap=True;tf.margin_left=PPt(1);tf.margin_top=PPt(3)
-    for i,line in enumerate(str(s).split('\n')):
-        p=tf.paragraphs[0] if i==0 else tf.add_paragraph();p.text=line;p.font.name='Aptos';p.font.size=PPt(size);p.font.bold=bold;p.font.color.rgb=color or DARK_P;p.space_after=PPt(8)
-        if align:p.alignment=align
-    return tb
+def slides():
+    slides=[
+        ('Atlas Insight', ['Phân tích quốc gia–năm bằng Python và AI','3 đầu ra: tuổi thọ, nhãn ≥70 và cụm hồ sơ','Nhóm 12 • 4 người trình bày'],None),
+        ('Dữ liệu và tích hợp', ['Scrapy World Bank: 12.768 dòng, 8 trường','Gapminder 1.704 + World Bank 1.400 = 3.104 dòng theo nguồn','ML dùng 1.704 country-year duy nhất; sim_* là mô phỏng'],None),
+        ('Làm sạch và EDA', ['Median theo nhóm, Unknown; missingno và phân phối trước/sau','ML: imputation/IQR fit train, log GDP/dân số','Spearman GDP–tuổi thọ ≈0,8265; không suy luận nhân quả'],6),
+        ('PCA và phân cụm', [f"{R['pca_components']} PC giữ {R['explained_variance']:.2%} phương sai",f"Thử K=2..8; chọn K={R['chosen_k']}, Silhouette {R['winning_silhouette']:.4f}",'Nhãn cụm được ghi lại vào CSV và SQLite'],12),
+        ('Hồi quy và phân loại', [f"{R['winning_regression']}: RMSE {R['best_regression']['RMSE']:.3f} năm; R² {R['best_regression']['R2']:.3f}",f"{R['winning_classification']}: Accuracy {R['best_classification']['Accuracy']:.2%}; F1 macro {R['best_classification']['F1_macro']:.3f}",'90 nước fit / 23 validation / 29 test; chọn winner bằng validation'],16),
+        ('Lưu trữ và triển khai', ['SQLite: bảng dữ liệu; Chroma: vector PCA, round-trip DataFrame','UI gọi 3 model và truy vấn 5 vector gần nhất thật','Docker: Web + Chroma, volume; CI kiểm tra và chụp UI'],None),
+        ('Demo và khuyến nghị', ['Nhập hồ sơ → dự đoán → xem vector neighbors → xem benchmark','Dùng cụm để nghiên cứu sâu; kiểm chứng nguồn cập nhật','Giữ baseline đơn giản; cảnh báo bất đồng giữa model'],None),
+        ('Kết quả kiểm tra và giới hạn', ['8 test PASS; HTTP UI/DB PASS; DB restart vẫn truy vấn được','Docker Engine chưa chạy trong môi trường sửa; kiểm tra workflow trước báo cáo','1952–2007; sim_* giả lập; không dùng quyết định chính sách'],None),
+    ]
+    story=[]
+    for i,(title,lines,n) in enumerate(slides):
+        if i:story.append(PageBreak())
+        title_style=ParagraphStyle('slide_title',fontName='DVB',fontSize=32,leading=42,textColor=TEAL,spaceAfter=20)
+        body_style=ParagraphStyle('slide_body',fontName='DV',fontSize=20 if n else 26,leading=29 if n else 39,textColor=INK,spaceAfter=12 if n else 22)
+        story.append(Paragraph(title,title_style))
+        for line in lines:story.append(Paragraph(line,body_style))
+        if n:story.append(chart(n,maxheight=205,width=730))
+    path=ROOT/'slide/Slides_Final_Project.pdf';path.parent.mkdir(exist_ok=True)
+    SimpleDocTemplate(str(path),pagesize=(960,540),leftMargin=50,rightMargin=50,topMargin=35,bottomMargin=40,title='Nhóm 12 trình bày ngắn').build(story,onFirstPage=footer,onLaterPages=footer)
 
-def rect(slide,x,y,w,h,fill,line=None,radius=False):
-    sh=slide.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE if radius else MSO_SHAPE.RECTANGLE,PInches(x),PInches(y),PInches(w),PInches(h))
-    sh.fill.solid();sh.fill.fore_color.rgb=fill
-    sh.line.fill.background() if line is None else None
-    return sh
 
-def headslide(prs,title,eyebrow='DATA ANALYST AI',sub=None):
-    s=prs.slides.add_slide(prs.slide_layouts[6]);rect(s,0,0,13.33,.17,TEAL_P)
-    text(s,.6,.42,12,.24,eyebrow,10,TEAL_P,True)
-    text(s,.6,.82,12,.55,title,27,DARK_P,True)
-    if sub:text(s,.6,1.44,12,.35,sub,12,GRAY)
-    rect(s,.6,7.12,12.1,.012,PRGB(210,226,224))
-    text(s,11.95,7.15,.9,.18,f'{len(prs.slides):02d}',9,GRAY,align=PP_ALIGN.RIGHT)
-    return s
+def notebook():
+    cells=[]
+    def md(s):cells.append({'cell_type':'markdown','metadata':{},'source':s.splitlines(True)})
+    def code(s):cells.append({'cell_type':'code','metadata':{},'execution_count':None,'outputs':[],'source':s.splitlines(True)})
+    md('# Atlas Insight — Nhóm 12\nNotebook đọc kết quả đã tạo; không ghi đè data/model. Chạy `python run_pipeline.py` khi cần tái tạo.\nNguồn: https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN và https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv')
+    code("from pathlib import Path\nimport json, pandas as pd\nfrom IPython.display import display, Image\nROOT = Path.cwd()\nif not (ROOT/'reports').exists(): ROOT = ROOT.parent\nassert (ROOT/'reports').exists()\nR=json.loads((ROOT/'reports/model_results.json').read_text())")
+    for title,expr in [('Crawl Scrapy World Bank',"json.loads((ROOT/'reports/crawl_audit.json').read_text())"),('Tích hợp hai nguồn',"pd.read_csv(ROOT/'reports/multisource_audit.csv')"),('Missingness trước/sau',"pd.read_csv(ROOT/'reports/missingness_before.csv')"),('Thống kê đơn biến',"pd.read_csv(ROOT/'reports/univariate_statistics.csv')"),('Bảng liên ngẫu',"pd.read_csv(ROOT/'reports/crosstab_continent_policy.csv')")]:
+        md('## '+title);code('display('+expr+')')
+    insights=[
+        '375 ô thiếu ở sim_*. Dữ liệu quan trắc Gapminder không bị cố ý xóa.',
+        'Median thay đổi hình dạng phân phối; so sánh thêm mean/median/std trong imputation_impact.csv.',
+        'Tuổi thọ phân tán theo nước/năm; giữ year và continent trong feature.',
+        'IQR tuổi thọ không đánh dấu ngoại lai. GDP/dân số được log và IQR clipping trong pipeline ML; không cắt target.',
+        'Phân bố châu lục lệch. Outer split phân tầng châu lục theo danh sách nước.',
+        'Spearman GDP–tuổi thọ ≈0,8265; gợi ý feature dự báo, không phải nhân quả.',
+        'GDP có đuôi dài; log1p và đối chứng tuyến tính/cây kiểm tra tính phi tuyến.',
+        'Khác biệt châu lục hỗ trợ OneHotEncoder(continent).',
+        'Tỷ lệ lớp không đều: class_weight balanced và F1 macro.',
+        'Một nước có nhiều năm: tách nước giữa fit/validation/test, không diễn giải thành dự báo tương lai.',
+        f"PCA giữ {R['explained_variance']:.2%} với {R['pca_components']} PC; không phải Accuracy.",
+        f"K={R['chosen_k']} chọn theo Silhouette {R['winning_silhouette']:.4f}; WCSS dùng tham khảo Elbow.",
+        'Hình 2D chỉ là phép chiếu; K-Means dùng các PC được chọn, không dùng target.',
+        f"Winner được chọn bằng validation; test RMSE {R['best_regression']['RMSE']:.3f} năm.",
+        'Residual = thật − dự đoán. Cần xem cấu trúc lỗi, không chỉ một metric.',
+        f"F1 macro {R['best_classification']['F1_macro']:.3f}; phân biệt lỗi từng lớp qua confusion matrix.",
+        'Missingno cho thấy cấu trúc thiếu trong các chỉ số mô phỏng, hỗ trợ kiểm tra trước điền.'
+    ]
+    for n,insight in enumerate(insights,1):
+        f=next((ROOT/'charts').glob(f'{n:02d}_*.png'))
+        md('## '+f.stem.replace('_',' '));code(f"display(Image(filename=str(ROOT/'charts/{f.name}'), width=800))");md('**So what?** '+insight)
+    for title,file in [('Validation và chọn winner','validation_benchmark.csv'),('Regression test','regression_benchmark.csv'),('Classification test','classification_benchmark.csv'),('ChromaDB đọc ngược DataFrame','chroma_roundtrip.csv')]:
+        md('## '+title);code(f"display(pd.read_csv(ROOT/'reports/{file}').head(10))")
+    md('## Kiểm tra triển khai\nHTTP UI/Chroma và restart đã test. Docker cần workflow xanh hoặc chạy Compose trên máy nhóm. Xem README để demo.');code("display(json.loads((ROOT/'reports/integration_status.json').read_text()))")
+    obj={'cells':cells,'metadata':{'kernelspec':{'display_name':'Python 3','language':'python','name':'python3'},'language_info':{'name':'python','version':'3.12'}},'nbformat':4,'nbformat_minor':5}
+    import uuid
+    for c in cells:c['id']=uuid.uuid4().hex[:8]
+    (ROOT/'notebooks/Project_Stage1_Stage2_NHOM12.ipynb').write_text(json.dumps(obj,ensure_ascii=False,indent=1),encoding='utf-8')
 
-def slide_img(prs,title,img,insight,sub=None):
-    s=headslide(prs,title,sub=sub)
-    # chart area: left 8.75x5.20, right insight card
-    from PIL import Image
-    iw,ih=Image.open(CH/img).size
-    maxw,maxh=8.27,5.04
-    scale=min(maxw/iw,maxh/ih)
-    dispw,disph=iw*scale,ih*scale
-    s.shapes.add_picture(str(CH/img),PInches(.59+(maxw-dispw)/2),PInches(1.82+(maxh-disph)/2),width=PInches(dispw),height=PInches(disph))
-    rect(s,9.05,1.87,3.78,4.85,LIGHT,radius=True)
-    text(s,9.34,2.08,3.15,.3,'SO WHAT?',13,TEAL_P,True)
-    text(s,9.34,2.6,3.1,3.6,insight,15,DARK_P)
-    return s
-
-def bulletslide(prs,title,items,sub=None):
-    s=headslide(prs,title,sub=sub)
-    count=len(items)
-    top=1.8
-    for i,(ttl,desc) in enumerate(items):
-        y=top+i*((5.05)/count)
-        rect(s,.65,y,12.0,min(4.9/count,.99),LIGHT,radius=True)
-        rect(s,.78,y+.15,.12,min(.52,3.7/count),TEAL_P)
-        text(s,1.12,y+.09,3.5,.46,ttl,17,TEAL_P,True)
-        text(s,4.47,y+.08,7.8,.7,desc,14,DARK_P)
-    return s
-
-def mk_slides():
-    prs=Presentation();prs.slide_width=PInches(13.33);prs.slide_height=PInches(7.5)
-    s=prs.slides.add_slide(prs.slide_layouts[6]);rect(s,0,0,13.33,7.5,DARK_P)
-    rect(s,.8,1.03,.17,4.25,ORANGE)
-    text(s,1.3,1.2,10,.35,'FINAL GROUP PROJECT · STAGE 1 + STAGE 2',14,PRGB(131,234,218),True)
-    text(s,1.24,2.0,11,1.25,'ATLAS INSIGHT',53,WHITE,True)
-    text(s,1.3,3.5,10.6,1.0,'AI PHÂN TÍCH & DỰ ĐOÁN CHỈ SỐ PHÁT TRIỂN QUỐC GIA',23,WHITE,True)
-    text(s,1.3,5.9,11,.6,'Data Analyst AI  •  [Tên nhóm / MSSV]  •  12.10.2026',14,PRGB(153,215,211))
-    bulletslide(prs,'Rubric đã triển khai',[
-      ('GĐ1 – Data','1.704 dòng THỰC; concat 2 feed địa lý; merge dữ liệu giả lập'),
-      ('GĐ1 – Storage','SQLite + ChromaDB đều có dữ liệu đã kiểm chứng'),
-      ('GĐ1 – EDA','375 thiếu mô phỏng → 0; 10 biểu đồ + phân tích So What'),
-      ('GĐ2 – ML','PCA + K-Means; 2 hồi quy; 2 phân loại; 16 đồ thị tổng'),
-      ('GĐ2 – UI','Gradio đã chạy; screenshots đã có trong thư mục project')],sub='Bám sát 3 tài liệu yêu cầu được giao')
-    bulletslide(prs,'Hai nguồn dữ liệu thực (Stage 1)',[
-      ('Gapminder','1.704 quan sát quốc gia-năm với dân số, GDP/người và tuổi thọ'),
-      ('World Bank','1.400 dòng tuổi thọ SP.DYN.LE00.IN được chuẩn hóa theo ISO/năm'),
-      ('pd.concat','3.104 dòng theo nguồn; 1.704 khóa quốc gia-năm duy nhất'),
-      ('pd.merge','Left join với dữ liệu động sim_*; xử lý 6 thiếu tuổi thọ + 690 ô mô phỏng'),
-      ('Giới hạn','Stage 2 vẫn học trên 1.704 dòng Gapminder, không nhân đôi các quan sát')])
-    bulletslide(prs,'Bài toán & dữ liệu',[
-      ('Regression','Dự đoán life_expectancy (năm) theo hồ sơ quốc gia-năm'),
-      ('Classification','Nhãn ≥70 năm: target_high_life_expectancy (0/1)'),
-      ('Segmentation','K-Means nhóm quan sát quốc gia-năm (không phải khách hàng)'),
-      ('Nguồn Gapminder','142 quốc gia × 12 mốc 1952–2007 = 1.704 quan sát'),
-      ('Hạn chế nguồn','Hai feed địa lý từ một bộ dữ liệu, chưa phải 2 nhà phát hành')])
-    bulletslide(prs,'Kiến trúc end-to-end',[
-      ('Static feeds','Gapminder → Africa/Asia (1.020) + các vùng còn lại (684)'),
-      ('Dynamic','Sinh sim_health / sim_education / sim_trend / policy, seed cố định'),
-      ('Integration','Align columns → pd.concat → record_id → left pd.merge'),
-      ('Storage + EDA','SQLite round trip → imputation → charts/insights'),
-      ('ML + Web UI','StandardScaler/OneHot → PCA/KMeans + Supervised → Gradio')])
-    slide_img(prs,'Chất lượng dữ liệu','01_missingness.png',f'{S["raw_missing_count"]} giá trị thiếu chỉ nằm ở các trường mô phỏng. Dùng median theo châu lục, ffill/bfill theo country và “Unknown”; còn 0 thiếu.',sub='Data cleaning & validation')
-    slide_img(prs,'Tuổi thọ: phân bố thực','03_life_expectancy_hist_kde.png',f'Tuổi thọ TB={S["mean_life_expectancy"]:.2f} năm. Phân phối đa dạng theo thời gian và châu lục → cần year và continent khi huấn luyện.')
-    slide_img(prs,'Tương quan các biến','06_correlation_heatmap.png',f'Spearman GDP/người – tuổi thọ = {S["gdp_lifeexp_spearman"]:.3f}. Quan hệ có ý nghĩa mô tả, KHÔNG chứng minh nhân quả.')
-    slide_img(prs,'Tuổi thọ & GDP/người','07_gdp_lifeexp_scatter.png','Có xu hướng đồng biến không tuyến tính; dùng log1p(GDP) và so sánh tuyến tính với cây quyết định.')
-    slide_img(prs,'Khác biệt giữa châu lục','08_continent_lifeexp_grouped_box.png','Africa ≈48,86 năm; Europe ≈71,90 năm. Oceania chỉ 24 quan sát → cẩn trọng với cỡ mẫu nhỏ.')
-    slide_img(prs,'PCA: giữ phương sai','11_pca_cumulative_variance.png',f'{R["pca_components"]} PCs giữ {R["explained_variance"]:.2%} phương sai; mục tiêu 90% nằm trong ngưỡng 85–95%.')
-    slide_img(prs,'Chọn K và so sánh không gian','12_kmeans_elbow_silhouette.png',f'K={R["chosen_k"]}; PCA silhouette={R["winning_silhouette"]:.3f}, không PCA={R["original_same_k_silhouette"]:.3f}. Phân cụm ở mức vừa.')
-    slide_img(prs,'Phân cụm K-Means','13_kmeans_2d_clusters.png','Cụm 0: 931 quan sát, tuổi thọ TB 50,86. Cụm 1: 773 quan sát, tuổi thọ TB 69,85. Nhãn cụm được merge ngược dataset.')
-    slide_img(prs,'Regression: Actual vs Predicted','14_regression_actual_vs_predicted.png',f'LinearRegression thắng: RMSE={R["best_regression"]["RMSE"]:.2f} năm, R²={R["best_regression"]["R2"]:.3f}; tree RMSE={REG.iloc[1].RMSE:.2f}.')
-    slide_img(prs,'Classification: Confusion Matrix','16_confusion_matrix.png',f'LogisticRegression thắng: F1 macro={R["best_classification"]["F1_macro"]:.3f}, Accuracy={R["best_classification"]["Accuracy"]:.3f}. 222 TN · 30 FP · 15 FN · 81 TP.')
-    bulletslide(prs,'Web UI — Gradio',[
-      ('Inputs','continent; year; population; GDP/người; 4 biến sim_*'),
-      ('Dự đoán','Tuổi thọ (hồi quy), xác suất và nhãn (phân loại), Cluster_Label'),
-      ('Trực quan','Scatter GDP/tuổi thọ, trend, PCA/K-Means charts'),
-      ('Benchmark','RMSE/MSE/R²; F1/Precision/Recall; confusion matrix'),
-      ('Minh chứng','Đã có ảnh UI thật trong screenshots/ cho cả 4 tab')])
-    # UI screenshot from the real browser, not a mocked image.
-    shot=ROOT/'screenshots/01_UI_Du_doan_Asia.png'
-    if shot.exists():
-        s=headslide(prs,'Minh chứng chạy Gradio',sub='Dự đoán tuổi thọ, phân loại và K-Means – ảnh trình duyệt thật')
-        from PIL import Image
-        iw,ih=Image.open(shot).size
-        scale=min(11.6/iw,5.1/ih)
-        s.shapes.add_picture(str(shot),PInches((13.33-iw*scale)/2),PInches(1.80),width=PInches(iw*scale),height=PInches(ih*scale))
-    bulletslide(prs,'3 khuyến nghị dựa trên dữ liệu',[
-      ('Ưu tiên kiểm định dữ liệu','Cụm GDP thấp có tuổi thọ lịch sử thấp hơn; tìm nguồn độc lập trước quyết định thực tế'),
-      ('Giữ baseline tuyến tính','RMSE 6,17 < 6,73; đánh giá sai số theo vùng, thời gian và bổ sung biến THỰC'),
-      ('Trình bày xác suất','F1 macro 0,845; lớp mất cân bằng nên tránh chỉ báo cáo Accuracy')])
-    bulletslide(prs,'Giới hạn & công việc cần hoàn tất',[
-      ('Nguồn','Đã bổ sung World Bank để đối chiếu độc lập; nhánh AI vẫn dùng Gapminder'),
-      ('Vector DB','ChromaDB đã lưu 1.704 embedding; có status và ảnh Terminal'),
-      ('Screenshots','Ảnh giao diện thực có sẵn và đã chèn vào báo cáo sinh lại'),
-      ('Extra credit','Web crawl/LLM code được cung cấp nhưng chưa chạy vì hạn chế mạng/mô hình'),
-      ('Giới hạn khoa học','Dữ liệu 1952–2007; sim_* giả lập; không dùng làm dự báo năm 2026')])
-    s=prs.slides.add_slide(prs.slide_layouts[6]);rect(s,0,0,13.33,7.5,DARK_P)
-    text(s,1,1.8,11,.9,'CẢM ƠN THẦY/CÔ',43,WHITE,True,PP_ALIGN.CENTER)
-    text(s,2,3.05,9.3,.8,'Q&A · Data Analyst AI · ATLAS INSIGHT',19,PRGB(162,234,223),align=PP_ALIGN.CENTER)
-    text(s,1,5.4,11,.4,'Liên kết code, báo cáo, chart và bộ dữ liệu: xem thư mục ZIP nộp nhóm',14,WHITE,align=PP_ALIGN.CENTER)
-    path=SL/'Slide_Project_Data_Analyst_AI.pptx';prs.save(path)
-    return path
 
 if __name__=='__main__':
-    print('DOCX',mk_doc());print('SLIDES',mk_slides())
+    report();slides();notebook()
+    print('Built concise report PDF, slide PDF and read-only notebook.')

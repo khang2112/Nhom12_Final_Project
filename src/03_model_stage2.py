@@ -15,6 +15,7 @@ import seaborn as sns
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+from transforms import FeatureCleaner
 from sklearn.cluster import KMeans
 from sklearn.compose import ColumnTransformer
 from sklearn.decomposition import PCA
@@ -66,7 +67,7 @@ def features(df):
 
 def preprocess():
     """Build the same numerical scaling and one-hot encoding pipeline."""
-    return ColumnTransformer(
+    return Pipeline([("clean", FeatureCleaner()), ("encode", ColumnTransformer(
         [
             ("numeric", StandardScaler(), NUM),
             (
@@ -77,7 +78,7 @@ def preprocess():
         ],
         remainder="drop",
         sparse_threshold=0,
-    )
+    ))])
 
 
 def fig(name):
@@ -262,7 +263,14 @@ def supervised(df):
     iste = df.country.isin(test_c)
     assert not set(train_c).intersection(test_c)
 
+    # Keep the final test completely out of model selection.
+    fit_c, valid_c = train_test_split(train_c, test_size=0.2, random_state=SEED)
+    isfit, isvalid = df.country.isin(fit_c), df.country.isin(valid_c)
+    xfit, xvalid = features(df.loc[isfit]), features(df.loc[isvalid])
     xtr, xts = features(df.loc[istrain]), features(df.loc[iste])
+    split_rows = df[['record_id', 'country', 'year']].copy()
+    split_rows['split'] = np.where(iste, 'test', np.where(isvalid, 'validation', 'fit'))
+    split_rows.to_csv(REP / 'data_splits.csv', index=False)
     rytr = df.loc[istrain, "life_expectancy"]
     ryts = df.loc[iste, "life_expectancy"]
     cytr = df.loc[istrain, "target_high_life_expectancy"]
@@ -272,8 +280,7 @@ def supervised(df):
     test_df.to_csv(REP / "held_out_test_records.csv", index=False)
 
     ratio = cytr.value_counts(normalize=True)
-    imbalance = ratio.max() / ratio.min()
-    weights = "balanced" if imbalance > 1.5 else None
+    weights = "balanced"
 
     regs = {
         "LinearRegression": LinearRegression(),
@@ -296,6 +303,24 @@ def supervised(df):
     regscore, clfscore = [], []
     rp, cp = {}, {}
     trained_reg, trained_clf = {}, {}
+
+    validation = []
+    for name, model in regs.items():
+        candidate = Pipeline([('prepare', preprocess()), ('model', model)]).fit(
+            xfit, df.loc[isfit, 'life_expectancy'])
+        validation.append({'algorithm': name, 'task': 'regression',
+                           'score': float(np.sqrt(mean_squared_error(
+                               df.loc[isvalid, 'life_expectancy'], candidate.predict(xvalid))))})
+    for name, model in clfs.items():
+        candidate = Pipeline([('prepare', preprocess()), ('model', model)]).fit(
+            xfit, df.loc[isfit, 'target_high_life_expectancy'])
+        validation.append({'algorithm': name, 'task': 'classification',
+                           'score': float(f1_score(df.loc[isvalid, 'target_high_life_expectancy'],
+                                                  candidate.predict(xvalid), average='macro'))})
+    val = pd.DataFrame(validation)
+    val.to_csv(REP / 'validation_benchmark.csv', index=False)
+    regwin = str(val[val.task.eq('regression')].sort_values('score').iloc[0].algorithm)
+    clfwin = str(val[val.task.eq('classification')].sort_values('score', ascending=False).iloc[0].algorithm)
 
     for name, model in regs.items():
         pipe = Pipeline([("prepare", preprocess()), ("model", model)]).fit(
@@ -348,8 +373,7 @@ def supervised(df):
     reg.to_csv(REP / "regression_benchmark.csv", index=False)
     clf.to_csv(REP / "classification_benchmark.csv", index=False)
 
-    regwin = str(reg.iloc[0].algorithm)
-    clfwin = str(clf.iloc[0].algorithm)
+    # Winner frozen from validation; test scores do not change this choice.
     joblib.dump(trained_reg[regwin], MOD / "regression_winner.joblib")
     joblib.dump(trained_clf[clfwin], MOD / "classification_winner.joblib")
 
@@ -359,6 +383,18 @@ def supervised(df):
     test_pred["actual_class"] = cyts.to_numpy()
     test_pred["pred_class"] = cp[clfwin]
     test_pred.to_csv(REP / "test_set_predictions.csv", index=False)
+
+    cleaner = trained_reg[regwin].named_steps['prepare'].named_steps['clean']
+    cleaned_train = cleaner.transform(xtr)
+    audit = []
+    for col in NUM:
+        bounds = cleaner.bounds_.get(col, (None, None))
+        audit.append({'feature': col, 'missing_train_before': int(xtr[col].isna().sum()),
+                      'missing_train_after': int(cleaned_train[col].isna().sum()),
+                      'changed_observed_values': int((xtr[col].notna() & (xtr[col] != cleaned_train[col])).sum()),
+                      'train_median': float(cleaner.medians_[col]),
+                      'iqr_lower': bounds[0], 'iqr_upper': bounds[1]})
+    pd.DataFrame(audit).to_csv(REP / 'ml_preprocessing_audit.csv', index=False)
 
     # Actual versus predicted regression values.
     plt.figure(figsize=(8, 5.5))
@@ -406,6 +442,8 @@ def supervised(df):
     fig("16_confusion_matrix.png")
 
     return {
+        "selection": "country-disjoint validation, then refit fit+validation; final test untouched",
+        "fit_countries": len(fit_c), "validation_countries": len(valid_c),
         "train_rows": len(xtr),
         "test_rows": len(xts),
         "train_countries": len(train_c),
@@ -418,12 +456,12 @@ def supervised(df):
         "winning_classification": clfwin,
         "best_regression": {
             k: round(float(v), 5)
-            for k, v in reg.iloc[0].to_dict().items()
+            for k, v in reg.set_index("algorithm").loc[regwin].to_dict().items()
             if k != "algorithm"
         },
         "best_classification": {
             k: round(float(v), 5)
-            for k, v in clf.iloc[0].to_dict().items()
+            for k, v in clf.set_index("algorithm").loc[clfwin].to_dict().items()
             if k != "algorithm"
         },
     }
@@ -432,8 +470,13 @@ def supervised(df):
 def main():
     df = pd.read_csv(DATA / "master_clean.csv")
     df, uns = clustering(df)
-    sup = supervised(df)
-    result = {**uns, **sup}
+    sup = supervised(pd.read_csv(DATA / "master_sparse.csv"))
+    import sklearn, sys
+    result = {**uns, **sup, "sklearn_version": sklearn.__version__, "python_version": sys.version.split()[0]}
+    # Fingerprint every artifact so deployment can verify compatible inputs.
+    import hashlib
+    result['artifact_sha256'] = {f.name: hashlib.sha256(f.read_bytes()).hexdigest()
+                                 for f in MOD.glob('*.joblib')}
     result_text = json.dumps(result, indent=2, ensure_ascii=False)
     (REP / "model_results.json").write_text(result_text, encoding="utf8")
     print(result_text)

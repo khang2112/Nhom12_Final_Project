@@ -1,3 +1,5 @@
+# SOURCES: https://api.worldbank.org/v2/country/all/indicator/SP.DYN.LE00.IN
+# https://raw.githubusercontent.com/plotly/datasets/master/gapminderDataFiveYear.csv
 
 from pathlib import Path
 import pandas as pd
