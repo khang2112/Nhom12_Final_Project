@@ -1,22 +1,22 @@
-\# Đóng góp của Lê Ngọc Quỳnh Hương - EDA và Insights
+# Đóng góp của Lê Ngọc Quỳnh Hương - EDA và Insights
 
 
 
-\## 1. Phạm vi phụ trách
+## 1. Phạm vi phụ trách
 
 
 
-\- Phân tích khám phá dữ liệu nâng cao.
+- Phân tích khám phá dữ liệu nâng cao.
 
-\- Kiểm tra dữ liệu thiếu và ngoại lai.
+- Kiểm tra dữ liệu thiếu và ngoại lai.
 
-\- Trình bày biểu đồ và insight.
+- Trình bày biểu đồ và insight.
 
-\- Giải thích ảnh hưởng của EDA đến thiết kế mô hình.
+- Giải thích ảnh hưởng của EDA đến thiết kế mô hình.
 
 
 
-\## 2. File đã đọc và kiểm tra
+## 2. File đã đọc và kiểm tra
 
 
 
@@ -24,7 +24,7 @@
 
 |---|---|
 
-| `src/02\_storage\_clean\_eda.py` | Thống kê, làm sạch và tạo biểu đồ |
+| `\src/02\_storage\_clean\_eda.py` | Thống kê, làm sạch và tạo biểu đồ |
 
 | `src/08\_make\_notebook.py` | Sinh notebook tổng hợp |
 
@@ -36,11 +36,11 @@
 
 
 
-\## 3. Kết quả EDA
+## 3. Kết quả EDA
 
 
 
-\### Dữ liệu thiếu
+### Dữ liệu thiếu
 
 
 
@@ -48,7 +48,7 @@ Các biểu đồ `01`, `02` và `17` cho biết số lượng và cấu trúc d
 
 
 
-\### Phân phối và ngoại lai
+### Phân phối và ngoại lai
 
 
 
@@ -56,7 +56,7 @@ Histogram và KDE cho thấy tuổi thọ không phân bố hoàn toàn đồng 
 
 
 
-\### GDP và tuổi thọ
+### GDP và tuổi thọ
 
 
 
@@ -68,7 +68,7 @@ Tương quan không chứng minh quan hệ nhân quả.
 
 
 
-\### Châu lục và thời gian
+### Châu lục và thời gian
 
 
 
@@ -76,7 +76,7 @@ Các biểu đồ grouped boxplot và stacked bar cho thấy phân phối tuổi
 
 
 
-\## 4. Insight dẫn sang Stage 2
+## 4. Insight dẫn sang Stage 2
 
 
 
@@ -94,7 +94,7 @@ Các biểu đồ grouped boxplot và stacked bar cho thấy phân phối tuổi
 
 
 
-\## 5. Bằng chứng
+## 5. Bằng chứng
 
 
 
@@ -118,7 +118,7 @@ reports/univariate\_statistics.csv
 
 
 
-\## 6. Lệnh kiểm tra
+## 6. Lệnh kiểm tra
 
 
 
@@ -132,23 +132,22 @@ reports/univariate\_statistics.csv
 
 
 
-\## 7. Hạn chế và câu hỏi bảo vệ
+## 7. Hạn chế và câu hỏi bảo vệ
 
 
 
-\- Dữ liệu chỉ thuộc giai đoạn 1952-2007.
+- Dữ liệu chỉ thuộc giai đoạn 1952-2007.
 
-\- `sim\_\*` là dữ liệu mô phỏng.
+- `sim\_\*` là dữ liệu mô phỏng.
 
-\- Tương quan không chứng minh nhân quả.
+- Tương quan không chứng minh nhân quả.
 
 
+*\*Vì sao dùng median?\*\* Median ít nhạy với ngoại lai hơn mean.  
 
-\*\*Vì sao dùng median?\*\* Median ít nhạy với ngoại lai hơn mean.  
+*\*Vì sao không xóa mọi outlier?\*\* Chúng có thể là quan sát lịch sử hợp lệ.  
 
-\*\*Vì sao không xóa mọi outlier?\*\* Chúng có thể là quan sát lịch sử hợp lệ.  
-
-\*\*EDA ảnh hưởng đến model thế nào?\*\* EDA dẫn đến log transform, giữ biến châu lục/năm và xử lý trong pipeline.
+*\*EDA ảnh hưởng đến model thế nào?\*\* EDA dẫn đến log transform, giữ biến châu lục/năm và xử lý trong pipeline.
 
 
 
