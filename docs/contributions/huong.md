@@ -24,13 +24,13 @@
 
 |---|---|
 
-| `\src/02\_storage\_clean\_eda.py` | Thống kê, làm sạch và tạo biểu đồ |
+| `src/02_storage_clean_eda.py` | Thống kê, làm sạch và tạo biểu đồ |
 
-| `src/08\_make\_notebook.py` | Sinh notebook tổng hợp |
+| `src/08_make_notebook.py` | Sinh notebook tổng hợp |
 
-| `notebooks/Project\_Stage1\_Stage2\_NHOM12.ipynb` | Biểu đồ và phần giải thích |
+| `notebooks/Project_Stage1_Stage2_NHOM12.ipynb` | Biểu đồ và phần giải thích |
 
-| `reports/univariate\_statistics.csv` | Mean, median, skewness và kurtosis |
+| `reports/univariate_statistics.csv` | Mean, median, skewness và kurtosis |
 
 | `charts/` | Các hình EDA và mô hình |
 
@@ -82,7 +82,7 @@ Các biểu đồ grouped boxplot và stacked bar cho thấy phân phối tuổi
 
 1\. Biến đổi log cho dân số và GDP/người.
 
-2\. Giữ biến `continent` và `sim\_policy\_group`.
+2\. Giữ biến `continent` và `sim_policy_group`.
 
 3\. Xử lý missing/outlier trong pipeline.
 
@@ -100,19 +100,19 @@ Các biểu đồ grouped boxplot và stacked bar cho thấy phân phối tuổi
 
 ```text
 
-charts/01\_missingness.png
+charts/01_missingness.png
 
-charts/03\_life\_expectancy\_hist\_kde.png
+charts/03_life_expectancy_hist_kde.png
 
-charts/04\_life\_expectancy\_box\_iqr.png
+charts/04_life_expectancy_box_iqr.png
 
-charts/06\_correlation\_heatmap.png
+charts/06_correlation_heatmap.png
 
-charts/07\_gdp\_lifeexp\_scatter.png
+charts/07_gdp_lifeexp_scatter.png
 
-charts/10\_historical\_trend.png
+charts/10_historical_trend.png
 
-reports/univariate\_statistics.csv
+reports/univariate_statistics.csv
 
 ```
 
@@ -138,7 +138,7 @@ reports/univariate\_statistics.csv
 
 - Dữ liệu chỉ thuộc giai đoạn 1952-2007.
 
-- `sim\_\*` là dữ liệu mô phỏng.
+- `sim_\*` là dữ liệu mô phỏng.
 
 - Tương quan không chứng minh nhân quả.
 
